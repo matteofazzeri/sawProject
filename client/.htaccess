@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteBase /
+
+# Redirect requests to http://test.test/
+RewriteRule ^server/blog/client/(.*)$ http://test.test/$1 [R=301,L]
+
+# Redirect all requests to index.php inside client/src folder
+RewriteCond %{REQUEST_URI} !/server/blog/client/src/index\.php
+RewriteRule ^(.*)$ /server/blog/client/src/index.php [L]
