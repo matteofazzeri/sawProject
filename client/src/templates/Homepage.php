@@ -2,7 +2,7 @@
 require __DIR__ . '/../components/Navbar.php';
 ?>
 
-<main class="w-full bg-yellow-200 p-4 overflow-none">
+<main class="w-full bg-yellow-200 p-4">
 
   <section id="">
     <div class="w-full h-full bg-green-200 p-3">

@@ -1,19 +1,17 @@
 <!doctype html>
-<html lang="en">
+<html lang="it">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="./output.css" rel="stylesheet">
-
-  <title>Bootstrap demo</title>
-
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="./style/navbar.css">
+  <title>test</title>
 </head>
 
 <body>
 
   <?php
-
   //* access the url
   $fullUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
@@ -28,6 +26,8 @@
     require_once __DIR__ . "/pages/PrivateArea.php";
   else if (preg_match("#^/$#", ROUTING_URL))
     require_once __DIR__ . "/pages/Home.php";
+  else if (preg_match("#^/search(\?.)*$#", ROUTING_URL))
+    require_once __DIR__ . "/pages/ShowItems.php";
   else if (preg_match("#^/about$#", ROUTING_URL))
     require_once __DIR__ . "/pages/About.php";
   else if (preg_match("#^/contact$#", ROUTING_URL))

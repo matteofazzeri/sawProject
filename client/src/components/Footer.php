@@ -1,3 +1,3 @@
-<footer class="w-full h-fit p-12">
+<footer class="w-full h-[500px]">
   questo è un footer
 </footer>

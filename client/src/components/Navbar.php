@@ -17,7 +17,7 @@
 
 <script>
   const changeSearch = (e) => {
-console.log(e.value);
+    console.log(e.value);
     const search_input = document.querySelector("input").value;
     console.log(search_input)
   }
