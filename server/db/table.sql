@@ -201,11 +201,11 @@ CREATE TABLE
 -- * user can have autologin in more than one device
 CREATE TABLE
   sessions (
-    id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
-    session_token VARCHAR(255) UNIQUE NOT NULL,
+    session_token VARCHAR(255) PRIMARY KEY NOT NULL,
     expiration_date TIMESTAMP NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users (id)
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    UNIQUE(user_id, session_token)
   );
 
 CREATE TABLE
