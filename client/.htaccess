@@ -1,6 +1,10 @@
 RewriteEngine On
 RewriteBase /
 
-# Redirect all requests to index.php inside client/src folder
-RewriteCond %{REQUEST_URI} !/server/blog/client/src/index\.php
+# Exclude requests for CSS files, JavaScript files, images, and other static assets
+RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif)$ [NC]
+RewriteRule ^ - [L]
+
+# Redirect all other requests to index.php inside client/src folder
+RewriteCond %{REQUEST_URI} !//bloserverg/client/src/index\.php
 RewriteRule ^(.*)$ /server/blog/client/src/index.php [L]

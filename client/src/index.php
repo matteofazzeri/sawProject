@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="index.css">
-  <link rel="stylesheet" href="./style/navbar.css">
+  <link rel="stylesheet" href="public/index.css">
+  <link rel="stylesheet" href="src/style/navbar.css">
   <title>test</title>
 </head>
 
@@ -19,14 +19,14 @@
   define("BASE_URL", "http://localhost" . str_replace("/src", "", (explode("xampp/htdocs", ROOT)[1])));
   define("ROUTING_URL", strtolower(str_replace(BASE_URL, "", $fullUrl)));
 
-  //* Routing the url
+  //* Routing the url  
 
   /* echo preg_match("#^/admin(/.+)?$#", ROUTING_URL); */
   if (preg_match("#^/admin.*$#", ROUTING_URL))
     require_once __DIR__ . "/pages/PrivateArea.php";
   else if (preg_match("#^/$#", ROUTING_URL))
     require_once __DIR__ . "/pages/Home.php";
-  else if (preg_match("#^/search(\?.)*$#", ROUTING_URL))
+  else if (preg_match("#^/search(\?.*)?$#", ROUTING_URL))
     require_once __DIR__ . "/pages/ShowItems.php";
   else if (preg_match("#^/about$#", ROUTING_URL))
     require_once __DIR__ . "/pages/About.php";
@@ -36,12 +36,12 @@
     require_once __DIR__ . "/pages/Error404.php";
   else if (preg_match("#^/repo$#", ROUTING_URL))
     header("Location: https://www.google.com");
-  else
-    header("Location:   " . BASE_URL . "/notfound");
+  //else
+  //header("Location:   " . BASE_URL . "/notfound");
 
   ?>
 
-  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
 </body>
 

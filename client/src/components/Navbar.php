@@ -1,6 +1,6 @@
-<nav class="w-full h-[10vh] py-1 bg-blue-200 flex items-center justify-center">
-  <span class="w-1/3 h-10 flex flex-row p-0 m-0">
-    <div class="w-fit h-full rounded-l-md">
+<nav class="global-navbar">
+  <span>
+    <div class="navbar-search-select">
       <select class="w-fit h-full rounded-l-md bg-gray-500/40 outline-none overflow-auto">
         <option value="all">all</option>
         <option value="all">Ship</option>
