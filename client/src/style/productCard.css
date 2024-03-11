@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+
+.product-show {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#product-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1vw;
+  justify-content: center;
+  background-color: greenyellow;
+  padding: 1vw;
+}
+
+.pagination {
+  display: flex;
+  gap: 1vw;
+  justify-content: center;
+  background-color: goldenrod;
+}
+
+.product-card {
+  position: relative;
+  min-width: 300px;
+  width: 325px;
+  height: 450px;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.image {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.image::before {
+  content: "";
+  position: absolute;
+  bottom: -45%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: 0.3s;
+}
+
+.product-card:hover .image::before {
+  bottom: 0;
+}
+
+.image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+.product-card:hover .image img {
+  transform: scale(1.1);
+}
+
+.details {
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  height: auto;
+  padding: 1.5em 1.5em 2em;
+  background: #000a;
+  backdrop-filter: blur(16px) saturate(120%);
+  transition: 0.3s;
+  color: #fff;
+  z-index: 2;
+}
+
+.product-card:hover .details {
+  bottom: 0;
+}
+
+.details h1 {
+  font-weight: 700;
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}
+
+.details .product-rating {
+  position: relative;
+  margin-bottom: 15px;
+  display: flex;
+  gap: 0.25em;
+}
+
+.details .product-tags {
+  display: flex;
+  gap: 0.375em;
+  margin-bottom: 0.875em;
+  font-size: 0.85em;
+}
+
+.details #latest-comment {
+  color: #fff;
+  opacity: 0.8;
+  line-height: 1.5;
+  margin-bottom: 1em;
+}

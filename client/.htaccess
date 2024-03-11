@@ -6,5 +6,5 @@ RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif)$ [NC]
 RewriteRule ^ - [L]
 
 # Redirect all other requests to index.php inside client/src folder
-RewriteCond %{REQUEST_URI} !/server/blog/client/src/index\.php
-RewriteRule ^(.*)$ /server/blog/client/src/index.php [L]
+RewriteCond %{REQUEST_URI} !/server/sawProject/client/src/index\.php
+RewriteRule ^(.*)$ /server/sawProject/client/src/index.php [L]
