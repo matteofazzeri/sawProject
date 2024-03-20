@@ -1,0 +1,39 @@
+.homepage {
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow: none;
+  padding: 1rem;
+}
+
+.homepage section {
+  
+}
+
+.last-added {
+  width: 100%;
+  height: 100%;
+  background-color: green;
+  padding: 10px;
+}
+
+h3 {
+  font-weight: bold;
+  font-size: large;
+}
+
+.last-added .elems-seq {
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  overflow-x: auto;
+  padding-bottom: 1em;
+  padding-top: 1em;
+}
+
+.last-added .elems-seq .elem {
+  min-width: 200px;
+  height: 300px;
+  background-color: white;
+}

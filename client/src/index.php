@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="public/index.css">
   <link rel="stylesheet" href="src/style/navbar.css">
   <link rel="stylesheet" href="src/style/productCard.css">
+  <link rel="stylesheet" href="src/style/homepage.css">
   <title>test</title>
 </head>
 

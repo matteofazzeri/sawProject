@@ -2,56 +2,58 @@
 require __DIR__ . '/../components/Navbar.php';
 ?>
 
-<main class="w-full bg-yellow-200 p-4">
+<main class="homepage">
 
   <section id="">
-    <div class="w-full h-full bg-green-200 p-3">
-      <div class="w-full">
-        <h3 class="font-bold text-lg">Last Added</h3>
-        <span class="max-w-full w-full flex flex-row gap-2 overflow-auto py-1">
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
+    <div class="last-added">
+        <h3 class="">Last Added</h3>
+        <span class="elems-seq">
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
         </span>
-      </div>
     </div>
 
-    <div class="w-full h-full bg-green-200 p-3">
-      <div class="w-full">
-        <h3 class="font-bold text-lg">Most sold</h3>
-        <span class="max-w-full w-full flex flex-row gap-2 overflow-auto py-1">
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
+    <div class="last-added">
+        <h3 class="">From your wishlist</h3>
+        <span class="elems-seq">
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
         </span>
-      </div>
     </div>
 
-    <!-- //* Aggiungere il controllo se nella lista dei desideri ci sono abbastanza elementi -->
-    <div class="w-full h-full bg-green-200 p-3">
-      <div class="w-full">
-        <h3 class="font-bold text-lg">From your wish list</h3>
-        <span class="max-w-full w-full flex flex-row gap-2 overflow-auto py-1">
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
-          <div class="min-w-[200px] h-[300px] bg-white"><img src="" alt="elem"></div>
+    <div class="last-added">
+        <h3 class="">Most sold</h3>
+        <span class="elems-seq">
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
+          <div class="elem"><img src="" alt="elem"></div>
         </span>
-      </div>
     </div>
   </section>
 

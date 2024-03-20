@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
-
 .product-show {
   display: flex;
   flex-direction: column;
@@ -24,11 +22,10 @@
 
 .product-card {
   position: relative;
-  min-width: 300px;
-  width: 325px;
-  height: 450px;
+  max-width: 200px;
   border-radius: 18px;
   overflow: hidden;
+  background-color: white;
 }
 
 .image {

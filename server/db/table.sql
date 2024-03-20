@@ -1,14 +1,8 @@
--- ! SOME USEFULL TRIGGERS
-CREATE TRIGGER update_availability BEFORE
-UPDATE ON products FOR EACH ROW
-SET
-  NEW.availability = IF (NEW.quantity <= 0, FALSE, TRUE);
 
--- ! END OF TRIGGERS
 /*
  * table for products + their possible colors, images, sizes.
  */
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   products (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
@@ -21,23 +15,37 @@ CREATE TABLE
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
   );
 
-CREATE TABLE
-  product_colors (
+CREATE TABLE IF NOT EXISTS  
+  tags (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS product_tags (
+    product_id INT,
+    tag_id INT,
+    PRIMARY KEY (product_id, tag_id),
+    FOREIGN KEY (product_id) REFERENCES products (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (tag_id) REFERENCES tags (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS
+  colors (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL
   );
 
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   colors_mapping (
     product_id INT,
     color_id INT,
     PRIMARY KEY (product_id, color_id),
     FOREIGN KEY (product_id) REFERENCES products (id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (color_id) REFERENCES product_colors (id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (color_id) REFERENCES colors (id) ON DELETE CASCADE ON UPDATE CASCADE
   );
 
-CREATE TABLE
-  product_photos (
+CREATE TABLE IF NOT EXISTS
+  photos (
     id INT PRIMARY KEY AUTO_INCREMENT,
     product_id INT,
     image BLOB,
@@ -45,20 +53,19 @@ CREATE TABLE
     FOREIGN KEY (product_id) REFERENCES products (id) ON DELETE CASCADE ON UPDATE CASCADE
   );
 
-CREATE TABLE
-  product_sizes (
+CREATE TABLE IF NOT EXISTS
+  sizes (
     id INT PRIMARY KEY AUTO_INCREMENT,
     size_name VARCHAR(20) NOT NULL UNIQUE
   );
 
-
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   sizes_mapping (
     product_id INT,
     size_id INT,
     PRIMARY KEY (product_id, size_id),
     FOREIGN KEY (product_id) REFERENCES products (id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (size_id) REFERENCES product_sizes (id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (size_id) REFERENCES sizes (id) ON DELETE CASCADE ON UPDATE CASCADE
   );
 
 -- ! END OF GENERIC PRODUCT TABLE
@@ -69,7 +76,7 @@ CREATE TABLE
 /*
 TODO: add foreign key to the spaceparts of the ship, for a more detailed description of the ship!!!
  */
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   spaceships (
     product_id INT PRIMARY KEY,
     fuel_type VARCHAR(50) NOT NULL,
@@ -82,7 +89,7 @@ CREATE TABLE
 
 -- ! END OF SPACESHIP TABLES
 -- ! SPACESUIT TABLES
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   spacesuits (
     product_id INT PRIMARY KEY,
     material VARCHAR(50),
@@ -96,7 +103,7 @@ CREATE TABLE
 ? più completo il database, e potremmo giocarcelo come jolly all'orale per fare bella figura
 ? diciamo come una delle n funzionalità che il sito dovrebbe avere, ma che per ovvie ragioni non ha.
 
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   space_parts (
     product_id INT PRIMARY KEY,
     category VARCHAR(50),
@@ -104,7 +111,7 @@ CREATE TABLE
     FOREIGN KEY (product_id) REFERENCES products (id)
   );
 
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   engines (
     product_id INT PRIMARY KEY,
     thrust_power DECIMAL(10, 2),
@@ -112,7 +119,7 @@ CREATE TABLE
     FOREIGN KEY (product_id) REFERENCES products (id)
   );
 
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   navigation_systems (
     product_id INT PRIMARY KEY,
     gps_accuracy DECIMAL(5, 2),
@@ -120,7 +127,7 @@ CREATE TABLE
     FOREIGN KEY (product_id) REFERENCES products (id)
   );
 
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   life_support_systems (
     product_id INT PRIMARY KEY,
     oxygen_capacity INT,
@@ -128,7 +135,7 @@ CREATE TABLE
     FOREIGN KEY (product_id) REFERENCES products (id)
   );
 
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   spacecraft_components (
     product_id INT PRIMARY KEY,
     component_type VARCHAR(50),
@@ -140,7 +147,7 @@ CREATE TABLE
 /*
 TODO: 
  */
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) UNIQUE NOT NULL,
@@ -150,7 +157,7 @@ CREATE TABLE
     registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   );
 
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   orders (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
@@ -160,7 +167,7 @@ CREATE TABLE
     FOREIGN KEY (user_id) REFERENCES users (id)
   );
 
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   order_items (
     id INT PRIMARY KEY AUTO_INCREMENT,
     order_id INT,
@@ -171,7 +178,7 @@ CREATE TABLE
     FOREIGN KEY (product_id) REFERENCES products (id)
   );
 
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   reviews (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
@@ -186,7 +193,7 @@ CREATE TABLE
 
 
 -- ! facoltive
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   addresses (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
@@ -199,7 +206,7 @@ CREATE TABLE
   );
 
 -- * user can have autologin in more than one device
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   sessions (
     user_id INT,
     session_token VARCHAR(255) PRIMARY KEY NOT NULL,
@@ -208,7 +215,7 @@ CREATE TABLE
     UNIQUE(user_id, session_token)
   );
 
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   shopping_cart (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
@@ -220,7 +227,7 @@ CREATE TABLE
     UNIQUE (user_id, product_id) -- ! prevent duplicate entries (just have to change quantity value)
   );
 
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   wishlist (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
@@ -233,7 +240,7 @@ CREATE TABLE
     UNIQUE (user_id, product_id) -- ! prevent duplicate entries (just have to change quantity value)  
   );
 
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   wishlist_collaborators (
     id INT PRIMARY KEY AUTO_INCREMENT,
     wishlist_id INT,
@@ -248,7 +255,7 @@ CREATE TABLE
  * following tables are probably not implemented. just some thought for the future 
  */
 -- ! changelog of what user do. it can be usefull to restore some data that users change by mistake
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   audit_trail (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT, -- User who made the change
@@ -261,7 +268,7 @@ CREATE TABLE
   );
 
 -- ! log of errors that occur in the application
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   error_log (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT, -- User who encountered the error (can be NULL)
@@ -271,7 +278,7 @@ CREATE TABLE
   );
 
 -- ! log of security events (error login, new device login, password change, etc.)
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   security_log (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT, -- User involved in the security event (can be NULL for system-level events)
@@ -280,7 +287,7 @@ CREATE TABLE
   );
 
 -- ! log of performance events (slow queries, etc.) [very very very optional, we're not gonna do this for sure]
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   performance_log (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT, -- User (if applicable)
@@ -290,7 +297,7 @@ CREATE TABLE
   );
 
 -- ! log of user sessions (login, logout, etc.)
-CREATE TABLE
+CREATE TABLE IF NOT EXISTS
   session_log (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT, -- User whose session is involved
@@ -298,6 +305,16 @@ CREATE TABLE
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   );
 
+-- Check if the view exists
+IF EXISTS (SELECT * FROM information_schema.views WHERE table_name = 'spacesuits_detail_view') THEN
+    -- Drop the view if it exists
+    DROP VIEW spacesuits_detail_view;
+END IF; 
+
+IF EXISTS (SELECT * FROM information_schema.views WHERE table_name = 'spaceships_detail_view') THEN
+    -- Drop the view if it exists
+    DROP VIEW spaceships_detail_view;
+END IF;
 
 CREATE VIEW spacesuits_detail_view AS
 SELECT
@@ -318,10 +335,10 @@ SELECT
 FROM
     products p
 LEFT JOIN colors_mapping cm ON p.id = cm.product_id
-LEFT JOIN product_colors pc ON cm.color_id = pc.id
-LEFT JOIN product_photos pp ON p.id = pp.product_id
+LEFT JOIN colors pc ON cm.color_id = pc.id
+LEFT JOIN photos pp ON p.id = pp.product_id
 LEFT JOIN sizes_mapping sm ON p.id = sm.product_id
-LEFT JOIN product_sizes ps ON sm.size_id = ps.id
+LEFT JOIN sizes ps ON sm.size_id = ps.id
 LEFT JOIN reviews r ON p.id = r.product_id
 RIGHT JOIN spacesuits ss ON p.id = ss.product_id
 GROUP BY p.id;
@@ -349,10 +366,10 @@ SELECT
 FROM
     products p
 LEFT JOIN colors_mapping cm ON p.id = cm.product_id
-LEFT JOIN product_colors pc ON cm.color_id = pc.id
-LEFT JOIN product_photos pp ON p.id = pp.product_id
+LEFT JOIN colors pc ON cm.color_id = pc.id
+LEFT JOIN photos pp ON p.id = pp.product_id
 LEFT JOIN sizes_mapping sm ON p.id = sm.product_id
-LEFT JOIN product_sizes ps ON sm.size_id = ps.id
+LEFT JOIN sizes ps ON sm.size_id = ps.id
 LEFT JOIN reviews r ON p.id = r.product_id
 RIGHT JOIN spaceships s ON p.id = s.product_id
 GROUP BY p.id;
@@ -364,7 +381,7 @@ GROUP BY p.id;
 */
 
 INSERT INTO
-  product_colors (name)
+  colors (name)
 VALUES
   ('Red'),
   ('Blue'),
@@ -374,7 +391,7 @@ VALUES
   ('White');
 
 INSERT INTO
-  product_sizes (size_name)
+  sizes (size_name)
 VALUES
   ('XXS'),
   ('XS'),
@@ -515,3 +532,14 @@ INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 2);
 INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 1);
 INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
 VALUES (@new_product_id, 'Hyper Fuel', 150, 3000, 'Model C', 'Large');
+
+
+
+
+-- ! SOME USEFULL TRIGGERS
+CREATE TRIGGER update_availability BEFORE
+UPDATE ON products FOR EACH ROW
+SET
+  NEW.availability = IF (NEW.quantity <= 0, FALSE, TRUE);
+
+-- ! END OF TRIGGERS
