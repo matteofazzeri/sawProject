@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS
     name VARCHAR(50) NOT NULL UNIQUE
 );
 
-CREATE TABLE IF NOT EXISTS product_tags (
+CREATE TABLE IF NOT EXISTS tags_mapping (
     product_id INT,
     tag_id INT,
     PRIMARY KEY (product_id, tag_id),
@@ -331,7 +331,9 @@ SELECT
     ss.material AS spacesuit_material,
     AVG(r.rating) AS product_rating,
     p.created_at AS product_created_at,
-    p.updated_at AS product_updated_at
+    p.updated_at AS product_updated_at,
+    t.name AS tag_name,
+    
 FROM
     products p
 LEFT JOIN colors_mapping cm ON p.id = cm.product_id
@@ -340,8 +342,10 @@ LEFT JOIN photos pp ON p.id = pp.product_id
 LEFT JOIN sizes_mapping sm ON p.id = sm.product_id
 LEFT JOIN sizes ps ON sm.size_id = ps.id
 LEFT JOIN reviews r ON p.id = r.product_id
+LEFT JOIN tags_mapping tm ON p.id = tm.product_id
+LEFT JOIN tags t ON tm.tag_id = t.id 
 RIGHT JOIN spacesuits ss ON p.id = ss.product_id
-GROUP BY p.id;
+GROUP BY p.id, s.size, pc.name, t.name_name;
 
 CREATE VIEW spaceships_detail_view AS
 SELECT
@@ -362,7 +366,8 @@ SELECT
     s.size AS spaceship_size,
     AVG(r.rating) AS product_rating,
     p.created_at AS product_created_at,
-    p.updated_at AS product_updated_at
+    p.updated_at AS product_updated_at,
+    t.name AS tag,
 FROM
     products p
 LEFT JOIN colors_mapping cm ON p.id = cm.product_id
@@ -371,8 +376,10 @@ LEFT JOIN photos pp ON p.id = pp.product_id
 LEFT JOIN sizes_mapping sm ON p.id = sm.product_id
 LEFT JOIN sizes ps ON sm.size_id = ps.id
 LEFT JOIN reviews r ON p.id = r.product_id
+LEFT JOIN tags_mapping tm ON p.id = tm.product_id
+LEFT JOIN tags t ON tm.tag_id = t.id 
 RIGHT JOIN spaceships s ON p.id = s.product_id
-GROUP BY p.id;
+GROUP BY p.id, s.size, pc.name, t.name;
 
 
 
@@ -402,49 +409,23 @@ VALUES
   ('XXL'),
   ('XXXL');
 
+INSERT INTO tags (name) VALUES ('Spaceship');
+INSERT INTO tags (name) VALUES ('Spacecraft');
+INSERT INTO tags (name) VALUES ('Interstellar Travel');
+INSERT INTO tags (name) VALUES ('Space Exploration');
+INSERT INTO tags (name) VALUES ('Alien Encounters');
+INSERT INTO tags (name) VALUES ('Galactic Adventure');
+INSERT INTO tags (name) VALUES ('Starship');
+INSERT INTO tags (name) VALUES ('Futuristic Technology');
+INSERT INTO tags (name) VALUES ('Extraterrestrial Life');
+INSERT INTO tags (name) VALUES ('Deep Space');
+INSERT INTO tags (name) VALUES ('Space Mission');
+INSERT INTO tags (name) VALUES ('Astroengineering');
+INSERT INTO tags (name) VALUES ('Intergalactic Travel');
+INSERT INTO tags (name) VALUES ('Outer Space');
+INSERT INTO tags (name) VALUES ('Space Adventure');
 
 -- ! SPACESUITS INSERTS
-
-
-  -- Insert into products table
-INSERT INTO products (name, description, price, quantity, availability, item_sold)
-VALUES ('Test Spacesuit Product', 'Description for the test spacesuit product', 39.99, 15, true, 0);
-
--- Retrieve the ID of the newly inserted product
-SET @new_product_id = LAST_INSERT_ID();
-
--- Insert into colors_mapping table
-INSERT INTO colors_mapping (product_id, color_id)
-VALUES (@new_product_id, 3); -- Assuming color_id 3 exists in product_colors table
-
--- Insert into sizes_mapping table
-INSERT INTO sizes_mapping (product_id, size_id)
-VALUES (@new_product_id, 3); -- Assuming size_id 3 exists in product_sizes table
-
--- Insert into spacesuits table
-INSERT INTO spacesuits (product_id, material)
-VALUES (@new_product_id, 'Advanced Polymer');
-
--- Insert into products table
-INSERT INTO products (name, description, price, quantity, availability, item_sold)
-VALUES ('Spacesuit Product A', 'Description for Spacesuit Product A', 49.99, 10, true, 0);
-
--- Retrieve the ID of the newly inserted product
-SET @new_product_id = LAST_INSERT_ID();
-
--- Insert into colors_mapping table
-INSERT INTO colors_mapping (product_id, color_id)
-VALUES (@new_product_id, 1); -- Assuming color_id 1 exists in product_colors table
-
--- Insert into sizes_mapping table
-INSERT INTO sizes_mapping (product_id, size_id)
-VALUES (@new_product_id, 2); -- Assuming size_id 2 exists in product_sizes table
-
--- Insert into spacesuits table
-INSERT INTO spacesuits (product_id, material)
-VALUES (@new_product_id, 'Nano Fiber');
-
--- Repeat the above structure for the next 8 spacesuit products (Product B to Product J)
 
 -- Product B
 INSERT INTO products (name, description, price, quantity, availability, item_sold)
@@ -464,54 +445,7 @@ INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 3);
 INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 3);
 INSERT INTO spacesuits (product_id, material) VALUES (@new_product_id, 'Carbon Fiber');
 
--- ... Repeat for Spacesuit Products D to J
-
-
-
 -- ! SPACESHIP INSERTS
-
-
-
--- Insert into products table
-INSERT INTO products (name, description, price, quantity, availability, item_sold)
-VALUES ('Test Spaceship Product', 'Description for the test product', 29.99, 20, true, 0);
-
--- Retrieve the ID of the newly inserted product
-SET @new_product_id = LAST_INSERT_ID();
-
--- Insert into colors_mapping table
-INSERT INTO colors_mapping (product_id, color_id)
-VALUES (@new_product_id, 2); -- Assuming color_id 2 exists in product_colors table
-
--- Insert into sizes_mapping table
-INSERT INTO sizes_mapping (product_id, size_id)
-VALUES (@new_product_id, 2); -- Assuming size_id 2 exists in product_sizes table
-
--- Insert into spaceships table
-INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
-VALUES (@new_product_id, 'Hyper Fuel', 150, 3000, 'Test Model', 'Medium');
-
--- Insert into products table
-INSERT INTO products (name, description, price, quantity, availability, item_sold)
-VALUES ('Product A', 'Description for Product A', 19.99, 15, true, 0);
-
--- Retrieve the ID of the newly inserted product
-SET @new_product_id = LAST_INSERT_ID();
-
--- Insert into colors_mapping table
-INSERT INTO colors_mapping (product_id, color_id)
-VALUES (@new_product_id, 1); -- Assuming color_id 1 exists in product_colors table
-
--- Insert into sizes_mapping table
-INSERT INTO sizes_mapping (product_id, size_id)
-VALUES (@new_product_id, 1); -- Assuming size_id 1 exists in product_sizes table
-
--- Insert into spaceships table
-INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
-VALUES (@new_product_id, 'Standard Fuel', 100, 2000, 'Model A', 'Small');
-
-
--- Repeat the above structure for the next 8 products (Product B to Product J)
 
 -- Product B
 INSERT INTO products (name, description, price, quantity, availability, item_sold)
@@ -519,22 +453,138 @@ VALUES ('Product B', 'Description for Product B', 24.99, 10, true, 0);
 SET @new_product_id = LAST_INSERT_ID();
 INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 3);
 INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 2);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 1);
 INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
 VALUES (@new_product_id, 'Advanced Fuel', 120, 2500, 'Model B', 'Medium');
 
--- Continue the pattern for Products C to J
-
 -- Product C
+
 INSERT INTO products (name, description, price, quantity, availability, item_sold)
-VALUES ('Product C', 'Description for Product C', 29.99, 20, true, 0);
+VALUES ('Product C', 'Description for Product C', 49.99, 20, true, 0);
 SET @new_product_id = LAST_INSERT_ID();
 INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 2);
-INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 1);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 5);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 7);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 12);
 INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
-VALUES (@new_product_id, 'Hyper Fuel', 150, 3000, 'Model C', 'Large');
+VALUES (@new_product_id, 'Quantum Fuel', 300, 4000, 'Model X', 'Large');
 
+-- Product D
 
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Product D', 'Description for Product D', 74.99, 15, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 4);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 7);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 2);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 9);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Plasma Drive', 200, 3500, 'Model Y', 'Extra Large');
 
+-- Product E
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Product E', 'Description for Product E', 99.99, 30, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 6);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 3);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 5);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Hyperdrive', 400, 5000, 'Model Z', 'Extra Large');
+
+-- Product F
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Product F', 'Description for Product F', 149.99, 25, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 1);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 8);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 8);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Warp Drive', 500, 6000, 'Model Alpha', 'Extra Extra Large');
+
+-- Product G
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Product G', 'Description for Product G', 64.99, 18, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 3);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 6);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 3);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 11);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Ion Propulsion', 250, 4500, 'Model Delta', 'Large');
+
+-- Product H
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Product H', 'Description for Product H', 39.99, 22, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 5);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 2);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 4);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 10);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Antimatter Drive', 300, 5500, 'Model Gamma', 'Medium');
+
+-- Product I
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Product I', 'Description for Product I', 129.99, 12, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 1);
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 2);
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 3);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 4);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 7);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 1);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 2);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 3);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 4);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Plasma Drive', 350, 4500, 'Model Omega', 'Extra Large');
+
+-- Product J
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Product J', 'Description for Product J', 89.99, 15, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 2);
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 4);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 3);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 6);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 5);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 6);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 7);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 8);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Quantum Fuel', 280, 3800, 'Model Beta', 'Large');
+
+-- Product K
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Product K', 'Description for Product K', 199.99, 8, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 3);
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 5);
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 6);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 2);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 5);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 9);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 10);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 11);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 12);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Warp Drive', 600, 7000, 'Model Sigma', 'Extra Extra Large');
+
+-- Product L
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Product L', 'Description for Product L', 149.99, 20, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 1);
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 4);
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 6);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 4);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 7);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 1);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 5);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 9);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 12);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Hyperdrive', 450, 5500, 'Model Epsilon', 'Extra Large');
 
 -- ! SOME USEFULL TRIGGERS
 CREATE TRIGGER update_availability BEFORE

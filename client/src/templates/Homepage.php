@@ -3,57 +3,51 @@ require __DIR__ . '/../components/Navbar.php';
 ?>
 
 <main class="homepage">
-
+  
   <section id="">
     <div class="last-added">
-        <h3 class="">Last Added</h3>
-        <span class="elems-seq">
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-        </span>
+      <h3 class="">Last Added</h3>
+      <span class="elems-seq">
+        <script>
+          console.log("ciao")
+          const p = new ProductAPI("http://localhost/server/sawProject/server/api/");
+          p.renderProductCards();
+        </script>
+      </span>
     </div>
 
     <div class="last-added">
-        <h3 class="">From your wishlist</h3>
-        <span class="elems-seq">
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-        </span>
+      <h3 class="">From your wishlist</h3>
+      <span class="elems-seq">
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+      </span>
     </div>
 
     <div class="last-added">
-        <h3 class="">Most sold</h3>
-        <span class="elems-seq">
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-          <div class="elem"><img src="" alt="elem"></div>
-        </span>
+      <h3 class="">Most sold</h3>
+      <span class="elems-seq">
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+        <div class="elem"><img src="" alt="elem"></div>
+      </span>
     </div>
   </section>
 

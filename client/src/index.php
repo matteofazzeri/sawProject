@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="src/style/productCard.css">
   <link rel="stylesheet" href="src/style/homepage.css">
   <title>test</title>
+  <script src="js/Product.js"></script>
 </head>
 
 <body>
@@ -43,7 +44,8 @@
 
   ?>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+
+
 
 </body>
 
