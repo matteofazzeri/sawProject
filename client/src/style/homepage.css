@@ -5,11 +5,9 @@
   padding: 1rem;
 }
 
-.homepage section {
-  
-}
-
-.last-added {
+.last-added,
+.wishlist,
+.most-sold {
   width: 100%;
   height: 100%;
   background-color: green;
@@ -21,7 +19,9 @@ h3 {
   font-size: large;
 }
 
-.last-added .elems-seq {
+.last-added .elems-seq,
+.wishlist .elems-seq,
+.most-sold .elems-seq{
   max-width: 100%;
   width: 100%;
   display: flex;
@@ -32,7 +32,9 @@ h3 {
   padding-top: 1em;
 }
 
-.last-added .elems-seq .elem {
+.last-added .elems-seq .elem,
+.wishlist .elems-seq .elem,
+.most-sold .elems-seq .elem{
   min-width: 200px;
   height: 300px;
   background-color: white;

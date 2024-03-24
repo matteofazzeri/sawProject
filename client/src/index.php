@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="src/style/navbar.css">
   <link rel="stylesheet" href="src/style/productCard.css">
   <link rel="stylesheet" href="src/style/homepage.css">
+  <link rel="stylesheet" href="src/style/searchpage.css">
+  <link rel="stylesheet" href="src/style/generic.css">
   <title>test</title>
-  <script src="js/Product.js"></script>
+  <script  src="src/js/Product.js"></script>
 </head>
 
 <body>

@@ -3,34 +3,32 @@ class ProductAPI {
     this.baseURL = baseURL;
   }
 
-  renderProductCards(id_div) {
-    const data = this.downloadProduct()
+  async renderProductCards(id_div) {
+    const data = await this.downloadProduct();
+    /* console.log(data); */
     var productHTML = data
       .map(function (product) {
         return `
                 <div class="product-card">
                     <div class="image">
                         <img src="${
-                          product.imageSrc
-                        }" alt="${product.title}" class="product-image">
+                          product.product_image
+                        }" alt="${product.product_name}" class="product-image">
                     </div>
                     <div class="details">
-                        <h1 class="product-title">${product.title}</h1>
+                        <h1 class="product-title">${product.product_name}</h1>
                         <div class="product-rating">Rating: ${
-                          product.rating
+                          product.product_rating
                         }</div>
                         <div class="product-tags">Tags: ${product.tags.join(
                           ", "
                         )}</div>
-                        <p class="latest-comment">Latest Comment: ${
-                          product.latestComment
-                        }</p>
+                        <p class="latest-comment">Latest Comment: Aggiungere ultimo commento</p>
                     </div>
                 </div>
             `;
       })
       .join("");
-
     document.getElementById(id_div).innerHTML = productHTML;
   }
 
@@ -59,7 +57,7 @@ class ProductAPI {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    return response.json();
+    return await response.json();
   }
 
   // Edit product JSON

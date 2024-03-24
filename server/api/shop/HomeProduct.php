@@ -22,7 +22,7 @@ foreach ($data as $item) {
   if (!in_array($item['tag'], $grouped_data[$product_id]['tags'])) {
     $grouped_data[$product_id]['tags'][] = $item['tag'];
   }
-}
+} 
 
 // Convert associative array back to indexed array
 $result = array_values($grouped_data);
@@ -31,4 +31,4 @@ $result = array_values($grouped_data);
 $json_output = json_encode($result, JSON_PRETTY_PRINT);
 
 // Output JSON
-echo "<pre>" . $json_output . "</pre>";
+echo $json_output;

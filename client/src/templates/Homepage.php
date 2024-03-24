@@ -1,24 +1,20 @@
-<?php
-require __DIR__ . '/../components/Navbar.php';
-?>
-
 <main class="homepage">
-  
   <section id="">
     <div class="last-added">
       <h3 class="">Last Added</h3>
-      <span class="elems-seq">
+      <span id="last-added-row" class="elems-seq">
         <script>
           console.log("ciao")
           const p = new ProductAPI("http://localhost/server/sawProject/server/api/");
-          p.renderProductCards();
+          p.renderProductCards("last-added-row");
         </script>
       </span>
     </div>
 
-    <div class="last-added">
+    <div class="wishlist">
       <h3 class="">From your wishlist</h3>
-      <span class="elems-seq">
+      <span id="wishlist-row" class="elems-seq">
+
         <div class="elem"><img src="" alt="elem"></div>
         <div class="elem"><img src="" alt="elem"></div>
         <div class="elem"><img src="" alt="elem"></div>
@@ -33,9 +29,9 @@ require __DIR__ . '/../components/Navbar.php';
       </span>
     </div>
 
-    <div class="last-added">
+    <div class="most-sold">
       <h3 class="">Most sold</h3>
-      <span class="elems-seq">
+      <span id="most-sold-row" class="elems-seq">
         <div class="elem"><img src="" alt="elem"></div>
         <div class="elem"><img src="" alt="elem"></div>
         <div class="elem"><img src="" alt="elem"></div>
@@ -61,6 +57,3 @@ require __DIR__ . '/../components/Navbar.php';
 
 
 </main>
-
-<?php
-require __DIR__ . '/../components/Footer.php';

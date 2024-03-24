@@ -1,2 +1,4 @@
 <?php
-require_once __DIR__ . '/../templates/Homepage.php';
+require __DIR__ . '/../libs/help_func.php';
+
+display('Homepage', true);
