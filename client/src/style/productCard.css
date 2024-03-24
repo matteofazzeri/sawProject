@@ -1,6 +1,6 @@
 .product-card {
-  min-width: 18%;
   height: 350px;
+  margin: 5px;
   border-radius: 18px;
   overflow: hidden;
   background-color: white;

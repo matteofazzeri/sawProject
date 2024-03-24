@@ -305,17 +305,6 @@ CREATE TABLE IF NOT EXISTS
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   );
 
--- Check if the view exists
-IF EXISTS (SELECT * FROM information_schema.views WHERE table_name = 'spacesuits_detail_view') THEN
-    -- Drop the view if it exists
-    DROP VIEW spacesuits_detail_view;
-END IF; 
-
-IF EXISTS (SELECT * FROM information_schema.views WHERE table_name = 'spaceships_detail_view') THEN
-    -- Drop the view if it exists
-    DROP VIEW spaceships_detail_view;
-END IF;
-
 CREATE VIEW spacesuits_detail_view AS
 SELECT
     p.id AS product_id,
@@ -367,7 +356,7 @@ SELECT
     AVG(r.rating) AS product_rating,
     p.created_at AS product_created_at,
     p.updated_at AS product_updated_at,
-    t.name AS tag,
+    t.name AS tag
 FROM
     products p
 LEFT JOIN colors_mapping cm ON p.id = cm.product_id

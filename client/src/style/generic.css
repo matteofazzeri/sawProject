@@ -1,6 +1,15 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
 .page {
   max-width: 100vw;
   min-height: 100vh;
-  display: flex;
   overflow: none;
+  display: flex;
+  flex-direction: row;
 }
