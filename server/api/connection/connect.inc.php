@@ -1,6 +1,6 @@
 <?php
 $serverName = "localhost";
-$dbName = "sawproject";
+$dbName = "test";
 
 $db = "mysql:host=$serverName;dbname=$dbName";
 $userName = "root";

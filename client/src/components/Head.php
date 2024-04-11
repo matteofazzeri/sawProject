@@ -17,7 +17,6 @@
         echo '<script src=' . $link . '></script>';
     }
     ?>
-    <script src="src/js/Product.js"></script>
 </head>
 
 <body>

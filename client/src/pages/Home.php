@@ -4,8 +4,8 @@ require __DIR__ . '/../libs/help_func.php';
 
 display('Head', false, [
     'title' => 'Home',
-    'css' => ['generic', 'homepage', 'productCard', 'navbar'],
-    'js' => ['Product']
+    'css' => ['generic', 'navbar', 'homepage', 'productCard'],
+    'js' => ['Product', 'config']
 ]
 );
 display('Navbar');

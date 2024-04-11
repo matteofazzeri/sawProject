@@ -1,12 +1,17 @@
-
 <main class="page">
   <aside class="products-filter"></aside>
-  <section id="searched-elem" class="show-row-4">
-    <script>
-      const p = new ProductAPI("http://localhost/server/sawProject/server/api/");
-      p.renderProductCards("searched-elem");
-    </script>
+  <section class="elem-section">
+    <div id="searched-elem" class="show-row-4">
+      <script>
+        let params = new URLSearchParams(window.location.search);
+        let page = params.get('page');
+        const p = new Pagination(8, 'searched-elem', page);
+        p.loadItems();
+      </script>
+    </div>
+    <?php
+    display("Pagination");
+    ?>
   </section>
-
 
 </main>

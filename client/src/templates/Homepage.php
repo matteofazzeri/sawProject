@@ -4,8 +4,7 @@
       <h3 class="">Last Added</h3>
       <span id="last-added-row" class="elems-seq">
         <script>
-          console.log("ciao")
-          const p = new ProductAPI("http://localhost/server/sawProject/server/api/");
+          const p = new ProductAPI(8);
           p.renderProductCards("last-added-row");
         </script>
       </span>
