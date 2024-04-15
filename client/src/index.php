@@ -3,7 +3,7 @@
 $fullUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 define("ROOT", str_replace("\\", "/", __DIR__));
-define("BASE_URL", "http://localhost" . str_replace("/src", "", (explode("xampp/htdocs", ROOT)[1])));
+define("BASE_URL", "http://localhost" . str_replace("/src", "", (explode("laragon/www", ROOT)[1])));
 define("ROUTING_URL", strtolower(str_replace(BASE_URL, "", $fullUrl)));
 
 //* Routing the url  

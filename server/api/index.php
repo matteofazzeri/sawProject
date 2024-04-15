@@ -10,7 +10,7 @@ $requestURL = $_SERVER['REQUEST_URI'];
 
 if (strpos($requestURL, "forms")) {
   // TODO: send request to form.php file 
-} else if (strpos($requestURL, "search")) {
+} else if (strpos($requestURL, "s")) {
   require __DIR__ . "/shop/Shop.php";
 } else if (strpos($requestURL, "home")) {
   require __DIR__ . "";

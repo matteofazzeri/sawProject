@@ -345,30 +345,46 @@ SELECT
     p.quantity AS product_quantity,
     p.availability AS product_availability,
     p.item_sold AS products_sold,
-    pc.name AS color_name,
-    pp.image AS product_image,
-    ps.size_name AS size_name,
+    pc.color_names AS color_names,
+    pp.images AS product_images,
+    ps.size_names AS size_names,
     s.fuel_type AS spaceship_fuel_type,
     s.capacity AS spaceship_capacity,
     s.speed AS spaceship_speed,
     s.model AS spaceship_model,
-    s.size AS spaceship_size,
     AVG(r.rating) AS product_rating,
+    pt.tag_names AS tag_names,
     p.created_at AS product_created_at,
-    p.updated_at AS product_updated_at,
-    t.name AS tag
+    p.updated_at AS product_updated_at
 FROM
     products p
-LEFT JOIN colors_mapping cm ON p.id = cm.product_id
-LEFT JOIN colors pc ON cm.color_id = pc.id
-LEFT JOIN photos pp ON p.id = pp.product_id
-LEFT JOIN sizes_mapping sm ON p.id = sm.product_id
-LEFT JOIN sizes ps ON sm.size_id = ps.id
+LEFT JOIN (
+    SELECT product_id, GROUP_CONCAT(DISTINCT pc.name) AS color_names
+    FROM colors_mapping cm
+    LEFT JOIN colors pc ON cm.color_id = pc.id
+    GROUP BY product_id
+) pc ON p.id = pc.product_id
+LEFT JOIN (
+    SELECT product_id, GROUP_CONCAT(DISTINCT pp.image) AS images
+    FROM photos pp
+    GROUP BY product_id
+) pp ON p.id = pp.product_id
+LEFT JOIN (
+    SELECT product_id, GROUP_CONCAT(DISTINCT ps.size_name) AS size_names
+    FROM sizes_mapping sm
+    LEFT JOIN sizes ps ON sm.size_id = ps.id
+    GROUP BY product_id
+) ps ON p.id = ps.product_id
 LEFT JOIN reviews r ON p.id = r.product_id
-LEFT JOIN tags_mapping tm ON p.id = tm.product_id
-LEFT JOIN tags t ON tm.tag_id = t.id 
+LEFT JOIN (
+    SELECT product_id, GROUP_CONCAT(DISTINCT t.name) AS tag_names
+    FROM tags_mapping tm
+    LEFT JOIN tags t ON tm.tag_id = t.id
+    GROUP BY product_id
+) pt ON p.id = pt.product_id
 RIGHT JOIN spaceships s ON p.id = s.product_id
-GROUP BY p.id, s.size, pc.name, t.name;
+GROUP BY p.id, p.name, p.description, p.price, p.quantity, p.availability, p.item_sold, s.fuel_type, s.capacity, s.speed, s.model, p.created_at, p.updated_at, pp.images;
+
 
 
 

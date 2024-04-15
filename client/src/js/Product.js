@@ -1,6 +1,6 @@
 class ProductAPI {
   constructor(
-    elemPerPage = 16,
+    elemPerPage = 8,
     page = 1,
   ) {
     this.currentPage = page;
@@ -24,8 +24,9 @@ class ProductAPI {
                     <div class="details">
                         <h1 class="product-title">${product.product_name}</h1>
                         <div class="product-rating">Rating: ${product.product_rating}</div>
-                        <div class="product-tags">Tags: ${product.tags.join(", ")}</div>
-                        <p class="latest-comment">Latest Comment: Aggiungere ultimo commento</p>
+                        
+                        <div class="product-tags">Tags: ${product.tags && product.tags.length > 0 ? product.tags.join(", ") : "No tags available"}</div>
+                        <p class="latest-comment">Latest Comment: Aggiungere ultimo commentoooooooo oooootjtjakoooooo oooooo ooooooooooloooooo oooooooooo ooooooooo oooooooo ooo oooooo oooooo oooooo o!</p>
                     </div>
                 </div>
             `;

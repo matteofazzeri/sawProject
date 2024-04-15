@@ -58,6 +58,7 @@
   transition: 0.3s;
   color: #000000;
   z-index: 2;
+
 }
 
 .product-card:hover .details {
@@ -84,11 +85,16 @@
   font-size: 0.85em;
 }
 
-.details #latest-comment {
-  color: #fff;
-  opacity: 0.8;
-  line-height: 1.5;
+.details .latest-comment {
+  color: #000000;
+  opacity: .8;
+  line-height: 1;
   margin-bottom: 1em;
+  overflow: hidden;
+  width: 100%;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 
@@ -97,5 +103,5 @@
   .product-card {
     width: 80%;
   }
-  
+
 }

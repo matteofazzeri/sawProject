@@ -1,5 +1,5 @@
 class Pagination {
-  constructor(itemsPerPage = 16, id_div, cur_page = 1) {
+  constructor(itemsPerPage = 8, id_div, cur_page = 1) {
     this.itemsPerPage = itemsPerPage;
     this.currentPage = cur_page;
     this.div = id_div;
@@ -49,9 +49,5 @@ class Pagination {
   goToPage(page) {
     this.currentPage = page;
     return this.loadItems();
-  }
-
-  setPagination() {
-
   }
 }
