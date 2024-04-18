@@ -2,16 +2,21 @@ class ProductAPI {
   constructor(
     elemPerPage = 8,
     page = 1,
+    api,
   ) {
     this.currentPage = page;
     this.numItems = elemPerPage;
+    this.apiURL = api;
   }
 
   async renderProductCards(id_div) {
+    loaders.show("loader-" + id_div, 'circular');
+
+    await new Promise(r => setTimeout(r, 2000));
+
     const data = await this.downloadProduct();
 
     if (!data || (Array.isArray(data) && data.length === 0)) {
-      console.log('error');
       return -1;
     }
     var productHTML = data
@@ -32,12 +37,14 @@ class ProductAPI {
             `;
       })
       .join("");
+
+    loaders.hide("loader-" + id_div);
     document.getElementById(id_div).innerHTML = productHTML;
   }
 
   // Upload product JSON
   async uploadProduct(product) {
-    const response = await fetch(`${backendUrl.development}/products`, {
+    const response = await fetch(`${backendUrl.development}/p`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +62,7 @@ class ProductAPI {
   // Download product JSON
   async downloadProduct() {
     const response = await fetch(
-      `${backendUrl.development}/products?page=${this.currentPage}&nElem=${this.numItems}`
+      `${backendUrl.development}/s?page=${this.currentPage}&nElem=${this.numItems}`
     );
 
     if (!response.ok) {

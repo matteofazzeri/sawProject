@@ -5,7 +5,7 @@ require __DIR__ . '/../libs/help_func.php';
 display('Head', false, [
     'title' => 'Home',
     'css' => ['generic', 'navbar', 'homepage', 'productCard'],
-    'js' => ['Product', 'config']
+    'js' => ['Product', 'config', 'Loaders']
 ]
 );
 display('Navbar');

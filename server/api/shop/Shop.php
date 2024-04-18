@@ -1,5 +1,4 @@
 <?php
-// process-data.php
 
 header("Access-Control-Allow-Origin: *");
 
