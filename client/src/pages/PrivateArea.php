@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . "/../libs/adminCheck.php";
+require __DIR__ . "/../libs/functions.php";
 
 /* if(!isAdmin()) {
   header("Location: " . BASE_URL . "/");
