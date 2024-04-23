@@ -254,7 +254,7 @@ CREATE TABLE IF NOT EXISTS
 /*
  * following tables are probably not implemented. just some thought for the future 
  */
--- ! changelog of what user do. it can be usefull to restore some data that users change by mistake
+/* -- ! changelog of what user do. it can be usefull to restore some data that users change by mistake
 CREATE TABLE IF NOT EXISTS
   audit_trail (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -303,7 +303,7 @@ CREATE TABLE IF NOT EXISTS
     user_id INT, -- User whose session is involved
     session_action VARCHAR(50) NOT NULL, -- 'Login', 'Logout', etc.
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-  );
+  ); */
 
 CREATE VIEW spacesuits_detail_view AS
 SELECT

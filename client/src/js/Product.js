@@ -10,7 +10,7 @@ class ProductAPI {
   }
 
   async renderProductCards(id_div) {
-    loaders.show("loader-" + id_div, 'circular');
+    loaders.show("loader-" + id_div, 'search');
 
     await new Promise(r => setTimeout(r, 2000));
 

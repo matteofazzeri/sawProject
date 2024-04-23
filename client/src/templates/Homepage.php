@@ -3,8 +3,7 @@
     <div class="last-added">
       <h3 class="">Last Added</h3>
       <span id="last-added-row" class="elems-seq">
-        <span id="loader-last-added-row">
-        </span>
+        <span id="loader-last-added-row" class="loader">ciao</span>
         <script>
           const lap = new ProductAPI(10);
           lap.renderProductCards("last-added-row");
@@ -15,8 +14,7 @@
     <div class="wishlist">
       <h3 class="">From your wishlist</h3>
       <span id="wishlist-row" class="elems-seq">
-        <span id="loader-wishlist-row">
-          <p>PORCO DIO 1</p>
+        <span id="loader-wishlist-row" class="loader">
         </span>
         <script>
           const wp = new ProductAPI(10);
@@ -28,8 +26,7 @@
     <div class="most-sold">
       <h3 class="">Most sold</h3>
       <span id="most-sold-row" class="elems-seq">
-        <span id="loader-most-sold-row">
-          <p>PORCO DIO 2</p>
+        <span id="loader-most-sold-row" class="loader">
         </span>
         <script>
           const msp = new ProductAPI(10);
