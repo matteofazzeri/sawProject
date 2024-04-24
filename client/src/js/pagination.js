@@ -9,7 +9,6 @@ class Pagination {
   async loadItems() {
     const Prod = new ProductAPI(this.itemsPerPage, this.currentPage);
     if(await Prod.renderProductCards(this.div) === -1){
-      console.log("finish");
       this.previousPage();
     }
   }
@@ -19,7 +18,7 @@ class Pagination {
     // Get the current URL and its search parameters
     let url = new URL(window.location.href);
     let params = url.searchParams;
-    params.set('page', ++this.currentPage);
+    params.set('p', ++this.currentPage);
 
     // Update the URL with the new search parameters
     url.search = params.toString();
@@ -36,7 +35,7 @@ class Pagination {
     // Get the current URL and its search parameters
     let url = new URL(window.location.href);
     let params = url.searchParams;
-    params.set('page', this.currentPage);
+    params.set('p', this.currentPage);
 
     // Update the URL with the new search parameters
     url.search = params.toString();

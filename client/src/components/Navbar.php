@@ -16,16 +16,6 @@
 </nav>
 
 <script>
-  const changeSearch = (e) => {
-    let search_input = document.querySelector("input").value;
-    if (search_input[search_input.length - 1] === ' ') {
-      search_input[search_input.length - 1] = '+';
-    }
-    console.log(search_input);
-  }
-
-  const search = () => {
-    const search_input = document.querySelector("input").value;
-    console.log(search_input);
-  }
+  const search = new searchProduct();
+  
 </script>

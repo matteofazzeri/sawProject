@@ -12,6 +12,9 @@ class ProductAPI {
   async renderProductCards(id_div) {
     loaders.show("loader-" + id_div, 'search');
 
+    document.getElementById(id_div).style.display = "none";
+
+    //! to delete
     await new Promise(r => setTimeout(r, 2000));
 
     const data = await this.downloadProduct();
@@ -40,6 +43,7 @@ class ProductAPI {
 
     loaders.hide("loader-" + id_div);
     document.getElementById(id_div).innerHTML = productHTML;
+    document.getElementById(id_div).style.display = "flex";
   }
 
   // Upload product JSON
@@ -88,4 +92,29 @@ class ProductAPI {
 
     return response.json();
   }
+
+}
+
+
+class searchProduct extends ProductAPI {
+  constructor(
+    elemPerPage = 8,
+    page = 1,
+    api,
+  ) {
+    super(elemPerPage, page, api);
+  }
+
+  changeSearch = (e) => {
+    let search_input = document.querySelector("input").value;
+    if (search_input[search_input.length - 1] === ' ') {
+    }
+    console.log(search_input);
+  }
+
+  search = () => {
+    const search_input = document.querySelector("input").value;
+    console.log(search_input);
+  }
+
 }
