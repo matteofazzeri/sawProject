@@ -47,7 +47,7 @@
                     if($remember == "on") {
                         setcookie("username", $username, time() + (86400 * 30), "/");
                     }
-                    header("Location: es11.php");
+                    header("Location: Home.php");
                     $con->close();
                     exit();
                 } else {
@@ -65,6 +65,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./style/form.css">
         <title>SAW: login</title>
     </head>
     <body>
