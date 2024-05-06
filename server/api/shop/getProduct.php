@@ -1,11 +1,16 @@
 <?php
 include __DIR__ . "/../connection/inc.php";
 
-$data = getElem("SELECT * FROM spaceships_detail_view");
-
 $page = $_GET['page'] ?? 1;
 $items_per_page = $_GET['nElem'] ?? 16;
 $latest_added = $_GET['la'] ?? 0;
+$searchedElem = $_GET['k'] ?? '';
+
+if ($searchedElem) {
+    $data = getElem("SELECT * FROM spaceships_detail_view WHERE product_name LIKE '$searchedElem%'");
+} else {
+    echo json_encode([], JSON_PRETTY_PRINT);
+}
 
 $result = array_values($data);
 

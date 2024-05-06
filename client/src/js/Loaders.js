@@ -95,7 +95,6 @@ const loaders = {
     toEdit.style.display = 'block';
     const messageHTML = `<p>${message}</p>`;
     toEdit.innerHTML = loader+messageHTML;
-    console.log(loader+messageHTML)
   },
   hide: function (load_div, type) {
     document.getElementById(load_div).style.display = 'none';

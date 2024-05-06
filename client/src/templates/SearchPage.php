@@ -7,13 +7,7 @@
         let params = new URLSearchParams(window.location.search);
         let page = params.get('p');
         const search_input = params.get('s');
-        if (page === null) {
-          page = 1;
-        }
-        if (search_input === null) {
-          window.location.href = 'http://localhost/sawProject/client';
-        }
-        const p = new Pagination(8, 'searched-elem', page);
+        const p = new Pagination('searched-elem');
         p.loadItems();
       </script>
     </div>

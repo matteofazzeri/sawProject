@@ -1,15 +1,20 @@
 class Pagination {
-  constructor(itemsPerPage = 8, id_div, cur_page = 1) {
-    this.itemsPerPage = itemsPerPage;
-    this.currentPage = cur_page;
+  constructor(id_div) {
+    this.itemsPerPage = 8;
+    this.currentPage = new URLSearchParams(window.location.search).get('p') === null ?
+      1
+      :
+      new URLSearchParams(window.location.search).get('p');
     this.div = id_div;
   }
 
   // Fetch items for the current page
   async loadItems() {
-    const Prod = new ProductAPI(this.itemsPerPage, this.currentPage);
-    if(await Prod.renderProductCards(this.div) === -1){
-      this.previousPage();
+    const Prod = new ProductAPI(this.currentPage);
+    await Prod.renderProductCards(this.div) === -1;
+
+    if (document.getElementById(this.div).innerHTML === "<h1>No products found</h1>") {
+      //this.previousPage();
     }
   }
 
@@ -20,11 +25,11 @@ class Pagination {
     let params = url.searchParams;
     params.set('p', ++this.currentPage);
 
-    // Update the URL with the new search parameters
-    url.search = params.toString();
+    // Update the URL with the new search parameters using history.pushState()
+    history.pushState({}, '', url.pathname + '?' + params.toString());
 
-    // Redirect to the updated URL
-    window.location.href = url.toString();
+    window.scrollTo(0, 0);
+    this.loadItems();
   }
 
   // Go to the previous page
@@ -37,11 +42,11 @@ class Pagination {
     let params = url.searchParams;
     params.set('p', this.currentPage);
 
-    // Update the URL with the new search parameters
-    url.search = params.toString();
+    // Update the URL with the new search parameters using history.pushState()
+    history.pushState({}, '', url.pathname + '?' + params.toString());
 
-    // Redirect to the updated URL
-    window.location.href = url.toString();
+    window.scrollTo(0, 0);
+    this.loadItems();
   }
 
   // Go to a specific page

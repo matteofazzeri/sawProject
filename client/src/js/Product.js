@@ -1,12 +1,13 @@
 class ProductAPI {
   constructor(
-    elemPerPage = 8,
     page = 1,
-    api,
   ) {
     this.currentPage = page;
-    this.numItems = elemPerPage;
-    this.apiURL = api;
+    this.numItems = 8;
+    this.searchElem = new URLSearchParams(window.location.search).get('k') === null ?
+      ""
+      :
+      new URLSearchParams(window.location.search).get('k');
   }
 
   async renderProductCards(id_div) {
@@ -15,35 +16,52 @@ class ProductAPI {
     document.getElementById(id_div).style.display = "none";
 
     //! to delete
-    await new Promise(r => setTimeout(r, 2000));
+    //await new Promise(r => setTimeout(r, 2000));
 
-    const data = await this.downloadProduct();
+    const timeout = new Promise((resolve, reject) => {
+      setTimeout(reject, 1000, 'Request timed out');
+    });
 
-    if (!data || (Array.isArray(data) && data.length === 0)) {
-      return -1;
+    let data;
+    try {
+      data = await Promise.race([this.downloadProduct(), timeout]);
+    } catch (error) {
+      console.error(error);
+      loaders.hide("loader-" + id_div);
+      document.getElementById(id_div).innerHTML = "<h1>Error loading products</h1>";
+      document.getElementById(id_div).style.display = "flex";
+      return;
     }
-    var productHTML = data
-      .map(function (product) {
-        return `
-                <div class="product-card">
-                    <div class="image">
-                        <img src="${product.product_image}" alt="${product.product_name}" class="product-image">
-                    </div>
-                    <div class="details">
-                        <h1 class="product-title">${product.product_name}</h1>
-                        <div class="product-rating">Rating: ${product.product_rating}</div>
-                        
-                        <div class="product-tags">Tags: ${product.tags && product.tags.length > 0 ? product.tags.join(", ") : "No tags available"}</div>
-                        <p class="latest-comment">Latest Comment: Aggiungere ultimo commentoooooooo oooootjtjakoooooo oooooo ooooooooooloooooo oooooooooo ooooooooo oooooooo ooo oooooo oooooo oooooo o!</p>
-                    </div>
-                </div>
-            `;
-      })
-      .join("");
 
-    loaders.hide("loader-" + id_div);
-    document.getElementById(id_div).innerHTML = productHTML;
-    document.getElementById(id_div).style.display = "flex";
+    if (Array.isArray(data) && data.length === 0) {
+      loaders.hide("loader-" + id_div);
+      document.getElementById(id_div).innerHTML = "<h1>No products found</h1>";
+      document.getElementById(id_div).style.display = "flex";
+    }
+    else {
+      var productHTML = data
+        .map(function (product) {
+          return `
+            <div class="product-card">
+                <div class="image">
+                    <img src="${product.product_image}" alt="${product.product_name}" class="product-image">
+                </div>
+                <div class="details">
+                    <h1 class="product-title">${product.product_name}</h1>
+                    <div class="product-rating">Rating: ${product.product_rating}</div>
+                    
+                    <div class="product-tags">Tags: ${product.tags && product.tags.length > 0 ? product.tags.join(", ") : "No tags available"}</div>
+                    <p class="latest-comment">Latest Comment: Aggiungere ultimo commentoooooooo oooootjtjakoooooo oooooo ooooooooooloooooo oooooooooo ooooooooo oooooooo ooo oooooo oooooo oooooo o!</p>
+                </div>
+            </div>
+        `;
+        })
+        .join("");
+
+      loaders.hide("loader-" + id_div);
+      document.getElementById(id_div).innerHTML = productHTML;
+      document.getElementById(id_div).style.display = "flex";
+    }
   }
 
   // Upload product JSON
@@ -66,7 +84,7 @@ class ProductAPI {
   // Download product JSON
   async downloadProduct() {
     const response = await fetch(
-      `${backendUrl.development}/s?page=${this.currentPage}&nElem=${this.numItems}`
+      `${backendUrl.development}/s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}`
     );
 
     if (!response.ok) {
@@ -97,24 +115,19 @@ class ProductAPI {
 
 
 class searchProduct extends ProductAPI {
-  constructor(
-    elemPerPage = 8,
-    page = 1,
-    api,
-  ) {
-    super(elemPerPage, page, api);
+  constructor() {
+    super();
   }
 
   changeSearch = (e) => {
-    let search_input = document.querySelector("input").value;
-    if (search_input[search_input.length - 1] === ' ') {
-    }
-    console.log(search_input);
+    const search_input = document.querySelector("input").value;
   }
 
   search = () => {
-    const search_input = document.querySelector("input").value;
-    console.log(search_input);
-  }
+    const search_input = encodeURIComponent(document.querySelector("input").value);
+    console.log(search_input)
 
+    window.location.href = `http://localhost/sawProject/client/search?k=${search_input}`;
+
+  }
 }
