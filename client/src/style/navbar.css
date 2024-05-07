@@ -6,7 +6,7 @@
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 
   background-color: aquamarine;
 }
@@ -17,15 +17,11 @@
   border-radius: 10px;
   display: flex;
   background-color: white;
+  justify-content: space-between;
 }
 
-.global-navbar span {
-  height: 2.5rem;
-  display: flex;
-  flex-direction: row;
-}
 
-.global-navbar span button {
+.global-navbar .search-bar-elem span button {
   width: 100%;
   height: 100%;
   padding: 0.5rem;
@@ -34,16 +30,25 @@
   background-color: white;
 }
 
-.global-navbar span button svg {
+.global-navbar .search-bar-elem span button svg {
   width: 100%;
   height: 100%;
 }
 
-.global-navbar span input {
+.global-navbar .search-bar-elem form {
+  width: 100%;
+}
+
+.global-navbar .search-bar-elem form input {
   width: 100%;
   height: 100%;
   padding: 0.5rem;
   border: none;
+  outline: none;
+}
+.global-navbar .search-bar-elem form input:focus {
+  outline: auto;
+  outline-color: orange;
 }
 
 .navbar-search-select {

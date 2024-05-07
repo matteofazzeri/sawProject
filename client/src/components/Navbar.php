@@ -1,5 +1,9 @@
 <nav class="global-navbar">
-  <span class="search-bar-elem">
+  <div>
+    <a href="http://localhost/sawProject/client/">Go back home</a>
+  </div>
+
+  <div class="search-bar-elem">
     <div class="navbar-search-select">
       <select class="">
         <option value="all">all</option>
@@ -10,7 +14,7 @@
       const s = new searchProduct();
     </script>
     <form onsubmit="event.preventDefault(); s.search()">
-      <input id="search-input" class="" type="text" placeholder="Search" onkeyup="s.changeSearch()">
+      <input id="search-input" type="text" placeholder="Search" onkeyup="s.changeSearch()">
     </form>
     <span class="search-btn" onclick="s.search()">
       <button onclick="s.search">
@@ -19,5 +23,10 @@
         </svg>
       </button>
     </span>
-  </span>
+    </div>
+
+    <div>
+      <a href="/login">Register</a>
+    </div>
+
 </nav>
