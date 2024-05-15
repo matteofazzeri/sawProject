@@ -18,6 +18,11 @@ button {
   background-color: transparent;
 }
 
+a, button {
+  cursor: pointer;
+  text-decoration: none;
+}
+
 .page {
   max-width: 100vw;
   min-height: 100vh;

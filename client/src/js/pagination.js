@@ -10,8 +10,8 @@ class Pagination {
 
   // Fetch items for the current page
   async loadItems() {
-    const Prod = new ProductAPI(this.currentPage);
-    await Prod.renderProductCards(this.div) === -1;
+    const Prod = new ProductAPI();
+    await Prod.renderProductCards(this.div, this.currentPage) === -1;
 
     if (document.getElementById(this.div).innerHTML === "<h1>No products found</h1>") {
       //this.previousPage();

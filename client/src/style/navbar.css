@@ -1,12 +1,11 @@
 .global-navbar {
   width: 100%;
   height: 10vh;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+  padding: 0 1rem;
 
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 
   background-color: aquamarine;
 }
@@ -19,7 +18,6 @@
   background-color: white;
   justify-content: space-between;
 }
-
 
 .global-navbar .search-bar-elem span button {
   width: 100%;
@@ -46,6 +44,7 @@
   border: none;
   outline: none;
 }
+
 .global-navbar .search-bar-elem form input:focus {
   outline: auto;
   outline-color: orange;
@@ -63,4 +62,50 @@
   height: 100%;
   padding: 0.5rem;
   border: none;
+}
+
+.global-navbar .profile-btn {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: white;
+  position: relative;
+}
+
+.profile-btn .popup-menu {
+  display: none;
+}
+
+.profile-btn:hover .popup-menu,
+.profile-btn:focus .popup-menu {
+  display: flex;
+
+  width: 300px;
+  height: 200px;
+  background-color: rgb(241, 241, 241);
+  position: absolute;
+  top: 45px;
+  right: 9%;
+
+  padding: .5rem;
+  border-radius: 10px;
+  border-top-right-radius: 0;
+
+  z-index: 999;
+}
+
+/* arrow */
+.popup-menu::before {
+  content: "";
+  position: absolute;
+  top: -24px;
+  /* Adjust to position arrow */
+  left: calc(100% - 24px);
+  /* Adjust to center arrow horizontally */
+  border-width: 12px;
+  border-style: solid;
+  border-color: transparent transparent rgb(241, 241, 241) transparent;
 }

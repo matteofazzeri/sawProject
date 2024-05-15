@@ -1,4 +1,4 @@
 const backendUrl = {
-  development: 'http://localhost/sawProject/server/api/s',
+  development: 'http://localhost/sawProject/server/api/',
   production: 'https://api.example.com'
 };

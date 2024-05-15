@@ -20,7 +20,11 @@ if (strpos($requestURL, "forms")) {
   require __DIR__ . "/home/home.php";
 } else if (strpos($requestURL, "users")) {
   // TODO: all the request for users data
-} else {
+} else if ($requestURL[0] == "e") {
+  require __DIR__ . "/shop/GetElemByName.php";
+}
+else {
+
   echo "wtf are u doing here?!";
   echo $requestURL;
 }

@@ -65,11 +65,17 @@
   bottom: 0;
 }
 
-.details h1 {
+.details h1 a {
   font-weight: 700;
-  font-size: 1.5em;
+  font-size: .9em;
   margin-bottom: 5px;
+  color: #000000;
 }
+
+.details h1 :hover{
+  color: orange;
+}
+
 
 .details .product-rating {
   position: relative;
