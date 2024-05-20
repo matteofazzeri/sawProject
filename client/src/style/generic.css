@@ -50,3 +50,42 @@ a, button {
   height: auto;
   z-index: 100;
 }
+
+.cookie-banner {
+  display: none; /* Inizialmente nascosto */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  line-height: 40px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
+  text-align: center;
+  z-index: 1000;
+}
+
+.cookie-banner form .accept-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.cookie-banner form .accept-btn:hover {
+  background-color: #45a049;
+} 
+
+.cookie-banner form .dont-accept-btn {  
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.cookie-banner form .dont-accept-btn:hover {
+  color: #f44336;
+}

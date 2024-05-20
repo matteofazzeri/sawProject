@@ -47,7 +47,7 @@ class ProductAPI {
                   <img src="${product.product_image}" alt="${product.product_name}" class="product-image">
                 </div>
                 <div class="details">
-                    <h1 class="product-title"><a href="${product.product_id}">${product.product_name}</a></h1>
+                    <h1 class="product-title"><a href="${product.product_id}/${product.product_name.replace(/ /g, "-")}">${product.product_name}</a></h1>
                     <div class="product-rating">Rating: ${product.product_rating}</div>
                     <span>
                       <button onclick="decrement_value(this)">
@@ -185,4 +185,24 @@ const decrement_value = (e) => {
   if (clean_quantity - 1 >= 1) clean_quantity -= 1;
 
   quantity.innerHTML = "Add " + clean_quantity;
+}
+
+
+
+async function fillElemPage() {
+  const url = new URL(window.location.href);
+
+  const id = url.pathname.split('/')[3];
+
+  const response = await fetch(`${backendUrl.development}e?eid=${id}`);
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const data = (await response.json())[0];
+
+  document.getElementById("elem-price").innerHTML = data['product_price'] + "$";
+  document.getElementById("elem-title").innerHTML = data['product_name'];
+  document.getElementById("elem-description").innerHTML = data['product_description'];
 }

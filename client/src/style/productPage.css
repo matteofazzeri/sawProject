@@ -1,0 +1,37 @@
+.element-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgb(127, 169, 155);
+}
+
+.elem {
+  padding: 5px;
+  height: 600px;
+  background-color: greenyellow;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+#elem-images {
+  width: 40%;
+  height: 100%;
+  background-color: yellow;
+}
+
+.elem-info {
+  width: 45%;
+
+  background-color: white;
+}
+
+.elem-info #elem-title {
+  border-bottom: solid 1px;
+}
+
+.box-outer {
+  width: 15%;
+  padding: 10px;
+  border: solid 1px;
+  border-radius: 7px;  
+}

@@ -1,5 +1,8 @@
 <?php
 //* access the url
+
+use function PHPSTORM_META\elementType;
+
 $fullUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 define("ROOT", str_replace("\\", "/", __DIR__));
@@ -27,8 +30,9 @@ else if (preg_match("#^/repo$#", ROUTING_URL))
   header("Location: https://github.com/matteofazzeri/sawProject");
 else {
   // ! Have to check if the element exists in the database
-  json_decode(
-    file_get_contents("http://localhost/sawProject/server/api/e?eid=" . str_replace("/", "", ROUTING_URL), false),
+
+  !empty(json_decode(
+    file_get_contents("http://localhost/sawProject/server/api/e?eid=" . explode('/', ROUTING_URL)[1], false),
     true
-  ) ? require_once __DIR__ . "/pages/ElementPage.php" : header("Location:   " . BASE_URL . "/notfound");
+  )) ? require_once __DIR__ . "/pages/ElementPage.php" : header("Location:   " . BASE_URL . "/notfound");
 }

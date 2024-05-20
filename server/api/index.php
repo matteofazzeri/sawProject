@@ -21,7 +21,7 @@ if (strpos($requestURL, "forms")) {
 } else if (strpos($requestURL, "users")) {
   // TODO: all the request for users data
 } else if ($requestURL[0] == "e") {
-  require __DIR__ . "/shop/GetElemByName.php";
+  require __DIR__ . "/shop/GetElem.php";
 }
 else {
 

@@ -1,4 +1,3 @@
-
 /*
  * table for products + their possible colors, images, sizes.
  */
