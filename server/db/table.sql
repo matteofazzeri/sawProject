@@ -88,12 +88,12 @@ CREATE TABLE IF NOT EXISTS
 
 -- ! END OF SPACESHIP TABLES
 -- ! SPACESUIT TABLES
-CREATE TABLE IF NOT EXISTS
+/* CREATE TABLE IF NOT EXISTS
   spacesuits (
     product_id INT PRIMARY KEY,
     material VARCHAR(50),
     FOREIGN KEY (product_id) REFERENCES products (id)
-  );
+  ); */
 
 -- ! END OF SPACESUIT TABLES
 /*
@@ -190,7 +190,6 @@ CREATE TABLE IF NOT EXISTS
     UNIQUE (user_id, product_id)
   );
 
-
 -- ! facoltive
 CREATE TABLE IF NOT EXISTS
   addresses (
@@ -205,14 +204,14 @@ CREATE TABLE IF NOT EXISTS
   );
 
 -- * user can have autologin in more than one device
-CREATE TABLE IF NOT EXISTS
+/* CREATE TABLE IF NOT EXISTS
   sessions (
     user_id INT,
     session_token VARCHAR(255) PRIMARY KEY NOT NULL,
     expiration_date TIMESTAMP NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id),
     UNIQUE(user_id, session_token)
-  );
+  ); */
 
 CREATE TABLE IF NOT EXISTS
   shopping_cart (
@@ -226,7 +225,7 @@ CREATE TABLE IF NOT EXISTS
     UNIQUE (user_id, product_id) -- ! prevent duplicate entries (just have to change quantity value)
   );
 
-CREATE TABLE IF NOT EXISTS
+/* CREATE TABLE IF NOT EXISTS
   wishlist (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
@@ -248,7 +247,7 @@ CREATE TABLE IF NOT EXISTS
     FOREIGN KEY (wishlist_id) REFERENCES wishlist (id),
     FOREIGN KEY (collaborator_id) REFERENCES users (id),
     UNIQUE (collaborator_id, wishlist_id)
-  );
+  ); */
 
 /*
  * following tables are probably not implemented. just some thought for the future 
@@ -304,7 +303,7 @@ CREATE TABLE IF NOT EXISTS
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   ); */
 
-CREATE VIEW spacesuits_detail_view AS
+/* CREATE VIEW spacesuits_detail_view AS
 SELECT
     p.id AS product_id,
     p.name AS product_name,
@@ -333,7 +332,7 @@ LEFT JOIN reviews r ON p.id = r.product_id
 LEFT JOIN tags_mapping tm ON p.id = tm.product_id
 LEFT JOIN tags t ON tm.tag_id = t.id 
 RIGHT JOIN spacesuits ss ON p.id = ss.product_id
-GROUP BY p.id, s.size, pc.name, t.name_name;
+GROUP BY p.id, s.size, pc.name, t.name_name; */
 
 CREATE VIEW spaceships_detail_view AS
 SELECT
@@ -432,7 +431,7 @@ INSERT INTO tags (name) VALUES ('Space Adventure');
 -- ! SPACESUITS INSERTS
 
 -- Product B
-INSERT INTO products (name, description, price, quantity, availability, item_sold)
+/* INSERT INTO products (name, description, price, quantity, availability, item_sold)
 VALUES ('Spacesuit Product B', 'Description for Spacesuit Product B', 59.99, 15, true, 0);
 SET @new_product_id = LAST_INSERT_ID();
 INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 2);
@@ -448,11 +447,11 @@ SET @new_product_id = LAST_INSERT_ID();
 INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 3);
 INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 3);
 INSERT INTO spacesuits (product_id, material) VALUES (@new_product_id, 'Carbon Fiber');
-
+ */
 -- ! SPACESHIP INSERTS
 
 -- Product B
-INSERT INTO products (name, description, price, quantity, availability, item_sold)
+/* INSERT INTO products (name, description, price, quantity, availability, item_sold)
 VALUES ('Product B', 'Description for Product B', 24.99, 10, true, 0);
 SET @new_product_id = LAST_INSERT_ID();
 INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 3);
@@ -588,7 +587,333 @@ INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 5);
 INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 9);
 INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 12);
 INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Hyperdrive', 450, 5500, 'Model Epsilon', 'Extra Large'); */
+
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Star Voyager B-3000 Advanced Shuttle', 'The Star Voyager B-3000 is an advanced shuttle designed for interstellar travel. Equipped with the latest in advanced fuel technology, this medium-sized ship features a capacity of 120 passengers, speeds up to 2500 km/h, and Model B engineering for reliable performance. Ideal for both personal and commercial use, it offers spacious interiors and state-of-the-art navigation systems.', 24.99, 10, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 3);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 2);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 1);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Advanced Fuel', 120, 2500, 'Model B', 'Medium');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Quantum Cruiser X-5000', 'Experience the pinnacle of space travel with the Quantum Cruiser X-5000. This large-sized spaceship is powered by Quantum Fuel, providing an impressive capacity of 300 passengers and reaching speeds of up to 4000 km/h. The Model X design ensures top-tier comfort and safety, making it the perfect choice for long-distance voyages and intergalactic exploration.', 49.99, 20, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 2);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 5);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 7);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 12);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Quantum Fuel', 300, 4000, 'Model X', 'Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Plasma Explorer Y-7500', 'The Plasma Explorer Y-7500 is engineered for extra-large missions and interstellar adventures. Featuring a powerful Plasma Drive, this ship accommodates up to 200 passengers and achieves speeds of 3500 km/h. With the latest Model Y enhancements, it promises superior performance, safety, and luxury, making it a top choice for space enthusiasts and commercial enterprises alike.', 74.99, 15, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 4);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 7);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 2);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 9);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Plasma Drive', 200, 3500, 'Model Y', 'Extra Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Hyperdrive Starship Z-9000', 'The Hyperdrive Starship Z-9000 represents the future of space travel. Equipped with cutting-edge Hyperdrive technology, this extra-large vessel can transport 400 passengers at incredible speeds of up to 5000 km/h. Model Z’s innovative design and spacious interiors ensure a luxurious and safe journey, perfect for extended interstellar expeditions.', 99.99, 30, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 6);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 3);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 5);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Hyperdrive', 400, 5000, 'Model Z', 'Extra Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Warp Drive Transport Alpha', 'The Warp Drive Transport Alpha is a marvel of modern engineering, designed for extra-extra-large capacities and extraordinary speeds. Featuring the revolutionary Warp Drive, it can carry 500 passengers and achieve speeds of 6000 km/h. Model Alpha’s advanced technology and robust build make it ideal for commercial space lines and ambitious explorers.', 149.99, 25, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 1);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 8);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 8);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Warp Drive', 500, 6000, 'Model Alpha', 'Extra Extra Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Ion Propulsion Freighter Delta', 'The Ion Propulsion Freighter Delta is designed for efficient long-range travel. This large freighter can carry up to 250 passengers and reaches speeds of 4500 km/h with its Ion Propulsion system. The Model Delta ensures high efficiency and reliability, making it a preferred choice for cargo and passenger transport across the galaxy.', 64.99, 18, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 3);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 6);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 3);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 11);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Ion Propulsion', 250, 4500, 'Model Delta', 'Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Antimatter Drive Cruiser Gamma', 'The Antimatter Drive Cruiser Gamma offers exceptional speed and capacity for medium-sized voyages. Powered by Antimatter Drive technology, it can transport 300 passengers at speeds of up to 5500 km/h. The Model Gamma combines efficiency, safety, and comfort, making it ideal for both private and commercial space travel.', 39.99, 22, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 5);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 2);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 4);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 10);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Antimatter Drive', 300, 5500, 'Model Gamma', 'Medium');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Plasma Drive Explorer Omega', 'The Plasma Drive Explorer Omega is an extra-large spaceship designed for extensive explorations. With a capacity of 350 passengers and speeds of 4500 km/h, its Plasma Drive ensures powerful and efficient travel. Model Omega’s cutting-edge features and spacious design make it a top choice for both commercial and personal space missions.', 129.99, 12, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 1);
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 2);
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 3);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 4);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 7);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 1);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 2);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 3);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 4);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Plasma Drive', 350, 4500, 'Model Omega', 'Extra Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Quantum Freighter Beta', 'The Quantum Freighter Beta is built for long-haul missions and extensive transport needs. Featuring Quantum Fuel technology, it can carry 280 passengers and reach speeds of 3800 km/h. The Model Beta provides reliable performance, making it an excellent choice for large-scale commercial operations and deep space explorations.', 89.99, 15, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 2);
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 4);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 3);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 6);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 5);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 6);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 7);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 8);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Quantum Fuel', 280, 3800, 'Model Beta', 'Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Warp Drive Cruiser Sigma', 'The Warp Drive Cruiser Sigma offers unparalleled speed and luxury. Designed for extra-extra-large capacities, it can transport 600 passengers at incredible speeds of 7000 km/h. The Model Sigma’s advanced Warp Drive technology ensures smooth and efficient travel, making it perfect for commercial airlines and luxury space cruises.', 199.99, 8, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 3);
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 5);
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 6);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 2);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 5);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 9);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 10);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 11);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 12);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Warp Drive', 600, 7000, 'Model Sigma', 'Extra Extra Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Hyperdrive Explorer Epsilon', 'The Hyperdrive Explorer Epsilon is designed for extensive explorations and intergalactic missions. This extra-large ship features a Hyperdrive engine, allowing it to carry 450 passengers at speeds of up to 5500 km/h. Model Epsilon’s advanced design and spacious interiors provide comfort and reliability for long-distance travel.', 149.99, 20, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 1);
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 4);
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 6);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 4);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 7);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 1);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 5);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 9);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 12);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
 VALUES (@new_product_id, 'Hyperdrive', 450, 5500, 'Model Epsilon', 'Extra Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Galactic Pioneer M-8000 Explorer', 'The Galactic Pioneer M-8000 Explorer is the perfect choice for ambitious space adventurers. This medium-sized spaceship features advanced propulsion technology, allowing it to reach speeds of up to 2600 km/h. With a capacity of 180 passengers, the Model M-8000 provides ample space and comfort, complete with cutting-edge navigation systems and safety features for reliable interstellar travel.', 119.99, 12, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 4);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 3);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 1);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 8);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Fusion Drive', 180, 2600, 'Model M-8000', 'Medium');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Stellar Navigator N-9500', 'The Stellar Navigator N-9500 is a large spaceship designed for deep-space exploration. Powered by Quantum Fuel, it offers a capacity of 350 passengers and a maximum speed of 4200 km/h. The Model N-9500’s innovative design includes luxurious interiors and advanced life-support systems, making it ideal for long-term missions and scientific expeditions.', 139.99, 20, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 5);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 6);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 4);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 10);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Quantum Fuel', 350, 4200, 'Model N-9500', 'Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Cosmic Voyager O-7200', 'The Cosmic Voyager O-7200 is designed for medium-sized space journeys, offering a perfect blend of speed and capacity. With a top speed of 3200 km/h and a passenger capacity of 200, it features a Plasma Drive for efficient travel. The Model O-7200 is equipped with state-of-the-art navigation and safety systems, ensuring a smooth and comfortable journey for all onboard.', 89.99, 25, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 2);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 4);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 2);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 7);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Plasma Drive', 200, 3200, 'Model O-7200', 'Medium');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Interstellar Transporter P-9900', 'The Interstellar Transporter P-9900 is a large vessel built for extensive passenger transport and long-haul travel. With a capacity of 400 passengers and a speed of 4500 km/h, it utilizes advanced Ion Propulsion technology. The Model P-9900 features luxurious cabins, entertainment systems, and comprehensive safety measures, making it perfect for commercial space travel.', 159.99, 10, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 3);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 7);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 5);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 9);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Ion Propulsion', 400, 4500, 'Model P-9900', 'Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Nebula Cruiser Q-7000', 'The Nebula Cruiser Q-7000 offers exceptional performance for large-scale space travel. Equipped with Hyperdrive technology, it can carry 500 passengers at speeds of 4700 km/h. The Model Q-7000’s advanced features include spacious interiors, modern navigation systems, and robust safety protocols, making it ideal for both commercial and exploratory missions.', 189.99, 15, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 4);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 8);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 6);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 11);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Hyperdrive', 500, 4700, 'Model Q-7000', 'Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Aurora Freighter R-8500', 'The Aurora Freighter R-8500 is engineered for extensive cargo and passenger transport. With a capacity of 600 passengers and speeds up to 5300 km/h, it utilizes Antimatter Drive technology. The Model R-8500 is designed for efficiency and reliability, featuring advanced cargo handling systems and luxurious passenger accommodations.', 209.99, 8, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 1);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 5);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 1);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 12);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Antimatter Drive', 600, 5300, 'Model R-8500', 'Extra Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Galaxy Explorer S-6000', 'The Galaxy Explorer S-6000 is designed for medium-sized missions, offering a balance of speed and capacity. Featuring advanced Fusion Drive technology, it can transport 220 passengers at speeds of up to 3800 km/h. The Model S-6000 provides state-of-the-art navigation and safety systems, ensuring a smooth and secure journey for all space travelers.', 99.99, 18, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 6);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 3);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 4);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 8);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Fusion Drive', 220, 3800, 'Model S-6000', 'Medium');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Lunar Freighter T-5000', 'The Lunar Freighter T-5000 is perfect for large-scale space transport. With a capacity of 400 passengers and a maximum speed of 4500 km/h, it features cutting-edge Ion Propulsion technology. The Model T-5000’s robust design includes advanced cargo handling and life-support systems, making it ideal for both commercial and long-distance space missions.', 159.99, 20, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 2);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 6);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 5);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 9);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Ion Propulsion', 400, 4500, 'Model T-5000', 'Large');
+
+/* add from here */
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Starliner U-4400', 'The Starliner U-4400 is a medium-sized spaceship crafted for optimal interstellar travel. Equipped with advanced Fusion Drive technology, it boasts a top speed of 3400 km/h and a capacity of 250 passengers. The U-4400’s sleek design incorporates state-of-the-art navigation and safety systems, ensuring both comfort and security on long voyages.', 129.99, 15, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 1);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 4);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 2);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 10);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Fusion Drive', 250, 3400, 'Model U-4400', 'Medium');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Solar Cruiser V-6000', 'The Solar Cruiser V-6000 is designed for large-scale explorations and transport missions. With a passenger capacity of 450 and a maximum speed of 5000 km/h, it features Hyperdrive technology for unmatched efficiency. The Model V-6000 offers luxurious interiors, advanced navigation systems, and comprehensive safety features, making it ideal for long-distance travel.', 179.99, 10, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 3);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 7);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 4);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 8);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Hyperdrive', 450, 5000, 'Model V-6000', 'Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Nebula Explorer W-7200', 'The Nebula Explorer W-7200 is perfect for medium-range space missions. Powered by advanced Quantum Fuel, it offers a capacity of 280 passengers and a speed of 4000 km/h. The Model W-7200’s innovative design includes modern navigation systems, safety protocols, and comfortable interiors, making it an excellent choice for scientific and exploratory missions.', 149.99, 18, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 5);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 3);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 3);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 7);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Quantum Fuel', 280, 4000, 'Model W-7200', 'Medium');
+
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Galaxy Transporter X-8800', 'The Galaxy Transporter X-8800 is engineered for extensive passenger and cargo transport. Featuring advanced Ion Propulsion technology, it can accommodate 500 passengers and reach speeds of up to 5200 km/h. The Model X-8800 boasts luxurious amenities, cutting-edge navigation, and comprehensive safety systems, ideal for commercial and exploratory missions.', 199.99, 12, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 2);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 8);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 6);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 9);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Ion Propulsion', 500, 5200, 'Model X-8800', 'Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Cosmos Voyager Y-6600', 'The Cosmos Voyager Y-6600 is a top-tier spaceship designed for long-distance travel. Equipped with Antimatter Drive technology, it offers a capacity of 350 passengers and a maximum speed of 4500 km/h. The Model Y-6600’s sophisticated design includes spacious cabins, advanced life-support systems, and robust safety features, ensuring a comfortable and secure journey.', 159.99, 20, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 1);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 6);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 5);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 11);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Antimatter Drive', 350, 4500, 'Model Y-6600', 'Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Orion Freighter Z-9900', 'The Orion Freighter Z-9900 is designed for heavy-duty transport missions, featuring Warp Drive technology for superior efficiency. With a capacity of 700 passengers and speeds up to 6000 km/h, the Model Z-9900 offers spacious interiors, advanced cargo management systems, and state-of-the-art safety protocols, making it perfect for large-scale commercial and exploratory missions.', 249.99, 10, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 3);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 5);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 1);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 8);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Warp Drive', 700, 6000, 'Model Z-9900', 'Extra Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Intergalactic Explorer AA-3000', 'The Intergalactic Explorer AA-3000 is perfect for medium-range exploratory missions. Utilizing advanced Plasma Drive technology, it can carry 220 passengers at speeds of up to 3600 km/h. The Model AA-3000’s innovative design includes modern navigation systems, comprehensive safety features, and comfortable accommodations, making it ideal for both scientific and commercial explorations.', 119.99, 18, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 4);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 4);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 2);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 10);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Plasma Drive', 220, 3600, 'Model AA-3000', 'Medium');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Stellar Freighter BB-5000', 'The Stellar Freighter BB-5000 is designed for extensive transport missions. Featuring Fusion Drive technology, it can transport 450 passengers and reach speeds of up to 4800 km/h. The Model BB-5000’s robust design includes spacious interiors, advanced navigation systems, and comprehensive safety measures, making it perfect for large-scale commercial and exploratory missions.', 189.99, 12, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 2);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 7);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 3);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 9);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Fusion Drive', 450, 4800, 'Model BB-5000', 'Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Galactic Voyager CC-6600', 'The Galactic Voyager CC-6600 is engineered for long-distance travel, equipped with Hyperdrive technology. It can carry 400 passengers and reach speeds of up to 5000 km/h. The Model CC-6600’s sophisticated design includes luxurious interiors, advanced life-support systems, and robust safety features, ensuring a comfortable and secure journey.', 219.99, 15, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 1);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 6);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 5);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 8);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Hyperdrive', 400, 5000, 'Model CC-6600', 'Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Orion Transporter DD-8000', 'The Orion Transporter DD-8000 is designed for heavy-duty transport missions, featuring advanced Antimatter Drive technology. It can accommodate 500 passengers and reach speeds of up to 5800 km/h. The Model DD-8000’s robust design includes spacious interiors, advanced cargo management systems, and comprehensive safety protocols, making it perfect for large-scale commercial and exploratory missions.', 249.99, 10, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 3);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 5);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 1);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 11);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Antimatter Drive', 500, 5800, 'Model DD-8000', 'Extra Large');
+
+INSERT INTO products (name, description, price, quantity, availability, item_sold)
+VALUES ('Cosmos Freighter EE-9000', 'The Cosmos Freighter EE-9000 is the ultimate spaceship for extensive transport missions. Featuring advanced Warp Drive technology, it can transport 600 passengers and reach speeds of up to 6500 km/h. The Model EE-9000’s luxurious design includes spacious interiors, advanced navigation systems, and comprehensive safety measures, making it perfect for large-scale commercial and exploratory missions.', 299.99, 8, true, 0);
+SET @new_product_id = LAST_INSERT_ID();
+INSERT INTO colors_mapping (product_id, color_id) VALUES (@new_product_id, 2);
+INSERT INTO sizes_mapping (product_id, size_id) VALUES (@new_product_id, 8);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 3);
+INSERT INTO tags_mapping (product_id, tag_id) VALUES (@new_product_id, 12);
+INSERT INTO spaceships (product_id, fuel_type, capacity, speed, model, size)
+VALUES (@new_product_id, 'Warp Drive', 600, 6500, 'Model EE-9000', 'Extra Large');
+
+
+
+
+
+
 
 -- ! SOME USEFULL TRIGGERS
 CREATE TRIGGER update_availability BEFORE

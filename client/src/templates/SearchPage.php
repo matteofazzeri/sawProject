@@ -9,6 +9,7 @@
         const search_input = params.get('s');
         const p = new Pagination('searched-elem');
         p.loadItems();
+        const c = new Cart();
       </script>
     </div>
     <?php

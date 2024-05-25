@@ -9,7 +9,7 @@ if ($searchedElem) {
   $data = getElem(
     "SELECT * FROM spaceships_detail_view WHERE product_name LIKE :searchElem",
     [
-      'searchElem' => "$searchedElem%",
+      'searchElem' => "%$searchedElem%",
     ]
   );
 } else {
@@ -18,8 +18,17 @@ if ($searchedElem) {
 
 $result = array_values($data);
 
+
+if(empty($result)) 
+  echo json_encode($result, JSON_PRETTY_PRINT);
+
+
+
 // Paginate result array
 $offset = ($page - 1) * $items_per_page;
 $result = array_slice($result, $offset, $items_per_page);
 
-echo json_encode($result, JSON_PRETTY_PRINT);
+if(empty($result))
+  echo json_encode(['page' => '0']);
+else
+  echo json_encode($result, JSON_PRETTY_PRINT);
