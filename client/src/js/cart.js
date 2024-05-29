@@ -67,4 +67,5 @@ class Cart {
 
     console.log(response);
   }
+  
 }

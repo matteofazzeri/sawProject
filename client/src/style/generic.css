@@ -1,3 +1,5 @@
+
+
 *,
 *::before,
 *::after {
@@ -13,12 +15,13 @@ body {
 }
 
 button {
-  cursor:grabbing;
+  cursor: grabbing;
   border: none;
   background-color: transparent;
 }
 
-a, button {
+a,
+button {
   cursor: pointer;
   text-decoration: none;
 }
@@ -34,7 +37,7 @@ a, button {
 
 .loader {
   display: flex;
-  flex-direction: row ;
+  flex-direction: row;
   width: 100%;
   height: 90%;
 }
@@ -52,7 +55,8 @@ a, button {
 }
 
 .cookie-banner {
-  display: none; /* Inizialmente nascosto */
+  display: none;
+  /* Inizialmente nascosto */
   position: fixed;
   bottom: 0;
   left: 0;
@@ -76,9 +80,9 @@ a, button {
 
 .cookie-banner form .accept-btn:hover {
   background-color: #45a049;
-} 
+}
 
-.cookie-banner form .dont-accept-btn {  
+.cookie-banner form .dont-accept-btn {
   color: white;
   border: none;
   padding: 10px 20px;

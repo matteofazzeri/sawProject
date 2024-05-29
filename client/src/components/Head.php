@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="/sawProject/client/">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <?php
   foreach ($css as $key => $link) {
     $link = "src/style/" . $link . ".css";
@@ -60,8 +61,7 @@
         }
       })(window, document);
     </script>
-    <form
-      <button onclick="acceptCookies()" class="accept-btn">Accetta</button>
+    <form <button onclick="acceptCookies()" class="accept-btn">Accetta</button>
       <button onclick="dontacceptCookies()" class="dont-accept-btn">Continua senza accettare</button>
     </form>
   </div>

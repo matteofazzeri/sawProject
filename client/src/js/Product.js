@@ -138,6 +138,7 @@ class searchProduct extends ProductAPI {
 
   changeSearch = (e) => {
     const search_input = document.querySelector("input").value;
+    console.log(search_input);
   }
 
   search = () => {
@@ -145,6 +146,5 @@ class searchProduct extends ProductAPI {
     console.log(search_input)
 
     window.location.href = `http://localhost/sawProject/client/search?k=${search_input}`;
-
   }
 }

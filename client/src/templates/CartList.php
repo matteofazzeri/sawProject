@@ -2,6 +2,11 @@
   <script>
     const c = new Cart();
 
-    c.downloadCart();
+    c.loadCart();
   </script>
+
+  <section>
+    
+  </section>
+
 </main>
