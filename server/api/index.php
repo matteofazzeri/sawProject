@@ -26,7 +26,6 @@ if (strpos($requestURL, "forms")) {
   require __DIR__ . "/cart/Cart.php";
 }
 else {
-
   echo "wtf are u doing here?!";
   echo $requestURL;
 }
