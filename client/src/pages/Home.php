@@ -16,4 +16,3 @@ display('Navbar');
 display('Homepage', true);
 display('Footer');
 
-echo '<a href="Registration.php">Register</a>';
