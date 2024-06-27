@@ -1,7 +1,4 @@
 <?php
-//* access the url
-
-use function PHPSTORM_META\elementType;
 
 $fullUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
@@ -28,6 +25,7 @@ else if (preg_match("#^/notfound$#", ROUTING_URL))
   require_once __DIR__ . "/pages/Error404.php";
 else if (preg_match("#^/repo$#", ROUTING_URL))
   header("Location: https://github.com/matteofazzeri/sawProject");
+
 else {
   // ! Have to check if the element exists in the database
 
