@@ -54,7 +54,7 @@
   height: auto;
   padding: 1.5em 1.5em 2em;
   background: rgba(0, 0, 0, 0.216);
-  backdrop-filter: blur(16px) saturate(120%);
+  /* backdrop-filter: blur(16px) saturate(120%); */
   transition: 0.3s;
   color: #000000;
   z-index: 2;
