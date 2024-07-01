@@ -25,20 +25,21 @@ button {
   text-decoration: none;
 }
 
-.page {
+nav,
+footer {
+  min-height: 10vh;
+}
+
+main {
   max-width: 100vw;
-  min-height: 100vh;
-  overflow: none;
-  display: flex;
-  flex-direction: row;
-  padding-bottom: 30px;
+  min-height: 90vh;
 }
 
 .loader {
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 90%;
+  height: 100%;
 }
 
 .loader svg {

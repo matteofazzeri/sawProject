@@ -1,6 +1,6 @@
 .element-page {
   width: 100%;
-  min-height: 100vh;
+  min-height: 90vh;
   background-color: rgb(127, 169, 155);
 }
 
@@ -21,7 +21,6 @@
 
 .elem-info {
   width: 45%;
-
   background-color: white;
 }
 

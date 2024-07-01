@@ -7,6 +7,9 @@
   align-items: center;
   justify-content: space-between;
 
+
+  background-color: tomato;
+
 }
 
 .search {
@@ -14,19 +17,20 @@
   align-items: center;  
   cursor: pointer;
   transition: all 0.3s ease 0.6s;
-  border-radius: 50%;
+  border-radius: 19px;
   border: solid 1px #c7c7c7;
   padding: 6px;
+  background-color: white;
 }
 
 .search svg {
   cursor: pointer;
   
-  width: 18px;
+  width: 20px;
   height: 18px;
   display: block;
   color: #000;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   stroke-width: 2;
   transform: rotate(90deg);
   transition: all 0.3s ease 0.6s;
@@ -103,8 +107,9 @@
 
 .search.open {
   cursor: default;
-  border-radius: 8px;
+  border-radius: 50px;
   transition-delay: 0s;
+  background-color: white;
 }
 
 .search.open svg {

@@ -16,6 +16,8 @@ class Pagination {
     if (await Prod.renderProductCards(this.div, this.currentPage) === -1) {
       this.previousPage();
     }
+
+    document.getElementById("page-number").innerHTML = this.currentPage;
   }
 
   // Go to the next page
@@ -29,6 +31,7 @@ class Pagination {
     history.pushState({}, '', url.pathname + '?' + params.toString());
 
     window.scrollTo(0, 0);
+
     this.loadItems();
   }
 

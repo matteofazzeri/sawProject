@@ -1,6 +1,6 @@
 <?php $eid = $_GET['id'] ?>
 
-<main class="element-page product-card">
+<main class="element-page">
   <script>
     const cart = new Cart();
     window.onload = function() {
@@ -10,10 +10,10 @@
   </script>
   <section class="elem" id=<?php echo $eid ?>>
     <!-- Immagini del prodotto | titolo, descrizione, presso, recensione | area per comprare/aggiungere al carello -->
-    <div id="elem-images"><!-- Image --></div>
+    <div id="elem-images"></div>
 
     <div class="elem-info">
-      <h1 id="elem-title"><!-- Image --></h1>
+      <h1 id="elem-title"></h1>
       <div class="elem-mark">
         <div id="elem-stars"></div>
         <a href="#review" id="n-votes">100 Voti</a>

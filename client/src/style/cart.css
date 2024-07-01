@@ -1,0 +1,36 @@
+.cart-page {
+  background-color: cadetblue;
+  display: flex;
+  flex-direction: row;
+  gap: 2vw;
+
+  padding: 4vw 10vw ;
+}
+
+.cart-list {
+  width: 65%;
+  height: 100%;
+  padding: 2vw;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+#cart-list .cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #000;
+}
+
+.total-price {
+  width: 15vw;
+  height: 80px;
+  padding: 1vw;
+  background-color: yellow;
+  color: black;
+}
+
+#loader-cart-list {
+  display: none;
+}

@@ -35,6 +35,6 @@ if (empty($alr_in)) {
   insertValue("UPDATE shopping_cart SET quantity = :new_quantity WHERE user_id = :uuid AND product_id = :eid", [
     'uuid' => $uuid,
     'eid' => $eid,
-    'new_quantity' => $alr_in[0]['quantity'] + $n_elem,
+    'new_quantity' => $n_elem,
   ]);
 }

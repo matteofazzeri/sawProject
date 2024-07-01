@@ -13,7 +13,7 @@
       </script>
     </div>
     <?php
-    display("Pagination");
+      display("Pagination");
     ?>
   </section>
 

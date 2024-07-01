@@ -15,11 +15,8 @@ class ProductAPI {
 
     document.getElementById(id_div).style.display = "none";
 
-    //! to delete
-    //await new Promise(r => setTimeout(r, 2000));
-
     const timeout = new Promise((resolve, reject) => {
-      setTimeout(reject, 1000, 'Request timed out');
+      setTimeout(reject, 10000, 'Request timed out');
     });
 
     let data;
@@ -41,8 +38,7 @@ class ProductAPI {
     } else if (data['page'] === "0") {
       return -1;
 
-    }
-    else {
+    } else {
       var productHTML = data
         .map(function (product) {
           return `
@@ -80,9 +76,6 @@ class ProductAPI {
       document.getElementById(id_div).style.display = "flex";
     }
   }
-
-
-  
 
   // Download product JSON
   async downloadProduct() {
