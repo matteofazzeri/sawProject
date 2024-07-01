@@ -65,7 +65,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./style/forms.css">
+        <link rel="stylesheet" href="./src/style/forms.css">
         <title>SAW: login</title>
     </head>
     <body>
