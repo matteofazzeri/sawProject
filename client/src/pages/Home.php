@@ -15,4 +15,3 @@ display(
 display('Navbar');
 display('Homepage', true);
 display('Footer');
-

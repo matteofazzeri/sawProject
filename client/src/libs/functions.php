@@ -27,12 +27,11 @@ function isLogged(): bool
 // check if the user is an Admin
 function isAdmin(): bool
 {
-  if (!isLogged())
-    return true;
-
-  if (isset($_SESSION["admin"]) && $_SESSION['admin']) {
+  if (isLogged() && isset($_SESSION["admin"]) && $_SESSION['admin']) {
     return true;
   }
+
+  //! connect to the database and check if the user is registered
 
   // check if the user is logged
 
