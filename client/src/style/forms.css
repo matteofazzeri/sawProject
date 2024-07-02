@@ -3,10 +3,19 @@
     font-size: medium;
 }
 
+body{
+    background-color: #222E50;
+}
+
 p{
     align-self: center;
     text-align: center;
     margin: 10px;
+    color: white;
+}
+
+a::visited{
+    color: white;
 }
 
 /* Reset default form styles */
@@ -50,6 +59,7 @@ input[type=checkbox] {
     margin-bottom: 20px;
     border: 1px solid;
     border-radius: 4px;
+    color: white;
 }
 
 /* Form submit button styles */
