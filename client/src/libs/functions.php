@@ -16,7 +16,7 @@ function isLogged(): bool
       /* check if is expired */
       if ($result[0]['expire_date'] > date('Y-m-d H:i:s', time())) {
         $_SESSION['logged'] = true;
-        $_SESSION['id'] = $result[0]['users_id'];
+        $_SESSION['uuid'] = $result[0]['users_id'];
         return isLogged();
       }
     }
