@@ -36,6 +36,29 @@
   background-color: #7EB2DD;
 }
 
+.edit-quantity-elem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.edit-quantity-elem .saveNQ {
+  display: none;
+  text-align: center;
+  background-color: #ffd814;
+  padding: 0.2rem 0.5rem;
+  border: solid 1px #ecc500;
+  border-radius: 5px;
+}
+
+.saveNQ:hover {
+  background-color: #ecc500;
+}
+
+.saveNQ:active {
+  background-color: #fcd200;
+}
+
 @media screen and (max-width: 768px) {
   .show-4-grid {
     width: 100%;
@@ -87,9 +110,7 @@
   border-radius: 5px;
 }
 
-.saveNQ {
-  display: none;
-}
+
 
 /* override classes from generic.css */
 

@@ -43,29 +43,29 @@ class ProductAPI {
         .map(function (product) {
           return `
             <div class="product-card elem" id="${product.product_id}">
-                <div class="image">
-                  <img src="${product.product_image}" alt="${product.product_name}" class="product-image">
-                </div>
-                <div class="details">
-                    <h1 class="product-title"><a href="${product.product_id}/${product.product_name.replace(/ /g, "-")}?id=${product.product_id}">${product.product_name}</a></h1>
-                    <div class="product-rating">Rating: ${product.product_rating}</div>
-                    <span>
-                      <button onclick="c.decrement_value(this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                          <path d="M200-440v-80h560v80H200Z" />
-                        </svg>
-                      </button>
-                      <p id="add-${product.product_id}" >Quantity: ${product.quantity}</p>
-                      <button onclick="c.increment_value(this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                          <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-                        </svg>
-                      </button>
-                      <button id="${product.product_id}saveNQ" class="saveNQ" onclick="c.addToCart(this)" >OK</button>
-                    </span>
-                    <div class="product-tags">Tags: ${product.tags && product.tags.length > 0 ? product.tags.join(", ") : "No tags available"}</div>
-                    <p class="latest-comment">Latest Comment: Aggiungere ultimo commentoooooooo oooootjtjakoooooo oooooo ooooooooooloooooo oooooooooo ooooooooo oooooooo ooo oooooo oooooo oooooo o!</p>
-                </div>
+              <div class="image">
+                <img src="${product.product_image}" alt="${product.product_name}" class="product-image">
+              </div>
+              <div class="details">
+                  <h1 class="product-title"><a href="${product.product_id}/${product.product_name.replace(/ /g, "-")}?id=${product.product_id}">${product.product_name}</a></h1>
+                  <div class="product-rating">Rating: ${product.product_rating}</div>
+                  <span class="edit-quantity-elem" >
+                    <button onclick="c.decrement_value(this)">
+                      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                        <path d="M200-440v-80h560v80H200Z" />
+                      </svg>
+                    </button>
+                    <p id="add-${product.product_id}" >Quantity: ${product.quantity}</p>
+                    <button onclick="c.increment_value(this)">
+                      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                        <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+                      </svg>
+                    </button>
+                    <button id="${product.product_id}saveNQ" class="saveNQ" onclick="c.addToCart(this)" >OK</button>
+                  </span>
+                  <div class="product-tags">Tags: ${product.tags && product.tags.length > 0 ? product.tags.join(", ") : "No tags available"}</div>
+                  <p class="latest-comment">Latest Comment: Aggiungere ultimo commentoooooooo oooootjtjakoooooo oooooo ooooooooooloooooo oooooooooo ooooooooo oooooooo ooo oooooo oooooo oooooo o!</p>
+              </div>
             </div>
         `;
         })
