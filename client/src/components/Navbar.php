@@ -1,4 +1,5 @@
 <nav class="global-navbar">
+  <link rel="stylesheet" href="./src/style/navbar.css">
 
   <div>
     <a href="search">SHOP</a>

@@ -3,7 +3,7 @@
     font-size: medium;
 }
 
-body{
+.form{
     background-color: #222E50;
 }
 
@@ -18,17 +18,23 @@ a::visited{
     color: white;
 }
 
+h1{
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
+
 /* Reset default form styles */
 form {
-    margin: 10px;
-    border:#4CAF50 1px solid;
+    margin: 10px auto;
+    border:#3A7D44 1px solid;
     border-radius: 10px;
     padding: 10px;
-    width: auto;
-    align-self: center;
+    width: 25%;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: ivory;
 }
 
 fieldset{
@@ -59,7 +65,7 @@ input[type=checkbox] {
     margin-bottom: 20px;
     border: 1px solid;
     border-radius: 4px;
-    color: white;
+    color: ivory;
 }
 
 /* Form submit button styles */
@@ -67,8 +73,8 @@ input[type=submit]{
     width: 100%;
     padding: 10px;
     align-self: center;
-    background-color: #4CAF50;
-    color: white;
+    background-color: #3A7D44;
+    color: ivory;
     border: none;
     border-radius: 4px;
     cursor: pointer;

@@ -69,20 +69,27 @@
         <title>SAW: login</title>
     </head>
     <body>
-        <p>New to SAW? <a href="Registration.php">Sign up now!</a></p>
         <?php
+            display('Navbar');
             if(!isset($_COOKIE["username"])) {
-                echo '<form action="Login.php" method="post" class = "login">
+                echo '<div class="form">
+                <h1>SAW: Login</h1><br>
+                <p>New to SAW? <a href="Registration.php">Sign up now!</a></p><br>
+                <form action="Login.php" method="post" class = "login">
                 <fieldset>
                     <input type="text" name="username" placeholder="Username"><br><span class="error"><?php echo $username_error; ?></span><br>
                     <input type="password" name="password" placeholder="Password"><br><span class="error"><?php echo $password_error; ?></span><br>
                     <input type="checkbox" name="remember" value="1">Remember me<br>
                     <input type="submit" value="Login">
                 </fieldset>
-            </form>';
+            </form>
+            </div>';
             } else {
                 header("Location: Home.php");
             }
         ?>
     </body>
 </html>
+
+<?php
+    display('Footer');

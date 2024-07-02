@@ -116,8 +116,11 @@
     </head>
     <body>
         <?php
+            display('Navbar');
             if(!isset($_COOKIE["username"])) {
-                echo '<form action="Registration.php" method="post">
+                echo '<div class="form">
+                <h1>SAW: Sign up</h1><br>
+                <form action="Registration.php" method="post">
                     <fieldset>
                         <input type="text" name="firstname" placeholder="First name"><br><span class="error"><?php echo $firstname_error; ?></span><br>
                         <input type="text" name="lastname" placeholder="Last name"><br><span class="error"><?php echo $lastname_error; ?></span><br>
@@ -126,10 +129,14 @@
                         <input type="password" name="confirm" placeholder="Confirm password"><br><span class="error"><?php echo $confirm_password_error; ?></span><br>
                         <input type="submit" value="Sign up">
                     </fieldset>
-                </form>';
+                </form>
+                </div>';
             } else {
                 header("Location: Home.php");
             }
         ?>
     </body>
 </html>
+
+<?php
+    display('Footer');

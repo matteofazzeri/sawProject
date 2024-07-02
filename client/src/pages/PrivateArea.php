@@ -23,3 +23,5 @@ switch (ROUTING_URL) {
     header("Location: " . BASE_URL . "/notfound");
     break;
 }
+
+display('Footer');

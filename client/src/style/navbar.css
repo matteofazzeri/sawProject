@@ -1,5 +1,5 @@
 .global-navbar {
-  width: 100%;
+  width: auto;
   height: 10vh;
   padding: 0 1rem;
 
@@ -8,7 +8,7 @@
   justify-content: space-between;
 
 
-  background-color: tomato;
+  background-color: ivory;
 
 }
 

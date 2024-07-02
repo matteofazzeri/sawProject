@@ -107,3 +107,6 @@
         <a href="Logout.php">Logout</a>
     </body>
 </html>
+
+<?php
+    display('Footer');
