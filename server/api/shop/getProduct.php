@@ -27,8 +27,6 @@ $result = array_values($data);
 if (empty($result))
   echo json_encode($result, JSON_PRETTY_PRINT);
 
-
-
 // Paginate result array
 $offset = ($page - 1) * $items_per_page;
 $result = array_slice($result, $offset, $items_per_page);

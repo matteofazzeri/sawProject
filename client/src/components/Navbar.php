@@ -1,5 +1,4 @@
 <nav class="global-navbar">
-  <link rel="stylesheet" href="./src/style/navbar.css">
 
   <div>
     <a href="search">SHOP</a>
@@ -7,7 +6,7 @@
     <a href="#">MORE</a>
   </div>
 
-  <a href="http://localhost/sawProject/client/"><img src="./public/img/logo.jpeg" width="75px"></a>
+  <a href="http://localhost/sawProject/client/"><img src="./public/img/new_logo.png" width="75px"></a>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>

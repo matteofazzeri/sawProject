@@ -80,7 +80,7 @@ class ProductAPI {
   // Download product JSON
   async downloadProduct() {
     const response = await fetch(
-      `${backendUrl.development}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}`
+      `${backendUrl.development}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${localStorage.getItem("uuid") || "1"}`
     );
 
     if (!response.ok) {
@@ -110,7 +110,9 @@ class ProductAPI {
   async fillElemPage() {
     const url = new URL(window.location.href);
     const id = url.pathname.split('/')[3];
-    const response = await fetch(`${backendUrl.development}e?eid=${id}`);
+    const response = await fetch(`${backendUrl.development}e?eid=${id}&uuid=${localStorage.getItem("uuid") || "1"}`, {
+      method: "GET",
+    });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

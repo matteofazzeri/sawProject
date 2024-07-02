@@ -1,10 +1,10 @@
 <?php
 require __DIR__ . '/../libs/functions.php';
 
-if (!isLogged()) {
+/* if (!isLogged()) {
   header('Location: login.php');
   exit;
-}
+} */
 
 display('Head', false, [
   'title' => 'Item Searched',

@@ -20,7 +20,7 @@ p {
   padding: 2vw;
   display: flex;
   flex-direction: column;
-  background-color: ivory;
+  background-color: white;
 }
 
 #cart-list .cart-item {

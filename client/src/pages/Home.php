@@ -1,7 +1,6 @@
 <?php
 require __DIR__ . '/../libs/functions.php';
 
-
 display(
   'Head',
   false,

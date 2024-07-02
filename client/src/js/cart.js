@@ -6,7 +6,7 @@ class Cart {
   async addProductToCart(product, quantity) {
     const body_message = {
       elem_id: product,
-      uuid: "1",
+      uuid: localStorage.getItem("uuid") || "1",
       n_elem: quantity,
     };
 
@@ -29,7 +29,9 @@ class Cart {
 
     await this.addProductToCart(card.id, clean_quantity);
 
-    location.reload();
+    document.getElementById(card.id + "saveNQ").style.display = "none";
+
+    // location.reload();
   }
 
   increment_value(e) {
@@ -60,7 +62,7 @@ class Cart {
   }
 
   async downloadCart() {
-    const response = await fetch(`${backendUrl.development}c?uuid=1&k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}`, {
+    const response = await fetch(`${backendUrl.development}c?uuid=${localStorage.getItem("uuid") || "1"}`, {
       method: "GET",
     });
 
@@ -78,7 +80,7 @@ class Cart {
 
     const body_message = {
       prod_id: card.id,
-      uuid: "1",
+      uuid: localStorage.getItem("uuid") || "1",
     };
 
     const response = await fetch(`${backendUrl.development}c`, {
@@ -186,7 +188,7 @@ class Checkout extends Cart {
     console.log("done");
 
     const body_message = {
-      uuid: "1",
+      uuid: localStorage.getItem("uuid") || "1",
     };
 
     const response = await fetch(`${backendUrl.development}c/checkout`, {
@@ -196,7 +198,7 @@ class Checkout extends Cart {
     });
 
 
-    
+
 
   }
 

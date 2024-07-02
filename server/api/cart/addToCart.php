@@ -15,6 +15,7 @@ if ($data !== null) {
   echo "Error decoding JSON data";
 }
 
+
 if($eid === null || $uuid === null || $n_elem === 0) {
   echo "Error: missing data";
   return;
