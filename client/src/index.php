@@ -17,6 +17,8 @@ else if (preg_match("#^/search(\?.*)?$#", ROUTING_URL))
   require_once __DIR__ . "/pages/ShowItems.php";
 else if (preg_match("#^/cart(\?.*)?$#", ROUTING_URL))
   require_once __DIR__ . "/pages/Cart.php";
+else if(preg_match("#^/checkout(\?.*)?$#", ROUTING_URL))
+  require_once __DIR__ . "/pages/Checkout.php";
 else if (preg_match("#^/about$#", ROUTING_URL))
   require_once __DIR__ . "/pages/About.php";
 else if (preg_match("#^/contact$#", ROUTING_URL))
@@ -37,8 +39,6 @@ else if (preg_match("#^/repo$#", ROUTING_URL))
   header("Location: https://github.com/matteofazzeri/sawProject");
 
 else {
-  // ! Have to check if the element exists in the database
-
   if (count(explode('/', ROUTING_URL)) > 2) {
 
     $productName = explode('/', ROUTING_URL)[2];

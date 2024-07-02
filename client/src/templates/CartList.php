@@ -11,7 +11,7 @@
   <div class="total-price">
     <p id="cart-list-total"></p>
     <button>
-      <a href="/checkout">Checkout</a>
+      <a href="checkout">Checkout</a>
     </button>
   </div>
 

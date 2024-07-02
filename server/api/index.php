@@ -23,9 +23,12 @@ if (strpos($requestURL, "forms")) {
 } else if ($requestURL[0] == "e") {
   require __DIR__ . "/shop/GetElem.php";
 } else if ($requestURL[0] == "c") {
-  require __DIR__ . "/cart/Cart.php";
-}
-else {
+  if (strpos($requestURL, "checkout")) {
+    require __DIR__ . "/cart/checkout/Checkout.php";
+  } else {
+    require __DIR__ . "/cart/Cart.php";
+  }
+} else {
   echo "wtf are u doing here?!";
   echo $requestURL;
 }

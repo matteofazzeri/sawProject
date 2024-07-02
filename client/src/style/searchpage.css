@@ -87,6 +87,10 @@
   border-radius: 5px;
 }
 
+.saveNQ {
+  display: none;
+}
+
 /* override classes from generic.css */
 
 .loarder {

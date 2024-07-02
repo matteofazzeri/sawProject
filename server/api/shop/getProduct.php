@@ -7,9 +7,14 @@ $searchedElem = $_GET['k'] ?? '';
 
 if ($searchedElem) {
   $data = getElem(
-    "SELECT * FROM spaceships_detail_view WHERE product_name LIKE :searchElem",
+    "SELECT sdv.*, COALESCE(sc.quantity, 1) AS quantity
+    FROM spaceships_detail_view sdv
+    LEFT JOIN shopping_cart sc 
+    ON sdv.product_id = sc.product_id AND sc.user_id = :uuid
+    WHERE sdv.product_name LIKE :searchElem",
     [
       'searchElem' => "%$searchedElem%",
+      'uuid' => $_SESSION['uuid'] ?? 1
     ]
   );
 } else {
@@ -19,7 +24,7 @@ if ($searchedElem) {
 $result = array_values($data);
 
 
-if(empty($result)) 
+if (empty($result))
   echo json_encode($result, JSON_PRETTY_PRINT);
 
 
@@ -28,7 +33,7 @@ if(empty($result))
 $offset = ($page - 1) * $items_per_page;
 $result = array_slice($result, $offset, $items_per_page);
 
-if(empty($result))
+if (empty($result))
   echo json_encode(['page' => '0']);
 else
   echo json_encode($result, JSON_PRETTY_PRINT);

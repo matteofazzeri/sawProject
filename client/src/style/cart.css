@@ -1,3 +1,10 @@
+p {
+  font-weight: 500;
+
+  font-size: large;
+  letter-spacing: 1px;
+}
+
 .cart-page {
   background-color: cadetblue;
   display: flex;
@@ -25,12 +32,23 @@
 
 .total-price {
   width: 15vw;
-  height: 80px;
+  height: 7vw;
   padding: 1vw;
-  background-color: yellow;
+  background-color: white;
   color: black;
 }
 
-#loader-cart-list {
+.total-price button {
+  width: 100%;
+  padding: 1vh;
+  margin-top: 1vh ;
+  background-color: #ffd814;
+  border: #fcd200;
+  border-radius: 15px;
+  color: white;
+  cursor: pointer;
+}
+
+.saveNQ {
   display: none;
 }
