@@ -6,7 +6,7 @@ p {
 }
 
 .cart-page {
-  background-color: cadetblue;
+  background-color: #7EB2DD;
   display: flex;
   flex-direction: row;
   gap: 2vw;
@@ -20,7 +20,7 @@ p {
   padding: 2vw;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: ivory;
 }
 
 #cart-list .cart-item {

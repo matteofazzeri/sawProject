@@ -1,5 +1,5 @@
 .homepage {
-  background-color: aquamarine;
+  background-color: #222E50;
 }
 
 .last-added,
@@ -7,7 +7,7 @@
 .most-sold {
   width: 100%;
   height: 100%;
-  background-color: green;
+  background-color: #7EB2DD;
   padding: 10px;
 }
 
@@ -33,7 +33,7 @@ h3 {
 .most-sold .elems-seq .elem{
   min-width: 200px;
   height: 300px;
-  background-color: white;
+  background-color: ivory;
 }
 
 .product-card {
