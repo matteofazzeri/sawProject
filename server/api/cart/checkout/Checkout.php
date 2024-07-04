@@ -33,7 +33,6 @@ foreach ($cartItems as $item) {
 
 
 
-
 // create a new order and add the items to the order_items
 
 $order_id = insertValue("INSERT INTO orders (user_id, total_amount) VALUES (:uuid, :total)", [

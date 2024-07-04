@@ -25,11 +25,11 @@ else if (preg_match("#^/contact$#", ROUTING_URL))
   require_once __DIR__ . "/pages/Contact.php";
 else if (preg_match("#^/notfound$#", ROUTING_URL))
   require_once __DIR__ . "/pages/Error404.php";
-else if (preg_match("#^/login#", ROUTING_URL))
+else if (preg_match("#^/login.php#", ROUTING_URL))
   require_once __DIR__ . "/pages/Login.php";
 else if (preg_match("#^/logout#", ROUTING_URL))
   require_once __DIR__ . "/pages/Logout.php";
-else if (preg_match("#^/registration#", ROUTING_URL))
+else if (preg_match("#^/registration.php#", ROUTING_URL))
   require_once __DIR__ . "/pages/Registration.php";
 else if (preg_match("#^/profile#", ROUTING_URL))
   require_once __DIR__ . "/pages/Profile.php";
@@ -37,7 +37,6 @@ else if (preg_match("#^/private#", ROUTING_URL))
   require_once __DIR__ . "/pages/PrivateArea.php";
 else if (preg_match("#^/repo$#", ROUTING_URL))
   header("Location: https://github.com/matteofazzeri/sawProject");
-
 else {
   if (count(explode('/', ROUTING_URL)) > 2) {
 

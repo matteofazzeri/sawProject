@@ -197,8 +197,11 @@ class Checkout extends Cart {
       body: JSON.stringify(body_message),
     });
 
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-
+    
 
   }
 
