@@ -156,7 +156,7 @@ class Cart {
                     
                   <button id="${product.product_id}saveNQ" class="saveNQ" onclick="c.addToCart(this)" >OK</button>
 
-                  <div>
+                  <div class="cart-elem-option">
                     <button onclick="c.removeProductFromCart(this)">Rimuovi</button>
                     <button>Salva per dopo</button>
                     <button>Condividi</button>
@@ -187,7 +187,7 @@ class Checkout extends Cart {
       window.location.href = "cart";
     }
 
-    document.getElementsByClassName("cart-item").forEach(function (item) {
+    Array.from(document.getElementsByClassName("cart-elem-option")).forEach(function (item) {
       item.style.display = "none";
     });
   }
@@ -216,8 +216,8 @@ class Checkout extends Cart {
     loaders.show("loader-checkout", "bubble", "Checkout completed! Redirecting to home page...");
 
 
-    /* setTimeout(function () {
+    setTimeout(function () {
       window.location.href = "";
-    }, 3000); */
+    }, 3000);
   }
 }
