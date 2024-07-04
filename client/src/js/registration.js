@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const passwordInput = document.getElementById('password');
     const confirmInput = document.getElementById('confirm');
     const errorMsg_username = document.getElementById('err-username');
-    const errorMsg_pwd = document.getElementById('err-pwd');
+    const errorMsg_pwd = document.getElementById('err-password');
 
     // Clear previous error messages
     // errorMsg = errorMsg.textContent.replace('Error: ', '');

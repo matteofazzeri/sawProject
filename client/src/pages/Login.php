@@ -1,4 +1,7 @@
 <?php
+require __DIR__ . '/../libs/functions.php';
+
+
 display('Head', false, [
   'title' => 'SAW: Login',
   'css' => ['generic', 'navbar', 'forms'],
@@ -16,11 +19,13 @@ if (!isset($_COOKIE["username"])) : ?>
           <input id="username" type="text" name="username" placeholder="Username">
           <br><span id="err-username" class="error">
             Username not correct
-            <?php //echo $username_error; ?></span><br>
+            <?php //echo $username_error; 
+            ?></span><br>
           <input id="password" type="password" name="password" placeholder="Password">
           <br><span id="err-pwd" class="error">
             Password not correct
-          <?php //echo $password_error; ?></span><br>
+            <?php //echo $password_error; 
+            ?></span><br>
           <input id="remember" type="checkbox" name="remember" value="1">Remember me<br>
           <input type="submit" value="Login">
         </fieldset>
