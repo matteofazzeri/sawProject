@@ -1,4 +1,4 @@
-<main>
+<main class="checkout-page">
 
   <div id="checkout" class="checkout">
     <span id="loader-checkout" class="loader"></span>
@@ -10,7 +10,9 @@
 
   <div class="total-price">
     <p id="checkout-total"></p>
-    <button onclick="c.completeCheckout()">Complete Purchase</button>
+    <button onclick="c.completeCheckout()">
+      <p>Complete Purchase</p>
+    </button>
   </div>
 
   <!-- <div id="cart-checkout"></div> -->

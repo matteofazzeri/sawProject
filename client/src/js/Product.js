@@ -26,7 +26,7 @@ class ProductAPI {
     } catch (error) {
       console.error(error);
       loaders.hide("loader-" + id_div);
-      document.getElementById(id_div).innerHTML = "<h1>Error loading products</h1>";
+      document.getElementById(id_div).innerHTML = `<h1>${error}</h1>`;
       document.getElementById(id_div).style.display = "flex";
       return;
     }
@@ -35,9 +35,9 @@ class ProductAPI {
       loaders.hide("loader-" + id_div);
       document.getElementById(id_div).innerHTML = "<h1>No products found</h1>";
       document.getElementById(id_div).style.display = "flex";
-    } else if (data['page'] === "0") {
+    } else if (data === -1) {
+      loaders.hide("loader-" + id_div);
       return -1;
-
     } else {
       var productHTML = data
         .map(function (product) {
@@ -80,14 +80,20 @@ class ProductAPI {
   // Download product JSON
   async downloadProduct() {
     const response = await fetch(
-      `${backendUrl.development}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${localStorage.getItem("uuid") || "1"}`
+      `${backendUrl.development}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${localStorage.getItem("uuid") || "1"}`,
+      {
+        method: "GET",
+      }
     );
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+      if (response.status === 204)
+        return -1;
+      else
+        return await response.json();
     }
-
-    return await response.json();
   }
 
   // Edit product JSON
@@ -102,9 +108,9 @@ class ProductAPI {
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+      return await response.json();
     }
-
-    return response.json();
   }
 
   async fillElemPage() {
@@ -116,13 +122,13 @@ class ProductAPI {
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+      const data = (await response.json())[0];
+
+      document.getElementById("elem-price").innerHTML = data['product_price'] + "$";
+      document.getElementById("elem-title").innerHTML = data['product_name'];
+      document.getElementById("elem-description").innerHTML = data['product_description'];
     }
-
-    const data = (await response.json())[0];
-
-    document.getElementById("elem-price").innerHTML = data['product_price'] + "$";
-    document.getElementById("elem-title").innerHTML = data['product_name'];
-    document.getElementById("elem-description").innerHTML = data['product_description'];
   }
 }
 
@@ -133,13 +139,11 @@ class searchProduct extends ProductAPI {
 
   changeSearch = (e) => {
     const search_input = document.querySelector("input").value;
-    console.log(search_input);
   }
 
   search = () => {
     const search_input = encodeURIComponent(document.querySelector("input").value);
-    console.log(search_input)
-
+    
     window.location.href = `http://localhost/sawProject/client/search?k=${search_input}`;
   }
 }

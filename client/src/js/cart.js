@@ -140,21 +140,27 @@ class Cart {
                 <h1 class="product-title"><a href="${product.product_id}/${product.product_name.replace(/ /g, "-")}?id=${product.product_id}">${product.product_name}</a></h1>
                 <div class="product-rating">Rating: ${product.product_rating}</div>
                 <span>
-                  <button onclick="c.decrement_value(this)">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                      <path d="M200-440v-80h560v80H200Z" />
-                    </svg>
-                  </button>
-                  <button id="add-${product.product_id}">Quantity: ${product.quantity}</button>
-                  <button onclick="c.increment_value(this)">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                      <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-                    </svg>
-                  </button>
+                  <div class="quantity-selector">
+                    <button onclick="c.decrement_value(this)">
+                      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                        <path d="M200-440v-80h560v80H200Z" />
+                      </svg>
+                    </button>
+                    <p id="add-${product.product_id}">Quantity: ${product.quantity}</p>
+                    <button onclick="c.increment_value(this)">
+                      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                        <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+                      </svg>
+                    </button>
+                  </div>
+                    
                   <button id="${product.product_id}saveNQ" class="saveNQ" onclick="c.addToCart(this)" >OK</button>
-                  <button onclick="c.removeProductFromCart(this)">Rimuovi</button>
-                  <button>Salva per dopo</button>
-                  <button>Condividi</button>
+
+                  <div>
+                    <button onclick="c.removeProductFromCart(this)">Rimuovi</button>
+                    <button>Salva per dopo</button>
+                    <button>Condividi</button>
+                  </div>
                 </span>
               </div>
               <div>
@@ -168,11 +174,9 @@ class Cart {
       loaders.hide("loader-" + id_div);
       document.getElementById(id_div).innerHTML = productHTML;
       document.getElementById(id_div).style.display = "flex";
-      document.getElementById(id_div + "-total").innerHTML = `Totale provvisorio (${numItems} articoli): <b>${total.toFixed(2)}€</b> `;
+      document.getElementById(id_div + "-total").innerHTML = `Totale (${numItems} articoli): <b>${total.toFixed(2)}€</b> `;
     }
-
   }
-
 }
 
 class Checkout extends Cart {
@@ -182,10 +186,18 @@ class Checkout extends Cart {
     if (await this.renderCart("checkout") === 404) {
       window.location.href = "cart";
     }
+
+    document.getElementsByClassName("cart-item").forEach(function (item) {
+      item.style.display = "none";
+    });
   }
 
   async completeCheckout() {
-    console.log("done");
+
+    document.getElementById("checkout").innerHTML = '<span id="loader-checkout" class="loader"></span>';
+
+    loaders.show("loader-checkout", "bubble", "Completing checkout...");
+
 
     const body_message = {
       uuid: localStorage.getItem("uuid") || "1",
@@ -201,8 +213,11 @@ class Checkout extends Cart {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    
+    loaders.show("loader-checkout", "bubble", "Checkout completed! Redirecting to home page...");
 
+
+    /* setTimeout(function () {
+      window.location.href = "";
+    }, 3000); */
   }
-
 }

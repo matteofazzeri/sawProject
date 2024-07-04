@@ -10,9 +10,7 @@
 
   <div class="total-price">
     <p id="cart-list-total"></p>
-    <button>
-      <a href="checkout">Checkout</a>
-    </button>
+    <a href="checkout"><p>Checkout</p></a>
   </div>
 
   <!-- <div id="cart-checkout"></div> -->

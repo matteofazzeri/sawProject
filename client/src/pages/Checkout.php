@@ -7,7 +7,7 @@ if (!isLogged()) {
 } */
 
 display('Head', false, [
-    'title' => 'Item Searched',
+    'title' => 'Checkout',
     'css' => ['generic', 'navbar', 'cart'],
     'js' => ['config', 'Loaders', 'cart', 'Product']
 ]);

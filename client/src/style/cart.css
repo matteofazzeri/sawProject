@@ -5,50 +5,133 @@ p {
   letter-spacing: 1px;
 }
 
-.cart-page {
+.cart-page,
+.checkout-page {
   background-color: #7EB2DD;
   display: flex;
   flex-direction: row;
   gap: 2vw;
 
-  padding: 4vw 10vw ;
+  padding: 4vw 10vw;
 }
 
-.cart-list {
+.cart-list,
+.checkout {
   width: 65%;
   height: 100%;
   padding: 2vw;
   display: flex;
   flex-direction: column;
+
   background-color: white;
 }
 
-#cart-list .cart-item {
+.cart-item {
   display: flex;
   justify-content: space-between;
   padding: 10px;
   border-bottom: 1px solid #000;
 }
 
+.saveNQ {
+  display: none;
+  border: 1px solid #e6eed8;
+  border-radius: 10px;
+  padding: .5vh;
+}
+
+.saveNQ:hover {
+  background-color: #cacaca6b;
+}
+
+.saveNQ:active {
+  background-color: #8a8a8aa2;
+}
+
+.cart-item .image {
+  width: 30%;
+  height: 10vw;
+  background-color: whitesmoke;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.cart-item .details {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+}
+
+.cart-item .details span {
+  display: flex;
+
+  align-items: center;
+  gap: 1vw;
+}
+
+.cart-item .details span div:nth-child(1) {
+  display: flex;
+  align-items: center;
+
+  border: 1px solid #d8e4ee;
+  border-radius: 10px;
+
+}
+
+.cart-item .details span div:nth-child(1) p {
+  padding: 0 1vh;
+}
+
+.cart-item .details span div:nth-child(1) button {
+  background-color: gainsboro;
+  &:hover {
+    background-color: #cacaca;
+  }
+  &:active {
+    background-color: #a8a8a8;
+  }
+}
+
+.cart-item .details span div:nth-child(1) button:nth-child(1) {
+  border-radius: 8px 0 0 8px;
+}
+.cart-item .details span div:nth-child(1) button:nth-child(3) {
+  border-radius: 0 8px 8px 0;
+}
+
+.cart-item .details span div:nth-child(2) {
+  gap: 1vw;
+}
+
+.cart-item .details span div:nth-child(2) button {
+  color: #008cff;
+}
+
 .total-price {
-  width: 15vw;
+  width: 30%;
   height: 7vw;
   padding: 1vw;
   background-color: white;
   color: black;
 }
 
-.total-price button {
+.total-price a p,
+.total-price button p {
   width: 100%;
-  padding: 1vh;
-  margin-top: 1vh ;
+  padding: .5vh 2vh;
+  margin-top: 1vh;
   background-color: #ffd814;
   border: #fcd200;
   border-radius: 15px;
   color: white;
   cursor: pointer;
+  text-align: center;
 }
 
-.saveNQ {
-  display: none;
+.total-price button a {
+  width: 15vw;
+  height: 100%;
+  color: white;
+  background-color: aliceblue;
 }
