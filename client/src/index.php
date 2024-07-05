@@ -61,6 +61,9 @@ switch (true) {
   case preg_match("#^/private#", ROUTING_URL):
     requirePage("/pages/PrivateArea.php");
     break;
+  case preg_match("#^/about#", ROUTING_URL):
+    requirePage("/pages/About.php");
+    break;
   case preg_match("#^/repo$#", ROUTING_URL):
     header("Location: https://github.com/matteofazzeri/sawProject");
     break;
