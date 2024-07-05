@@ -1,12 +1,14 @@
 class ProductAPI {
-  constructor(
+  constructor(numItems = 8, toRender = ""
   ) {
     this.currentPage = 1;
-    this.numItems = 8;
+    this.numItems = numItems;
     this.searchElem = new URLSearchParams(window.location.search).get('k') === null ?
       ""
       :
       new URLSearchParams(window.location.search).get('k');
+
+    this.toRender = toRender;
   }
 
   async renderProductCards(id_div, currentPage) {
@@ -31,6 +33,8 @@ class ProductAPI {
       return;
     }
 
+
+
     if (Array.isArray(data) && data.length === 0) {
       loaders.hide("loader-" + id_div);
       document.getElementById(id_div).innerHTML = "<h1>No products found</h1>";
@@ -47,7 +51,7 @@ class ProductAPI {
                 <img src="${product.product_image}" alt="${product.product_name}" class="product-image">
               </div>
               <div class="details">
-                  <h1 class="product-title"><a href="${product.product_id}/${product.product_name.replace(/ /g, "-")}?id=${product.product_id}">${product.product_name}</a></h1>
+                  <h1 class="product-title"><a href="${product.product_id}/${product.product_name.replace(/ /g, "-")}?eid=${product.product_id}">${product.product_name}</a></h1>
                   <div class="product-rating">Rating: ${product.product_rating}</div>
                   <span class="edit-quantity-elem" >
                     <button onclick="c.decrement_value(this)">
@@ -80,7 +84,7 @@ class ProductAPI {
   // Download product JSON
   async downloadProduct() {
     const response = await fetch(
-      `${backendUrl.development}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${localStorage.getItem("uuid") || "1"}`,
+      `${backendUrl.development}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${localStorage.getItem("uuid") || "1"}&x=${this.toRender}`,
       {
         method: "GET",
       }
@@ -128,6 +132,12 @@ class ProductAPI {
       document.getElementById("elem-price").innerHTML = data['product_price'] + "$";
       document.getElementById("elem-title").innerHTML = data['product_name'];
       document.getElementById("elem-description").innerHTML = data['product_description'];
+      document.getElementById("add-" + data['product_id']).innerHTML = "Quantity: " + data['quantity'];
+
+
+      // document.getElementById("elem-rating").innerHTML = data['product_rating'];
+
+      // render images of the product in the carousel
     }
   }
 }

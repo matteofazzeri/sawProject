@@ -5,7 +5,7 @@
       <span id="last-added-row" class="elems-seq">
         <span id="loader-last-added-row" class="loader"></span>
         <script>
-          const lap = new ProductAPI(10);
+          const lap = new ProductAPI(10, "last_added");
           lap.renderProductCards("last-added-row");
         </script>
       </span>
@@ -16,7 +16,7 @@
       <span id="wishlist-row" class="elems-seq">
         <span id="loader-wishlist-row" class="loader"></span>
         <script>
-          const wp = new ProductAPI(10);
+          const wp = new ProductAPI(10, "wishlist");
           wp.renderProductCards("wishlist-row");
         </script>
       </span>
@@ -27,7 +27,7 @@
       <span id="most-sold-row" class="elems-seq">
         <span id="loader-most-sold-row" class="loader"></span>
         <script>
-          const msp = new ProductAPI(10);
+          const msp = new ProductAPI(10, "most_sold");
           msp.renderProductCards("most-sold-row");
         </script>
       </span>

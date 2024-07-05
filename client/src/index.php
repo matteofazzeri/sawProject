@@ -70,9 +70,12 @@ switch (true) {
       $entityId = $parts[1];
       $productName = $parts[2];
       $productName = strstr($productName, '?', true) ?: $productName;
+      $uuid = $_SESSION['uuid'] ?? 1;
 
-      $apiUrl = "http://localhost/sawProject/server/api/e?eid=" . $entityId;
+      $apiUrl = "http://localhost/sawProject/server/api/e?eid=" . $entityId . "&uuid=" . $uuid;
       $response = file_get_contents($apiUrl);
+
+      
 
       if ($response !== false) {
         $productData = json_decode($response, true);

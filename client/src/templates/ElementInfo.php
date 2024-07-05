@@ -1,4 +1,4 @@
-<?php $eid = $_GET['id'] ?>
+<?php $eid = $_GET['eid'] ?>
 
 <main class="element-page">
   <script>
@@ -56,6 +56,8 @@
             <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
           </svg>
         </button>
+
+        
       </div>
 
       <button onclick="cart.addToCart(this)" class="add-to-cart">Add to cart</button>

@@ -29,7 +29,9 @@ class Cart {
 
     await this.addProductToCart(card.id, clean_quantity);
 
-    document.getElementById(card.id + "saveNQ").style.display = "none";
+
+    const okBTN = document.getElementById(card.id + "saveNQ");
+    okBTN !== null ? okBTN.style.display = "none" : null;
 
     // location.reload();
   }
@@ -40,7 +42,8 @@ class Cart {
     const quantity = document.getElementById(quantity_id);
     let clean_quantity = quantity.textContent.replace("Quantity: ", "");
 
-    document.getElementById(card.id + "saveNQ").style.display = "block";
+    const okBTN = document.getElementById(card.id + "saveNQ");
+    okBTN !== null ? okBTN.style.display = "block" : null;
 
     clean_quantity -= 0; // this convert the string to number
     clean_quantity += 1;
@@ -53,7 +56,9 @@ class Cart {
     const quantity_id = "add-" + card.id;
     const quantity = document.getElementById(quantity_id);
     let clean_quantity = quantity.textContent.replace("Quantity: ", "");
-    document.getElementById(card.id + "saveNQ").style.display = "block";
+
+    const okBTN = document.getElementById(card.id + "saveNQ");
+    okBTN !== null ? okBTN.style.display = "block" : null;
 
     clean_quantity -= 0; // this convert the string to number
     if (clean_quantity - 1 >= 1) clean_quantity -= 1;
@@ -137,7 +142,7 @@ class Cart {
                   <img src="${product.product_image}" alt="${product.product_name}" class="product-image">
               </div>
               <div class="details">
-                <h1 class="product-title"><a href="${product.product_id}/${product.product_name.replace(/ /g, "-")}?id=${product.product_id}">${product.product_name}</a></h1>
+                <h1 class="product-title"><a href="${product.product_id}/${product.product_name.replace(/ /g, "-")}?eid=${product.product_id}">${product.product_name}</a></h1>
                 <div class="product-rating">Rating: ${product.product_rating}</div>
                 <span>
                   <div class="quantity-selector">
@@ -207,6 +212,7 @@ class Checkout extends Cart {
       method: "POST",
 
       body: JSON.stringify(body_message),
+
     });
 
     if (!response.ok) {

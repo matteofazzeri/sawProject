@@ -97,3 +97,7 @@ main {
 .cookie-banner form .dont-accept-btn:hover {
   color: #f44336;
 }
+
+.saveNQ {
+  display: none;
+}
