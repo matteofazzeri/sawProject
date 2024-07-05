@@ -1,4 +1,4 @@
-.about{
+.container{
     background-color: #222E50;
     padding: 20px;
 }
@@ -9,9 +9,11 @@ h1{
     font-size: 30px;
 }
 
-p{
+.about p{
     align-self: center;
     text-align: center;
+    justify-content: center;
+    display: flex;
     margin: 10px;
     color: white;
     width: 50%;

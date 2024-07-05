@@ -8,9 +8,9 @@ display('Head', false, [
 display('Navbar');
 ?>
 <main>
-    <div class="about">
+    <div class="container">
         <h1>About SAW</h1>
-        <p>Hello! SAW is an e-commerce for your extra-terrastrial travels! 
+        <p id="about">Hello! SAW is an e-commerce for your extra-terrastrial travels! 
             It is only a startup, founded by Sara Caviglia and Matteo Fazzeri:
             they are two students from the University of Genoa, Italy. This is a
             project for the course of Web Applications, held by Prof. Ribaudo.
