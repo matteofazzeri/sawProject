@@ -10,7 +10,7 @@ $postData = file_get_contents("php://input");
 $data = json_decode($postData, true);
 
 if (!isset($data['uuid'])) {
-  echo json_encode(['message' => 'Invalid data'], JSON_PRETTY_PRINT);
+  echo json_encode(['message' => 'Invalid user data'], JSON_PRETTY_PRINT);
   http_response_code(400);
   exit;
 }
@@ -18,9 +18,16 @@ if (!isset($data['uuid'])) {
 $uuid = htmlspecialchars(strip_tags($data['uuid']));
 
 // get all the items from the cart of the user
-$cartItems = getElem("SELECT * FROM shopping_cart as c JOIN spaceships_detail_view as s on c.product_id = s.product_id WHERE c.user_id = :uuid", [
-  'uuid' => $uuid,
-]);
+
+$cartItems = getElem(
+  "SELECT sdv.*, COALESCE(sc.quantity, 1) AS quantity
+    FROM spaceships_detail_view sdv
+    JOIN shopping_cart sc 
+    ON sdv.product_id = sc.product_id AND sc.user_id = :uuid",
+  [
+    'uuid' => $_SESSION['uuid'] ?? 1
+  ]
+);
 
 // check if the user has items in the cart
 if (count($cartItems) === 0) {
@@ -29,15 +36,32 @@ if (count($cartItems) === 0) {
   exit;
 }
 
+// update the quantity of the of the product
+
+foreach ($cartItems as $item) {
+  $test = getElem("UPDATE products SET quantity = :new_q WHERE id = :eid", [
+    'new_q' => $item['product_quantity'] - $item['quantity'],
+    'eid' => $item['product_id'],
+  ]);
+
+  if ($test === false) {
+    json_encode(['message' => 'not enough product']);
+    http_response_code(409);
+    exit;
+  }
+}
+
+
+
 // calculate the total amount of the order
 
 $total_amount = 0;
 
 foreach ($cartItems as $item) {
-  $price = getElem("SELECT price FROM products WHERE id = :eid", [
+  $values = getElem("SELECT price FROM products WHERE id = :eid", [
     'eid' => $item['product_id'],
   ])[0];
-  $total_amount += $price['price'] * $item['quantity'];
+  $total_amount += $values['price'] * $item['quantity'];
 }
 
 // create a new order and get the order_id

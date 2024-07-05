@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS
     name VARCHAR(255) NOT NULL,
     description TEXT,
     price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
-    quantity INT DEFAULT 1,
+    quantity INT DEFAULT 1 CHECK(quantity >= 0),
     availability BOOLEAN NOT NULL,
     item_sold INT NOT NULL DEFAULT 0, -- number of products sold
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS
     id INT PRIMARY KEY AUTO_INCREMENT,
     order_id INT,
     product_id INT,
-    quantity INT DEFAULT 1,
+    quantity INT DEFAULT 1 CHECK(quantity >= 0),
     subtotal DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders (id),
     FOREIGN KEY (product_id) REFERENCES products (id)

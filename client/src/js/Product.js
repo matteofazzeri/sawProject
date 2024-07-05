@@ -66,6 +66,10 @@ class ProductAPI {
                       </svg>
                     </button>
                     <button id="${product.product_id}saveNQ" class="saveNQ" onclick="c.addToCart(this)" >OK</button>
+
+                    ${product.product_quantity <= 0 ? "<p style='color: red'> no product</p>" : product.product_quantity < 10 ?
+              `<p style='color: orange'>Prodotti rimasti: ${product.product_quantity}</p>` : null
+            }
                   </span>
                   <div class="product-tags">Tags: ${product.tags && product.tags.length > 0 ? product.tags.join(", ") : "No tags available"}</div>
                   <p class="latest-comment">Latest Comment: Aggiungere ultimo commentoooooooo oooootjtjakoooooo oooooo ooooooooooloooooo oooooooooo ooooooooo oooooooo ooo oooooo oooooo oooooo o!</p>
@@ -153,7 +157,7 @@ class searchProduct extends ProductAPI {
 
   search = () => {
     const search_input = encodeURIComponent(document.querySelector("input").value);
-    
+
     window.location.href = `http://localhost/sawProject/client/search?k=${search_input}`;
   }
 }

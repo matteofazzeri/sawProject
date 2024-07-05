@@ -161,6 +161,11 @@ class Cart {
                     
                   <button id="${product.product_id}saveNQ" class="saveNQ" onclick="c.addToCart(this)" >OK</button>
 
+                  ${
+                    product.product_quantity <= 0 ? "<p style='color: red'> no product</p>" : product.product_quantity < 10 ? 
+                    `<p style='color: orange'>Prodotti rimasti: ${product.product_quantity}</p>` : `<p style='color: green'>Disponibilità immediata</p>`
+                  }
+
                   <div class="cart-elem-option">
                     <button onclick="c.removeProductFromCart(this)">Rimuovi</button>
                     <button>Salva per dopo</button>
@@ -216,14 +221,22 @@ class Checkout extends Cart {
     });
 
     if (!response.ok) {
+      /* document.getElementById("checkout").innerHTML = response.status + " - " +response.statusText; */
+
+      if (response.status === 409) {
+        loaders.show("loader-checkout", "bubble", "Checkout Failed! Redirecting to the cart...");
+        setTimeout(function () {
+          window.location.href = "cart";
+        }, 3000);
+      }
       throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+      loaders.show("loader-checkout", "bubble", "Checkout completed! Redirecting to home page...");
     }
-
-    loaders.show("loader-checkout", "bubble", "Checkout completed! Redirecting to home page...");
-
-
+    
     setTimeout(function () {
       window.location.href = "";
     }, 3000);
+
   }
 }
