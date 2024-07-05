@@ -5,6 +5,7 @@
 
 .form{
     background-color: #222E50;
+    padding: 20px;
 }
 
 p{
@@ -14,22 +15,27 @@ p{
     color: white;
 }
 
-a::visited{
-    color: white;
+a.linkform{
+    color: #7EB2DD;
+    text-decoration: none;
+}
+
+a.linkform:hover{
+    color: #3A7D44;
 }
 
 h1{
     text-align: center;
     color: white;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 /* Reset default form styles */
-form {
+.login, .registration {
     margin: 10px auto;
     border:#3A7D44 1px solid;
     border-radius: 10px;
-    padding: 10px;
+    padding: 20px;
     width: 25%;
     display: flex;
     justify-content: center;
@@ -81,6 +87,6 @@ input[type=submit]{
 }
 
 
-#err-username, #err-pwd {
+#err-username, #err-pwd, #err-firstname, #err-lastname, #err-password, #err-confirm{ 
     display: none;
 }

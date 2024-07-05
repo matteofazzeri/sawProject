@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
             errorMsg_username.style.display = "block";
         } else {
             errorMsg_username.style.display = "none";
-
         }
 
         if (password === '' || password === null) {

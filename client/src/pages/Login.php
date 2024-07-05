@@ -12,20 +12,20 @@ if (!isset($_COOKIE["username"])) : ?>
   <main>
     <div class="form">
       <h1>SAW: Login</h1><br>
-      <p>New to SAW? <a href="Registration.php">Sign up now!</a></p><br>
+      <p>New to SAW? <a class="linkform" href="Registration.php">Sign up now!</a></p><br>
       <!-- action="Login.php" method="post" -->
       <form id="login" class="login">
         <fieldset>
+          <label for="username">Username</label>
           <input id="username" type="text" name="username" placeholder="Username">
           <br><span id="err-username" class="error">
             Username not correct
-            <?php //echo $username_error; 
-            ?></span><br>
+            <?php //echo $username_error; ?></span><br>
+          <label for="password">Password</label>
           <input id="password" type="password" name="password" placeholder="Password">
           <br><span id="err-pwd" class="error">
             Password not correct
-            <?php //echo $password_error; 
-            ?></span><br>
+            <?php //echo $password_error; ?></span><br>
           <input id="remember" type="checkbox" name="remember" value="1">Remember me<br>
           <input type="submit" value="Login">
         </fieldset>
