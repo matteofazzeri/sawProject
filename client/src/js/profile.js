@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Clear previous error messages
     // errorMsg = errorMsg.textContent.replace('Error: ', '');
 
-    form.addEventListener('submit', function(event) {
+    form.addEventListener('submit', async function(event) {
         event.preventDefault(); // Prevent form from submitting by default
 
         // Validate inputs
@@ -55,7 +55,13 @@ document.addEventListener('DOMContentLoaded', function() {
             errorMsg_username.style.display = "none";
 
         }
-
+        
+        bodyMessage = {
+            //photo: photo,
+            firstname: firstname,
+            lastname: lastname,
+            username: username,
+        };
         console.log(JSON.stringify(bodyMessage));
 
         // If valid, allow form submission (or handle login logic here)
@@ -66,8 +72,10 @@ document.addEventListener('DOMContentLoaded', function() {
             // alert('Please fix the errors before submitting.');
         }
 
-
-        // call the api
+        const response = await fetch(`${backendUrl.development}r`, {
+            method: "POST",
+            body: JSON.stringify(bodyMessage),
+        });
     });
 });
 
@@ -78,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const errorMsg_pwd = document.getElementById('err-password');
     const errorMsg_confirm = document.getElementById('err-confirm');
 
-    form.addEventListener('submit', function(event) {
+    form.addEventListener('submit', async function(event) {
         event.preventDefault(); // Prevent form from submitting by default
 
         // Validate inputs
@@ -116,12 +124,26 @@ document.addEventListener('DOMContentLoaded', function() {
             errorMsg_confirm.style.display = "none";
         }
 
+        bodyMessage = {
+            password: password,
+        };
+
         if (valid) {
             //alert('Login successful'); // Replace with actual login logic
             form.submit();
         } else {
             // alert('Please fix the errors before submitting.');
         }
+
+        const response = await fetch(`${backendUrl.development}r`, {
+            method: "POST",
+            body: JSON.stringify(bodyMessage),
+        });
+
+        if(!response.ok)
+        {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        };
     });
 
 });

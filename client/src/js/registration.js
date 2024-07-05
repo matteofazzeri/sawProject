@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Clear previous error messages
     // errorMsg = errorMsg.textContent.replace('Error: ', '');
 
-    form.addEventListener('submit', function(event) {
+    form.addEventListener('submit', async function(event) {
         event.preventDefault(); // Prevent form from submitting by default
 
         // Validate inputs
@@ -102,7 +102,14 @@ document.addEventListener('DOMContentLoaded', function() {
             // alert('Please fix the errors before submitting.');
         }
 
+        const response = await fetch(`${backendUrl.development}r`, {
+            method: "POST",
+            body: JSON.stringify(bodyMessage),
+        });
 
-        // call the api
+        if(!response.ok)
+        {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        };
     });
 });
