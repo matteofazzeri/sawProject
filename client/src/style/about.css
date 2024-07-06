@@ -9,12 +9,15 @@ h1{
     font-size: 30px;
 }
 
-.about p{
+.about {
+    margin: 10px;
+    color: white;
+    width: 50%;
+}
+
+.text{
     align-self: center;
     text-align: center;
     justify-content: center;
     display: flex;
-    margin: 10px;
-    color: white;
-    width: 50%;
 }

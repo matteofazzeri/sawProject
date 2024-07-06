@@ -25,7 +25,7 @@ if (!isset($_COOKIE["username"])) : ?>
               <br><span id="err-lastname" class="error">
                 Lastname not valid
                 <?php //echo $lastname_error; ?></span><br>
-              <label for="email">Email</label>
+              <label for="username">Username</label>
                 <input id="username" type="text" name="username" placeholder="Username">
               <br><span id="err-username" class="error">
                 Username not valid or available

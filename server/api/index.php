@@ -14,6 +14,13 @@ $requestURL = str_replace($base_url, "", $requestURL);
 
 if (strpos($requestURL, "forms")) {
   // TODO: send request to form.php file 
+  if ($requestURL[0] == "r") {
+    require __DIR__ . "/forms/Registration.php";
+  } else if ($requestURL[0] == "l") {
+    require __DIR__ . "/forms/Login.php";
+  } else if ($requestURL[0] == "p") {
+    require __DIR__ . "/forms/Profile.php";
+  }
 } else if ($requestURL[0] == "s") {
   require __DIR__ . "/shop/Shop.php";
 } else if ($requestURL[0] == "h") {
@@ -28,7 +35,8 @@ if (strpos($requestURL, "forms")) {
   } else {
     require __DIR__ . "/cart/Cart.php";
   }
-} else {
+} 
+else {
   echo "wtf are u doing here?!";
   echo $requestURL;
 }

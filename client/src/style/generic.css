@@ -84,6 +84,8 @@ main {
 
 .cookie-banner form .accept-btn:hover {
   background-color: #45a049;
+  color: #45a049;
+  cursor: pointer;
 }
 
 .cookie-banner form .dont-accept-btn {
