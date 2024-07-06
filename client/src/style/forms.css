@@ -87,6 +87,6 @@ input[type=submit]{
 }
 
 
-#err-username, #err-pwd, #err-firstname, #err-lastname, #err-password, #err-confirm{ 
+#err-email, #err-pwd, #err-firstname, #err-lastname, #err-password, #err-confirm{ 
     display: none;
 }

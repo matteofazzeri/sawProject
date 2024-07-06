@@ -204,14 +204,14 @@ CREATE TABLE IF NOT EXISTS
   );
 
 -- * user can have autologin in more than one device
-/* CREATE TABLE IF NOT EXISTS
+CREATE TABLE IF NOT EXISTS
   sessions (
     user_id INT,
     session_token VARCHAR(255) PRIMARY KEY NOT NULL,
     expiration_date TIMESTAMP NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id),
     UNIQUE(user_id, session_token)
-  ); */
+  ); 
 
 CREATE TABLE IF NOT EXISTS
   shopping_cart (

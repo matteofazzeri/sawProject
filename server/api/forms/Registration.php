@@ -1,14 +1,14 @@
 <?php
 
-include("././client/src/libs/functions.php");
+include("./libs/helper.inc.php");
 
 if (isLogged()) {
   header("Location: Home.php");
   exit();
 }
 
-$firstname = $lastname = $username = $password = $confirm_password = "";
-$firstname_error = $lastname_error = $username_error = $password_error = $confirm_password_error = $already_registered_error = "";
+$firstname = $lastname = $email = $username = $password = $confirm_password = "";
+$firstname_error = $lastname_error = $email_error = $username_error = $password_error = $confirm_password_error = $already_registered_error = "";
 
 //Controlla se il form è stato correttamente inviato
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -31,6 +31,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Check con espressioni regolari\
     if (!preg_match("/^[a-zA-Z ]*$/", $lastname)) {
       $lastname_error = "Only letters and white space allowed";
+    }
+  }
+
+  //Validazione email
+  if (empty($_POST["email"])) {
+    $email_error = "Email is required";
+  } else {
+    $email = test_input($_POST["email"]);
+    //Check con un filtro
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $email_error = "Invalid email format";
     }
   }
 
@@ -63,9 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 
-  include __DIR__ . "/../libs/helper.inc.php";
-
-  if (!checkAll($firstname, $lastname, $username, $password, $confirm_password)) {
+  if (!checkAll($firstname, $lastname, $email, $username, $password, $confirm_password)) {
     echo "Error -> unable to register" . "<br/>";
     //header("Location: Registration.php");
     die;
@@ -83,9 +92,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   //Salvare i dati dell'utente sul database
-  if (empty($firstname_error) && empty($lastname_error) && empty($username_error) && empty($password_error) && empty($confirm_password_error)) {
+  if (empty($firstname_error) && empty($lastname_error) && empty($email_error) && empty($username_error) && empty($password_error) && empty($confirm_password_error)) {
     $password = password_hash($password, PASSWORD_DEFAULT);
-    $insert = "INSERT INTO users (firstname, lastname, username, password) VALUES ('$firstname', '$lastname', '$username', '$password')";
+    $insert = "INSERT INTO users (firstname, lastname, email, username, password) VALUES ('$firstname', '$lastname', '$email', '$username', '$password')";
     if (!mysqli_query($con, $insert)) {
       echo "Error: " . $insert . "<br>" . mysqli_error($con);
       exit();

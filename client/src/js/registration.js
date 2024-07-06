@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('registration');
   const firstnameInput = document.getElementById('firstname');
   const lastnameInput = document.getElementById('lastname');
+  const emailInput = document.getElementById('email');
   const usernameInput = document.getElementById('username');
   const passwordInput = document.getElementById('password');
   const confirmInput = document.getElementById('confirm');
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Validate inputs
     const firstname = firstnameInput.value;
     const lastname = lastnameInput.value;
+    const email = emailInput.value;
     const username = usernameInput.value;
     const password = passwordInput.value;
     const confirm = confirmInput.value;
@@ -45,14 +47,14 @@ document.addEventListener('DOMContentLoaded', function () {
       errorMsg_lastname.style.display = "none";
     }
 
-    if (username === '' || username === null) {
+    if (email === '' || email === null) {
       valid = false;
       // errorMsg_username.textContent += 'Username is required. ';
 
-      console.log("username empty");
-      errorMsg_username.style.display = "block";
+      console.log("email empty");
+      errorMsg_email.style.display = "block";
     } else {
-      errorMsg_username.style.display = "none";
+      errorMsg_email.style.display = "none";
 
     }
 
@@ -101,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
         method: "POST",
         body: JSON.stringify(bodyMessage),
       });
+      console.log(response);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       };

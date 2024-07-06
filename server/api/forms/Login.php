@@ -1,6 +1,6 @@
 <?php
 
-include("././client/src/libs/functions.php");
+include("./libs/helper.inc.php");
 
 /*
 if (isLogged()) {

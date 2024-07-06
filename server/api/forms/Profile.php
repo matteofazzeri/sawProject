@@ -1,5 +1,5 @@
 <?php
-    include("./libs/functions.php");
+include("./libs/helper.inc.php");
     if(!isLogged()) {
         header("Location: Login.php");
         exit();

@@ -1,10 +1,5 @@
 <?php
-
-
-function sanitaze(string $data): string
-{
-  return $data;
-}
+include './connection/inc.php';
 
 /* input checker */
 
@@ -70,10 +65,10 @@ function userExists($email): bool
   return false;
 }
 
-function checkAll($email, $username, $name, $pwd, $cpwd): bool
+function checkAll($firstname, $lastname, $email, $username, $pwd, $cpwd): bool
 {
-  return checkEmail($email) and checkUsername($username)
-    and nameCheck($name) and checkPwd($pwd, $cpwd) and !userExists($email || $username);
+  return namecheck($firstname) and namecheck($lastname) and checkEmail($email) and checkUsername($username)
+    and checkPwd($pwd, $cpwd) and !userExists($email || $username);
 }
 
 function isLogged(): bool
@@ -85,7 +80,7 @@ function isLogged(): bool
 
   //! connect to the database and check if the user is registered
   $result = getElem(
-    "SELECT keep_logged, expire_date, users_id FROM logged WHERE token = :token_cookie;",
+    "SELECT keep_logged, expiration_date, user_id FROM sessions WHERE session_token = :token_cookie;",
     ['token_cookie' => $_COOKIE['rmbme'] ?? 'null']
   );
 
