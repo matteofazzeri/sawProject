@@ -1,115 +1,117 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('registration');
-    const firstnameInput = document.getElementById('firstname');
-    const lastnameInput = document.getElementById('lastname');
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    const confirmInput = document.getElementById('confirm');
-    const errorMsg_firstname = document.getElementById('err-firstname');
-    const errorMsg_lastname = document.getElementById('err-lastname');
-    const errorMsg_username = document.getElementById('err-username');
-    const errorMsg_pwd = document.getElementById('err-password');
-    const errorMsg_confirm = document.getElementById('err-confirm');
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('registration');
+  const firstnameInput = document.getElementById('firstname');
+  const lastnameInput = document.getElementById('lastname');
+  const usernameInput = document.getElementById('username');
+  const passwordInput = document.getElementById('password');
+  const confirmInput = document.getElementById('confirm');
+  const errorMsg_firstname = document.getElementById('err-firstname');
+  const errorMsg_lastname = document.getElementById('err-lastname');
+  const errorMsg_username = document.getElementById('err-username');
+  const errorMsg_pwd = document.getElementById('err-password');
+  const errorMsg_confirm = document.getElementById('err-confirm');
 
-    // Clear previous error messages
-    // errorMsg = errorMsg.textContent.replace('Error: ', '');
+  // Clear previous error messages
+  // errorMsg = errorMsg.textContent.replace('Error: ', '');
 
-    form.addEventListener('submit', async function(event) {
-        event.preventDefault(); // Prevent form from submitting by default
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault(); // Prevent form from submitting by default
 
-        // Validate inputs
-        const firstname = firstnameInput.value;
-        const lastname = lastnameInput.value;
-        const username = usernameInput.value;
-        const password = passwordInput.value;
-        const confirm = confirmInput.value;
-        let valid = true;
-        
-        if (firstname === '' || firstname === null) {
-            valid = false;
-            // errorMsg_username.textContent += 'Username is required. ';
+    // Validate inputs
+    const firstname = firstnameInput.value;
+    const lastname = lastnameInput.value;
+    const username = usernameInput.value;
+    const password = passwordInput.value;
+    const confirm = confirmInput.value;
+    let valid = true;
 
-            console.log("firstname empty");
-            errorMsg_firstname.style.display = "block";
-        } else {
-            errorMsg_firstname.style.display = "none";
-        }
+    if (firstname === '' || firstname === null) {
+      valid = false;
+      // errorMsg_username.textContent += 'Username is required. ';
 
-        if (lastname === '' || lastname === null) {
-            valid = false;
-            // errorMsg_username.textContent += 'Username is required. ';
+      console.log("firstname empty");
+      errorMsg_firstname.style.display = "block";
+    } else {
+      errorMsg_firstname.style.display = "none";
+    }
 
-            console.log("lastname empty");
-            errorMsg_lastname.style.display = "block";
-        } else {
-            errorMsg_lastname.style.display = "none";
-        }
+    if (lastname === '' || lastname === null) {
+      valid = false;
+      // errorMsg_username.textContent += 'Username is required. ';
 
-        if (username === '' || username === null) {
-            valid = false;
-            // errorMsg_username.textContent += 'Username is required. ';
+      console.log("lastname empty");
+      errorMsg_lastname.style.display = "block";
+    } else {
+      errorMsg_lastname.style.display = "none";
+    }
 
-            console.log("username empty");
-            errorMsg_username.style.display = "block";
-        } else {
-            errorMsg_username.style.display = "none";
+    if (username === '' || username === null) {
+      valid = false;
+      // errorMsg_username.textContent += 'Username is required. ';
 
-        }
+      console.log("username empty");
+      errorMsg_username.style.display = "block";
+    } else {
+      errorMsg_username.style.display = "none";
 
-        if (password === '' || password === null) {
-            valid = false;
-            // errorMsg_pwd.textContent += 'Password is required. ';
-            console.log("pwd empty");
+    }
 
-            errorMsg_pwd.style.display = "block";
-        } else {
-            errorMsg_pwd.style.display = "none";
-        }
+    if (password === '' || password === null) {
+      valid = false;
+      // errorMsg_pwd.textContent += 'Password is required. ';
+      console.log("pwd empty");
 
-        if (confirm === '' || confirm === null) {
-            valid = false;
-            // errorMsg_pwd.textContent += 'Password is required. ';
-            console.log("confirm empty");
+      errorMsg_pwd.style.display = "block";
+    } else {
+      errorMsg_pwd.style.display = "none";
+    }
 
-            errorMsg_pwd.style.display = "block";
-        } else {
-            errorMsg_pwd.style.display = "none";
-        }
+    if (confirm === '' || confirm === null) {
+      valid = false;
+      // errorMsg_pwd.textContent += 'Password is required. ';
+      console.log("confirm empty");
 
-        if (password !== confirm) {
-            valid = false;
-            // errorMsg_pwd.textContent += 'Password is required. ';
-            console.log("pwd not match");
+      errorMsg_pwd.style.display = "block";
+    } else {
+      errorMsg_pwd.style.display = "none";
+    }
 
-            errorMsg_confirm.style.display = "block";
-        } else {
-            errorMsg_confirm.style.display = "none";
-        }
+    if (password !== confirm) {
+      valid = false;
+      // errorMsg_pwd.textContent += 'Password is required. ';
+      console.log("pwd not match");
 
-        bodyMessage = {
-            firstname: firstname,
-            lastname: lastname,
-            username: username,
-            password: password,
-        };
-        console.log(JSON.stringify(bodyMessage));
+      errorMsg_confirm.style.display = "block";
+    } else {
+      errorMsg_confirm.style.display = "none";
+    }
 
-        // If valid, allow form submission (or handle login logic here)
-        if (valid) {
-            //alert('Login successful'); // Replace with actual login logic
-            form.submit();
-        } else {
-            // alert('Please fix the errors before submitting.');
-        }
+    bodyMessage = {
+      firstname: firstname,
+      lastname: lastname,
+      username: username,
+      password: password,
+    };
+    console.log(JSON.stringify(bodyMessage));
 
-        const response = await fetch(`${backendUrl.development}r`, {
-            method: "POST",
-            body: JSON.stringify(bodyMessage),
-        });
+    // If valid, allow form submission (or handle login logic here)
+    if (valid) {
+      //alert('Login successful'); // Replace with actual login logic
+      const response = await fetch(`${backendUrl.development}r`, {
+        method: "POST",
+        body: JSON.stringify(bodyMessage),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      };
 
-        if(!response.ok)
-        {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        };
-    });
+      // form.submit();
+    } else {
+      // alert('Please fix the errors before submitting.');
+    }
+
+
+
+
+  });
 });

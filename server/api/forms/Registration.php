@@ -63,12 +63,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 
-  include __DIR__ . "/../connection/inc.php";
+  include __DIR__ . "/../libs/helper.inc.php";
 
   if (!checkAll($firstname, $lastname, $username, $password, $confirm_password)) {
     echo "Error -> unable to register" . "<br/>";
-    header("Location: Registration.php");
-    die();
+    //header("Location: Registration.php");
+    die;
   }
 
   //Devo controllare se l'utente è già presente tra gli utenti registrati
@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $already_registered_error = "User already registered";
       echo $already_registered_error;
       $con->close();
-      exit();
+      exit;
     }
   }
 
