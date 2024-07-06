@@ -6,7 +6,7 @@ class Cart {
   async addProductToCart(product, quantity) {
     const body_message = {
       elem_id: product,
-      uuid: localStorage.getItem("uuid") || "1",
+      uuid: localStorage.getItem("uuid") || null,
       n_elem: quantity,
     };
 
@@ -17,6 +17,17 @@ class Cart {
     });
 
     if (!response.ok) {
+
+      if (response.status === 401) {
+        window.location.href = "login";
+      } else if (response.status === 409) {
+        document.getElementById(product + "-error").innerHTML = "Errore: Quantità non disponibile";
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+
+
       throw new Error(`HTTP error! status: ${response.status}`);
     }
   }
@@ -67,7 +78,7 @@ class Cart {
   }
 
   async downloadCart() {
-    const response = await fetch(`${backendUrl.development}c?uuid=${localStorage.getItem("uuid") || "1"}`, {
+    const response = await fetch(`${backendUrl.development}c?uuid=${localStorage.getItem("uuid") || null}`, {
       method: "GET",
     });
 
@@ -85,7 +96,7 @@ class Cart {
 
     const body_message = {
       prod_id: card.id,
-      uuid: localStorage.getItem("uuid") || "1",
+      uuid: localStorage.getItem("uuid") || null,
     };
 
     const response = await fetch(`${backendUrl.development}c`, {
@@ -104,6 +115,18 @@ class Cart {
   async renderCart(id_div) {
 
     loaders.show("loader-" + id_div, "search");
+
+    if (localStorage.getItem("uuid") === null) {
+      loaders.hide("loader-" + id_div);
+      document.getElementById(id_div).innerHTML = "<h1>You must be logged in to view your cart</h1><p>Redirecting you to login page...</p>";
+      document.getElementById(id_div).style.display = "flex";
+
+      setTimeout(function () {
+        window.location.href = "login";
+      }, 3000);
+
+      return 401;
+    }
 
     const timeout = new Promise((resolve, reject) => {
       setTimeout(reject, 1000, 'Request timed out');
@@ -161,10 +184,9 @@ class Cart {
                     
                   <button id="${product.product_id}saveNQ" class="saveNQ" onclick="c.addToCart(this)" >OK</button>
 
-                  ${
-                    product.product_quantity <= 0 ? "<p style='color: red'> no product</p>" : product.product_quantity < 10 ? 
-                    `<p style='color: orange'>Prodotti rimasti: ${product.product_quantity}</p>` : `<p style='color: green'>Disponibilità immediata</p>`
-                  }
+                  ${product.product_quantity <= 0 ? "<p style='color: red'> no product</p>" : product.product_quantity < 10 ?
+              `<p style='color: orange'>Prodotti rimasti: ${product.product_quantity}</p>` : `<p style='color: green'>Disponibilità immediata</p>`
+            }
 
                   <div class="cart-elem-option">
                     <button onclick="c.removeProductFromCart(this)">Rimuovi</button>
@@ -172,6 +194,7 @@ class Cart {
                     <button>Condividi</button>
                   </div>
                 </span>
+                <p class="error" id="${product.product_id}-error"></p>
               </div>
               <div>
                 <span id="item-price"><b>${product.product_price} €</b></span>
@@ -195,6 +218,8 @@ class Checkout extends Cart {
   async renderCheckout() {
     if (await this.renderCart("checkout") === 404) {
       window.location.href = "cart";
+    } else if (await this.renderCart("checkout") === 401) {
+      window.location.href = "login";
     }
 
     Array.from(document.getElementsByClassName("cart-elem-option")).forEach(function (item) {
@@ -210,14 +235,12 @@ class Checkout extends Cart {
 
 
     const body_message = {
-      uuid: localStorage.getItem("uuid") || "1",
+      uuid: localStorage.getItem("uuid") || null,
     };
 
     const response = await fetch(`${backendUrl.development}c/checkout`, {
       method: "POST",
-
       body: JSON.stringify(body_message),
-
     });
 
     if (!response.ok) {
@@ -229,11 +252,13 @@ class Checkout extends Cart {
           window.location.href = "cart";
         }, 3000);
       }
+      loaders.hide("loader-checkout");
+      window.location.href = "cart";
       throw new Error(`HTTP error! status: ${response.status}`);
     } else {
       loaders.show("loader-checkout", "bubble", "Checkout completed! Redirecting to home page...");
     }
-    
+
     setTimeout(function () {
       window.location.href = "";
     }, 3000);

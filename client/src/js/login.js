@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // alert('Please fix the errors before submitting.');
         }
 
-        const response = await fetch(`${backendUrl.development}r`, {
+        const response = await fetch(`${backendUrl.development}l`, {
             method: "POST",
             body: JSON.stringify(bodyMessage),
         });

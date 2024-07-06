@@ -33,8 +33,6 @@ class ProductAPI {
       return;
     }
 
-
-
     if (Array.isArray(data) && data.length === 0) {
       loaders.hide("loader-" + id_div);
       document.getElementById(id_div).innerHTML = "<h1>No products found</h1>";
@@ -68,9 +66,10 @@ class ProductAPI {
                     <button id="${product.product_id}saveNQ" class="saveNQ" onclick="c.addToCart(this)" >OK</button>
 
                     ${product.product_quantity <= 0 ? "<p style='color: red'> no product</p>" : product.product_quantity < 10 ?
-              `<p style='color: orange'>Prodotti rimasti: ${product.product_quantity}</p>` : null
-            }
+              `<p style='color: orange'>Prodotti rimasti: ${product.product_quantity}</p>` : ""
+            } 
                   </span>
+                  <p class="error" id="${product.product_id}-error"></p>
                   <div class="product-tags">Tags: ${product.tags && product.tags.length > 0 ? product.tags.join(", ") : "No tags available"}</div>
                   <p class="latest-comment">Latest Comment: Aggiungere ultimo commentoooooooo oooootjtjakoooooo oooooo ooooooooooloooooo oooooooooo ooooooooo oooooooo ooo oooooo oooooo oooooo o!</p>
               </div>
@@ -88,7 +87,7 @@ class ProductAPI {
   // Download product JSON
   async downloadProduct() {
     const response = await fetch(
-      `${backendUrl.development}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${localStorage.getItem("uuid") || "1"}&x=${this.toRender}`,
+      `${backendUrl.development}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${localStorage.getItem("uuid") || null}&x=${this.toRender}`,
       {
         method: "GET",
       }
@@ -124,7 +123,7 @@ class ProductAPI {
   async fillElemPage() {
     const url = new URL(window.location.href);
     const id = url.pathname.split('/')[3];
-    const response = await fetch(`${backendUrl.development}e?eid=${id}&uuid=${localStorage.getItem("uuid") || "1"}`, {
+    const response = await fetch(`${backendUrl.development}e?eid=${id}&uuid=${localStorage.getItem("uuid") || null}`, {
       method: "GET",
     });
 

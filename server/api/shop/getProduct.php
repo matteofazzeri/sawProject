@@ -4,6 +4,8 @@ $page = $_GET['page'] ?? 1;
 $items_per_page = $_GET['nElem'] ?? 16;
 $searchedElem = $_GET['k'] ?? '';
 
+
+
 $data = getElem(
   "SELECT sdv.*, COALESCE(sc.quantity, 1) AS quantity
     FROM spaceships_detail_view sdv
@@ -12,7 +14,7 @@ $data = getElem(
     WHERE sdv.product_name LIKE :searchElem",
   [
     'searchElem' => "%$searchedElem%",
-    'uuid' => $_SESSION['uuid'] ?? 1
+    'uuid' => $_SESSION['uuid'] ?? null
   ]
 );
 

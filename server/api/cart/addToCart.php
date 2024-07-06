@@ -15,10 +15,19 @@ if ($data !== null) {
   echo "Error decoding JSON data";
 }
 
+// Check if data is missing
 
-if($eid === null || $uuid === null || $n_elem === 0) {
+if($uuid === null) {
+  echo "Error: user not logged in";
+  http_response_code(401);
+  exit;
+}
+
+
+if($eid === null || $n_elem === 0) {
   echo "Error: missing data";
-  return;
+  http_response_code(400);
+ exit;
 }
 
 $alr_in = getElem("SELECT quantity FROM shopping_cart WHERE user_id = :uuid AND product_id = :eid", [
