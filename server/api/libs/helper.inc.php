@@ -1,18 +1,14 @@
 <?php
 
-function checkEmail($email)
+
+function sanitaze(string $data): string
 {
-  $regex_email = "/^[a-zA-Z\d\.]+@[a-zA-Z\d]+\.[a-z]{2,3}$/";
-
-  if (!preg_match($regex_email, $email)) {
-    echo "Invalid email address";
-    return false;
-  }
-
-  return true;
+  return $data;
 }
 
-function checkRegistrationPassword($p, $cpass)
+/* input checker */
+
+function checkPwd($p, $cpass)
 {
   $lowercase = preg_match("/.*[a-zàèéìòù]+.*/", $p);
   $uppercase = preg_match("/.*[A-Z]+.*/", $p);
@@ -42,27 +38,42 @@ function checkRegistrationPassword($p, $cpass)
   return false;
 }
 
-function checkLoginPassword($password)
+function nameCheck($data): bool
 {
-  $fp = fopen("libs/users.txt", "r");
-  while ($line = fgets($fp)) {
-    $data = explode("\t", $line);
-    if (password_verify($password, trim($data[count($data) - 1])))
-      return true;
+  if (preg_match("/^.\d.$/", $data)) {
+    echo "why tf u have a number in your name man!";
   }
+  return preg_match("/([a-zA-Z]+[àèéìòù]*\s+)+([a-zA-Z]+[àèéìòù]*\s*)/", $data);
+}
+
+function checkEmail($data): bool
+{
+  return preg_match("/^[a-zA-Z\d\.]+@[a-zA-Z\d]+\.[a-z]{2,3}$/", $data);
+}
+
+function checkUsername($data): bool
+{
+  return preg_match("/^[Ss][0-9]{7}$/", $data);
+}
+
+function userExists($email): bool
+{
+  $res = getElem(
+    "SELECT * FROM users WHERE email = :email OR username = :username;",
+    [
+      'email' => $email,
+      'username' => $email
+    ]
+  );
+
+  if (!empty($res))  return true;
   return false;
 }
 
-function checkAll(): bool
+function checkAll($email, $username, $name, $pwd, $cpwd): bool
 {
-  $args = func_get_args();
-  foreach ($args as $arg) {
-    if (empty($arg)) {
-      echo "Error -> unable to register" . "<br/>";
-      return false;
-    }
-  }
-  return true;
+  return checkEmail($email) and checkUsername($username)
+    and nameCheck($name) and checkPwd($pwd, $cpwd) and !userExists($email || $username);
 }
 
 function isLogged(): bool
@@ -73,6 +84,10 @@ function isLogged(): bool
   }
 
   //! connect to the database and check if the user is registered
+  $result = getElem(
+    "SELECT keep_logged, expire_date, users_id FROM logged WHERE token = :token_cookie;",
+    ['token_cookie' => $_COOKIE['rmbme'] ?? 'null']
+  );
 
   if (!empty($result)) {
     /* check if the keep_logged flag is 1 (true) */
@@ -96,6 +111,10 @@ function isAdmin(): bool
   }
 
   //! connect to the database and check if the user is registered
+  $result = getElem(
+    "SELECT is_admin FROM admin WHERE users_id = :id;",
+    ['id' => $_SESSION['id'] ?? 'null']
+  );
 
   // check if the user is logged
 
@@ -104,4 +123,24 @@ function isAdmin(): bool
     return isAdmin();
   }
   return true;
+}
+
+function id($data): string
+{
+  $query = "SELECT id FROM users WHERE email = :email OR username = :username;";
+  $data = ['email' => $data, 'username' => $data];
+  $res = getElem($query, $data);
+
+  if (!empty($res))  return $res[0]['id'];
+  return 'Unknown';
+}
+
+function dbInfo($id, $toFind): string
+{
+  $query = "SELECT $toFind FROM users WHERE id = :id;";
+  $data = ['id' => $id];
+  $res = getElem($query, $data);
+
+  if (!empty($res))  return $res[0][$toFind];
+  return 'Unknown';
 }

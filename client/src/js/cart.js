@@ -216,6 +216,12 @@ class Checkout extends Cart {
 
 
   async renderCheckout() {
+
+    if(localStorage.getItem("uuid") === null) {
+      window.location.href = "login";
+      return;
+    }
+
     if (await this.renderCart("checkout") === 404) {
       window.location.href = "cart";
     } else if (await this.renderCart("checkout") === 401) {
