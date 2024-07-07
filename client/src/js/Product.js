@@ -157,6 +157,6 @@ class searchProduct extends ProductAPI {
   search = () => {
     const search_input = encodeURIComponent(document.querySelector("input").value);
 
-    window.location.href = `http://localhost/sawProject/client/search?k=${search_input}`;
+    window.location.href = `http://localhost/sawProject/search?k=${search_input}`;
   }
 }

@@ -3,15 +3,18 @@
 // Get the full URL
 $fullUrl = "http://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 
+
 // Define constants
 define("ROOT", str_replace("\\", "/", __DIR__));
-define("BASE_URL", "http://localhost" . str_replace("/src", "", explode("laragon/www", ROOT)[1]));
+define("BASE_URL", "http://" . $_SERVER['HTTP_HOST'] . "/" . explode("/", $_SERVER['REQUEST_URI'])[1]);
 define("ROUTING_URL", strtolower(str_replace(BASE_URL, "", $fullUrl)));
+
 
 // Function to safely require pages
 function requirePage($pagePath)
 {
   $filePath = __DIR__ . $pagePath;
+
   if (file_exists($filePath)) {
     require_once $filePath;
   } else {
