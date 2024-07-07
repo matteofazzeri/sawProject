@@ -35,12 +35,10 @@ if (!isset($_COOKIE["email"])) : ?>
             ?></span><br>
           <label for="username">Username</label>
           <input id="username" type="text" name="username" placeholder="Username">
-          <!--
           <br><span id="err-username" class="error">
             Username not valid or available
             <?php //echo $username_error; 
             ?></span><br>
-          -->
           <label for="password">Password*</label>
           <input id="password" type="password" name="password" placeholder="Password">
           <br><span id="err-password" class="error">

@@ -1,14 +1,13 @@
 <?php
 require __DIR__ . '/../libs/functions.php';
 
-
 display('Head', false, [
   'title' => 'SAW: Login',
   'css' => ['generic', 'navbar', 'forms'],
   'js' => ['config', 'Loaders', 'cart', 'Product', 'login']
 ]);
 display('Navbar');
-if (!isset($_COOKIE["username"])) : ?>
+if (!isset($_COOKIE["email"])) : ?>
   <main>
     <div class="form">
       <h1>SAW: Login</h1><br>
@@ -16,11 +15,11 @@ if (!isset($_COOKIE["username"])) : ?>
       <!-- action="Login.php" method="post" -->
       <form id="login" class="login">
         <fieldset>
-          <label for="username">Username</label>
-          <input id="username" type="text" name="username" placeholder="Username">
-          <br><span id="err-username" class="error">
-            Username not correct
-            <?php //echo $username_error; ?></span><br>
+          <label for="email">Email</label>
+          <input id="email" type="text" name="email" placeholder="Email">
+          <br><span id="err-email" class="error">
+            Email not correct
+            <?php //echo $email_error; ?></span><br>
           <label for="password">Password</label>
           <input id="password" type="password" name="password" placeholder="Password">
           <br><span id="err-pwd" class="error">

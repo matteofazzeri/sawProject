@@ -65,6 +65,14 @@ input[type=password] {
     border-radius: 4px;
 }
 
+input[type=email] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid;
+    border-radius: 4px;
+}
+
 input[type=checkbox] {
     width: 10%;
     padding: 10px;
@@ -87,6 +95,10 @@ input[type=submit]{
 }
 
 
-#err-email, #err-pwd, #err-firstname, #err-lastname, #err-password, #err-confirm{ 
+#err-email, #err-pwd, #err-firstname, #err-username, #err-lastname, #err-password, #err-confirm{ 
     display: none;
+}
+
+.required{
+    color: red;
 }

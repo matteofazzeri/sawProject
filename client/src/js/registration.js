@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const confirmInput = document.getElementById('confirm');
   const errorMsg_firstname = document.getElementById('err-firstname');
   const errorMsg_lastname = document.getElementById('err-lastname');
-  const errorMsg_username = document.getElementById('err-username');
+  const errorMsg_email = document.getElementById('err-email');
+  //const errorMsg_username = document.getElementById('err-username');
   const errorMsg_pwd = document.getElementById('err-password');
   const errorMsg_confirm = document.getElementById('err-confirm');
 
@@ -88,12 +89,14 @@ document.addEventListener('DOMContentLoaded', function () {
       errorMsg_confirm.style.display = "none";
     }
 
-    bodyMessage = {
+    const bodyMessage = {
       firstname: firstname,
       lastname: lastname,
+      email: email,
       username: username,
       password: password,
     };
+    
     console.log(JSON.stringify(bodyMessage));
 
     // If valid, allow form submission (or handle login logic here)
@@ -108,13 +111,10 @@ document.addEventListener('DOMContentLoaded', function () {
         throw new Error(`HTTP error! status: ${response.status}`);
       };
 
-      // form.submit();
+      //form.submit();
     } else {
       // alert('Please fix the errors before submitting.');
     }
-
-
-
 
   });
 });

@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('login');
-    const usernameInput = document.getElementById('username');
+    const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
     const rememberInput = document.getElementById('remember');
-    const errorMsg_username = document.getElementById('err-username');
+    const errorMsg_email = document.getElementById('err-email');
     const errorMsg_pwd = document.getElementById('err-pwd');
 
     // Clear previous error messages
@@ -13,18 +13,18 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault(); // Prevent form from submitting by default
 
         // Validate inputs
-        const username = usernameInput.value;
+        const email = emailInput.value;
         const password = passwordInput.value;
         let valid = true;
 
-        if (username === '' || username === null) {
+        if (email === '' || email === null) {
             valid = false;
-            // errorMsg_username.textContent += 'Username is required. ';
+            // errorMsg_email.textContent += 'email is required. ';
 
-            console.log("username empty");
-            errorMsg_username.style.display = "block";
+            console.log("email empty");
+            errorMsg_email.style.display = "block";
         } else {
-            errorMsg_username.style.display = "none";
+            errorMsg_email.style.display = "none";
         }
 
         if (password === '' || password === null) {
@@ -37,9 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
             errorMsg_pwd.style.display = "none";
         }
 
-        if(rememberInput.checked) localStorage.setItem('username', username);
-        bodyMessage = {
-            username: username,
+        if(rememberInput.checked) localStorage.setItem('email', email);
+        const bodyMessage = {
+            email: email,
             password: password,
         };
         console.log(JSON.stringify(bodyMessage));
@@ -47,19 +47,19 @@ document.addEventListener('DOMContentLoaded', function() {
         // If valid, allow form submission (or handle login logic here)
         if (valid) {
             //alert('Login successful'); // Replace with actual login logic
-            form.submit();
+            const response = await fetch(`${backendUrl.development}l`, {
+                method: "POST",
+                body: JSON.stringify(bodyMessage),
+            });
+    
+            if(!response.ok)
+            {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            };
+            //form.submit();
         } else {
             // alert('Please fix the errors before submitting.');
         }
 
-        const response = await fetch(`${backendUrl.development}l`, {
-            method: "POST",
-            body: JSON.stringify(bodyMessage),
-        });
-
-        if(!response.ok)
-        {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        };
     });
 });
