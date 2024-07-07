@@ -19,14 +19,12 @@ class Cart {
     if (!response.ok) {
 
       if (response.status === 401) {
-        window.location.href = "login";
+        // window.location.href = "login";
       } else if (response.status === 409) {
         document.getElementById(product + "-error").innerHTML = "Errore: Quantità non disponibile";
       } else {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
-
 
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -78,7 +76,7 @@ class Cart {
   }
 
   async downloadCart() {
-    const response = await fetch(`${backendUrl.development}c?uuid=${localStorage.getItem("uuid") || null}`, {
+    const response = await fetch(`${backendUrl.development}c?uuid=${localStorage.getItem("uuid") || 1}`, {
       method: "GET",
     });
 
@@ -116,17 +114,17 @@ class Cart {
 
     loaders.show("loader-" + id_div, "search");
 
-    if (localStorage.getItem("uuid") === null) {
+    /* if (localStorage.getItem("uuid") === null) {
       loaders.hide("loader-" + id_div);
       document.getElementById(id_div).innerHTML = "<h1>You must be logged in to view your cart</h1><p>Redirecting you to login page...</p>";
       document.getElementById(id_div).style.display = "flex";
 
       setTimeout(function () {
-        window.location.href = "login";
+        // window.location.href = "login";
       }, 3000);
 
       return 401;
-    }
+    } */
 
     const timeout = new Promise((resolve, reject) => {
       setTimeout(reject, 1000, 'Request timed out');
@@ -218,14 +216,14 @@ class Checkout extends Cart {
   async renderCheckout() {
 
     if(localStorage.getItem("uuid") === null) {
-      window.location.href = "login";
-      return;
+      //window.location.href = "login";
+      // return;
     }
 
     if (await this.renderCart("checkout") === 404) {
       window.location.href = "cart";
     } else if (await this.renderCart("checkout") === 401) {
-      window.location.href = "login";
+      // window.location.href = "login";
     }
 
     Array.from(document.getElementsByClassName("cart-elem-option")).forEach(function (item) {

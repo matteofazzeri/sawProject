@@ -57,7 +57,7 @@
           </svg>
         </button>
 
-        
+
       </div>
 
       <button onclick="cart.addToCart(this)" class="add-to-cart">Add to cart</button>
@@ -69,7 +69,19 @@
   <section>
     <!-- Prodotti correlati a questo articolo -->
   </section>
-  <section>
+  <section class="review">
     <!-- Recensioni -->
+
+    <div class="review-form">
+
+
+
+    </div>
+
+    <div class="review-list">
+      <h2>Recensioni</h2>
+      <div id="review"></div>
+    </div>
+
   </section>
 </main>

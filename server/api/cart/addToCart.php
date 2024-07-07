@@ -9,7 +9,7 @@ $data = json_decode($postData, true);
 if ($data !== null) {
   // Access the data
   $eid = $data['elem_id'] ?? null;
-  $uuid = $data['uuid'] ?? null;
+  $uuid = $data['uuid'] ?? 1;
   $n_elem = $data['n_elem'] ?? 0;
 } else {
   echo "Error decoding JSON data";

@@ -1,6 +1,6 @@
 <?php
 
-$uuid = $_GET['uuid'] ?? null;
+$uuid = $_GET['uuid'] ?? 1;
 
 $data = getElem("SELECT * FROM shopping_cart as c JOIN spaceships_detail_view as s on c.product_id = s.product_id WHERE c.user_id = :uuid", [
   'uuid' => $uuid,

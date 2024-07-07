@@ -9,13 +9,29 @@ $postData = file_get_contents("php://input");
 // Decode JSON data
 $data = json_decode($postData, true);
 
-if (!isset($data['uuid'])) {
+/* if (!isset($data['uuid'])) {
   echo json_encode(['message' => 'Invalid user data'], JSON_PRETTY_PRINT);
   http_response_code(400);
   exit;
-}
+} */
 
 $uuid = htmlspecialchars(strip_tags($data['uuid']));
+
+$uuid = 1;
+
+/* if (!isLogged()) {
+  echo json_encode(['message' => 'User not logged in'], JSON_PRETTY_PRINT);
+  http_response_code(401);
+  exit;
+} */
+
+// check if the uuid corresponds to the user with the session id
+
+/* if ($_SESSION['uuid'] !== $uuid) {
+  echo json_encode(['message' => 'Invalid user data'], JSON_PRETTY_PRINT);
+  http_response_code(400);
+  exit;
+} */
 
 // get all the items from the cart of the user
 
@@ -25,7 +41,7 @@ $cartItems = getElem(
     JOIN shopping_cart sc 
     ON sdv.product_id = sc.product_id AND sc.user_id = :uuid",
   [
-    'uuid' => $_SESSION['uuid'] ?? 1
+    'uuid' => $uuid,
   ]
 );
 
@@ -50,8 +66,6 @@ foreach ($cartItems as $item) {
     exit;
   }
 }
-
-
 
 // calculate the total amount of the order
 
