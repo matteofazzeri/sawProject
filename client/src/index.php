@@ -78,10 +78,8 @@ switch (true) {
       $productName = strstr($productName, '?', true) ?: $productName;
       $uuid = $_SESSION['uuid'] ?? 1;
 
-      $apiUrl = "http://localhost/sawProject/server/api/e?eid=" . $entityId . "&uuid=" . $uuid;
-      $response = file_get_contents($apiUrl);
-
-      
+      $apiUrl = "http://" . $_SERVER['HTTP_HOST'] . "/" . explode("/", $_SERVER['REQUEST_URI'])[1] ."/server/api/e?eid=" . $entityId . "&uuid=" . $uuid;
+      $response = file_get_contents($apiUrl); // probably need to use cURL for the server side (localhost works fine with file_get_contents())
 
       if ($response !== false) {
         $productData = json_decode($response, true);

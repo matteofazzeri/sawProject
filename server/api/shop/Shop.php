@@ -10,7 +10,7 @@ $requestURL = explode('/', $_SERVER['REQUEST_URI']);
 $URL_lenght = $requestURL[count($requestURL) - 1];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  require __DIR__ . "/addToCart.php";
+  //require __DIR__ . "/add.php";
 } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   require __DIR__ . "/getProduct.php";
 } else if ($_SERVER['REQUEST_METHOD'] === 'PUT') {

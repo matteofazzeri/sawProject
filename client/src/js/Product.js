@@ -8,7 +8,7 @@ class ProductAPI {
       :
       new URLSearchParams(window.location.search).get('k');
 
-    this.toRender = toRender;
+    this.toRender = toRender; // toRender is used to render the product cards in the homepage
   }
 
   async renderProductCards(id_div, currentPage) {
@@ -87,7 +87,7 @@ class ProductAPI {
   // Download product JSON
   async downloadProduct() {
     const response = await fetch(
-      `${backendUrl.development}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${localStorage.getItem("uuid") || null}&x=${this.toRender}`,
+      `${backendUrl.development}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${localStorage.getItem("uuid") || 1}&x=${this.toRender || null}`,
       {
         method: "GET",
       }
@@ -96,8 +96,11 @@ class ProductAPI {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     } else {
-      if (response.status === 204)
+      if (response.status === 204 && this.currentPage !== 1) {
         return -1;
+        } else if (response.status === 204 && this.currentPage === 1) {
+        return [];
+      }
       else
         return await response.json();
     }
@@ -121,17 +124,19 @@ class ProductAPI {
   }
 
   async fillElemPage() {
+
     const url = new URL(window.location.href);
-    const id = url.pathname.split('/')[3];
-    const response = await fetch(`${backendUrl.development}e?eid=${id}&uuid=${localStorage.getItem("uuid") || null}`, {
+    const id = url.pathname.split('/')[2];
+    const response = await fetch(`${backendUrl.development}e?eid=${id}&uuid=${localStorage.getItem("uuid") || 1}`, {
       method: "GET",
     });
+
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     } else {
       const data = (await response.json())[0];
-
+      document.title = data['product_name'];
       document.getElementById("elem-price").innerHTML = data['product_price'] + "$";
       document.getElementById("elem-title").innerHTML = data['product_name'];
       document.getElementById("elem-description").innerHTML = data['product_description'];
@@ -160,3 +165,5 @@ class searchProduct extends ProductAPI {
     window.location.href = `http://localhost/sawProject/search?k=${search_input}`;
   }
 }
+
+const p = new ProductAPI();

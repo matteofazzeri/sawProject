@@ -1,6 +1,5 @@
 p {
   font-weight: 500;
-
   font-size: large;
   letter-spacing: 1px;
 }
@@ -30,7 +29,6 @@ p {
   flex-direction: column;
 
   background-color: white;
-
 }
 .checkout {
   width: 100%;
@@ -132,22 +130,36 @@ p {
   color: black;
 }
 
-.total-price a p,
-.total-price button p {
-  width: 100%;
-  padding: .5vh 2vh;
-  margin-top: 1vh;
-  background-color: #ffd814;
-  border: #fcd200;
-  border-radius: 15px;
-  color: white;
+#btn-checkout {
+  background: #c9eb0b;
+  max-width: 500px;
+  max-height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  color: #333;
   cursor: pointer;
-  text-align: center;
+  transition: all .25s;
+  margin-top: 20px;
 }
 
-.total-price button a {
-  width: 15vw;
-  height: 100%;
-  color: white;
-  background-color: aliceblue;
+#btn-checkout:hover {
+  background: #333;
+  color: #fff;
 }
+
+#btn-checkout:focus {
+  outline: none;
+}
+
+#btn-checkout:disabled, #btn-checkout.disable {
+  background: #ccc;
+  color: #fff;
+  cursor: not-allowed;
+}
+

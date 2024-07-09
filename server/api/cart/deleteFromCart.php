@@ -18,13 +18,22 @@ if (isset($data['deleteAll']) && $data['deleteAll'] === true) {
   insertValue("DELETE FROM shopping_cart WHERE user_id = :uuid", [
     'uuid' => $data['uuid'] ?? null,
   ]);
-  echo json_encode(['message' => 'All items deleted'], JSON_PRETTY_PRINT);
+
+  // echo json_encode(['message' => 'All items deleted'], JSON_PRETTY_PRINT);
+  http_response_code(204);
   exit;
 } else {
-  insertValue("DELETE FROM shopping_cart WHERE user_id = :uuid AND product_id = :prod_id", [
+  if (insertValue("DELETE FROM shopping_cart WHERE user_id = :uuid AND product_id = :prod_id", [
     'uuid' => $data['uuid'] ?? null,
     'prod_id' => $data['prod_id'] ?? null,
-  ]);
-  echo json_encode(['message' => $data['prod_id'] ?? null], JSON_PRETTY_PRINT);
+  ]) === false) {
+    http_response_code(500);
+    exit;
+  }
+
+
+  http_response_code(204);
+
+  //echo json_encode(['message' => $data['prod_id'] ?? null], JSON_PRETTY_PRINT);
   exit;
 }

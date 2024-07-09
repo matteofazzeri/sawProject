@@ -3,8 +3,8 @@ require __DIR__ . '/../libs/functions.php';
 
 display('Head', false, [
     'title' => 'Item Searched',
-    'css' => ['generic', 'navbar', 'productPage'],
-    'js' => ['Product', 'config', 'Loaders', 'cart']
+    'css' => ['generic', 'navbar', 'productPage', 'review'],
+    'js' => ['Product', 'config', 'Loaders', 'cart', 'review']
 ]);
 
 display('Navbar');

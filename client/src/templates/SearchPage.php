@@ -5,11 +5,8 @@
     <div id="searched-elem" class="show-row-4">
       <script>
         let params = new URLSearchParams(window.location.search);
-        let page = params.get('p');
-        const search_input = params.get('s');
-        const p = new Pagination('searched-elem');
-        p.loadItems();
-        const c = new Cart();
+        const page = new Pagination('searched-elem');
+        page.loadItems();
       </script>
     </div>
     <?php

@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="/sawproject/">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
   <?php
   foreach ($css as $key => $link) {
     $link = "client/src/style/" . $link . ".css";
@@ -19,6 +20,8 @@
     echo '<script src=' . $link . '></script>';
   }
   ?>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.4/purify.min.js"></script>
+
 </head>
 
 <body>

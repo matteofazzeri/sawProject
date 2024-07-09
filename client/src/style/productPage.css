@@ -1,3 +1,5 @@
+
+
 .element-page {
   width: 100%;
   min-height: 90vh;
@@ -6,7 +8,7 @@
 
 .elem {
   padding: 5px;
-  height: 600px;
+  height: 90vh;
   background-color: greenyellow;
   display: flex;
   flex-direction: row;

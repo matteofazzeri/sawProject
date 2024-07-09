@@ -6,7 +6,7 @@ class Cart {
   async addProductToCart(product, quantity) {
     const body_message = {
       elem_id: product,
-      uuid: localStorage.getItem("uuid") || null,
+      uuid: localStorage.getItem("uuid") || 1,
       n_elem: quantity,
     };
 
@@ -76,6 +76,7 @@ class Cart {
   }
 
   async downloadCart() {
+
     const response = await fetch(`${backendUrl.development}c?uuid=${localStorage.getItem("uuid") || 1}`, {
       method: "GET",
     });
@@ -94,7 +95,7 @@ class Cart {
 
     const body_message = {
       prod_id: card.id,
-      uuid: localStorage.getItem("uuid") || null,
+      uuid: localStorage.getItem("uuid") || 1,
     };
 
     const response = await fetch(`${backendUrl.development}c`, {
@@ -134,6 +135,8 @@ class Cart {
     var total = 0;
     var numItems = 0;
 
+    var toDisable = false;
+
     try {
       data = await Promise.race([this.downloadCart(), timeout]);
     } catch (error) {
@@ -143,6 +146,7 @@ class Cart {
       document.getElementById(id_div).style.display = "flex";
       return 500;
     }
+
 
     if (Array.isArray(data) && data.length === 0) {
       loaders.hide("loader-" + id_div);
@@ -157,6 +161,10 @@ class Cart {
         .map(function (product) {
           total += product.product_price * product.quantity;
           numItems += product.quantity;
+
+          if (product.product_quantity == 0)
+            toDisable = true;
+
           return `
             <div class="cart-item elem" id="${product.product_id}">
               <div class="image">
@@ -206,6 +214,19 @@ class Cart {
       document.getElementById(id_div).innerHTML = productHTML;
       document.getElementById(id_div).style.display = "flex";
       document.getElementById(id_div + "-total").innerHTML = `Totale (${numItems} articoli): <b>${total.toFixed(2)}€</b> `;
+
+      if (toDisable) {
+        document.getElementById("btn-checkout").disable = true;
+        document.getElementById("btn-checkout").classList.add("disable");
+      }
+    }
+  }
+
+  redirectToCheckOut(e) {
+    if (!e.disable) {
+      window.location.href = "checkout";
+    } else {
+
     }
   }
 }
@@ -213,9 +234,10 @@ class Cart {
 class Checkout extends Cart {
 
 
+
   async renderCheckout() {
 
-    if(localStorage.getItem("uuid") === null) {
+    if (localStorage.getItem("uuid") === null) {
       //window.location.href = "login";
       // return;
     }
@@ -239,7 +261,7 @@ class Checkout extends Cart {
 
 
     const body_message = {
-      uuid: localStorage.getItem("uuid") || null,
+      uuid: localStorage.getItem("uuid") || 1,
     };
 
     const response = await fetch(`${backendUrl.development}c/checkout`, {
@@ -256,8 +278,7 @@ class Checkout extends Cart {
           window.location.href = "cart";
         }, 3000);
       }
-      loaders.hide("loader-checkout");
-      window.location.href = "cart";
+      // window.location.href = "cart";
       throw new Error(`HTTP error! status: ${response.status}`);
     } else {
       loaders.show("loader-checkout", "bubble", "Checkout completed! Redirecting to home page...");
@@ -269,3 +290,5 @@ class Checkout extends Cart {
 
   }
 }
+
+const c = new Cart();

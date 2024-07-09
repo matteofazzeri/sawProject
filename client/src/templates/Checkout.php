@@ -3,14 +3,14 @@
   <div id="checkout" class="checkout">
     <span id="loader-checkout" class="loader"></span>
     <script>
-      const c = new Checkout();
-      c.renderCheckout("checkout");
+      const C = new Checkout();
+      C.renderCheckout("checkout");
     </script>
   </div>
 
   <div class="total-price">
     <p id="checkout-total"></p>
-    <button onclick="c.completeCheckout()">
+    <button onclick="C.completeCheckout()">
       <p>Complete Purchase</p>
     </button>
   </div>
