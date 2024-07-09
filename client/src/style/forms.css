@@ -99,6 +99,10 @@ input[type=submit]{
     display: none;
 }
 
+.password-info{
+    font-size: small;
+}
+
 .required{
     color: red;
 }

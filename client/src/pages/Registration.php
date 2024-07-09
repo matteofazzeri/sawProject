@@ -51,6 +51,7 @@ if (!isset($_COOKIE["email"])) : ?>
             Confirm password not valid
             <?php //echo $confirm_password_error; 
             ?></span><br>
+            <div class="password-info">Password must contain at least 8 characters, including UPPER/lowercase, numbers and special characters.</div><br>
           <p class="required">* = Required fields</p>
           <input type="submit" value="Sign up">
         </fieldset>

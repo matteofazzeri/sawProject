@@ -7,7 +7,13 @@ if (isLogged()) {
   exit();
 }
 
-$firstname = $lastname = $email = $username = $password = $confirm_password = "";
+//$firstname = $lastname = $email = $username = $password = $confirm_password = "";
+$firstname = $bodyMessage['firstname'];
+$lastname = $bodyMessage['lastname'];
+$email = $bodyMessage['email'];
+$username = $bodyMessage['username'];
+$password = $bodyMessage['password'];
+$confirm_password = $bodyMessage['confirm_password'];
 $firstname_error = $lastname_error = $email_error = $username_error = $password_error = $confirm_password_error = $already_registered_error = "";
 
 //Controlla se il form è stato correttamente inviato
@@ -46,15 +52,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   //Validazione username
-  if (empty($_POST["username"])) {
-    $username_error = "username is required";
-  } else {
+  //if (empty($_POST["username"])) {
+    //$username_error = "Username is required";
+  //} else {
     $username = test_input($_POST["username"]);
     //Check con un filtro
     if (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
       $username_error = "Invalid username format";
     }
-  }
+  //}
 
   //Validazione password
   if (empty($_POST["password"])) {

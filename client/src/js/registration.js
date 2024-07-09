@@ -95,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
       email: email,
       username: username,
       password: password,
+      confirm: confirm
     };
     
     console.log(JSON.stringify(bodyMessage));
