@@ -58,8 +58,8 @@ switch (true) {
   case preg_match("#^/registration#", ROUTING_URL):
     requirePage("/pages/Registration.php");
     break;
-  case preg_match("#^/profile#", ROUTING_URL):
-    requirePage("/pages/Profile.php");
+  case preg_match("#^/profile#", ROUTING_URL) or preg_match("#^/show_profile#", ROUTING_URL):
+    requirePage("/pages/show_profile.php");
     break;
   case preg_match("#^/private#", ROUTING_URL):
     requirePage("/pages/PrivateArea.php");

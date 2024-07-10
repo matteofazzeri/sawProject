@@ -27,7 +27,7 @@
 
 <body>
 
-  <div id="cookie-banner" class="cookie-banner">
+  <!-- <div id="cookie-banner" class="cookie-banner">
     <p>Questo sito utilizza cookie per migliorare l'esperienza di navigazione. Continuando a navigare, accetti l'uso dei cookie.</p>
     <a href="https://www.iubenda.com/privacy-policy/87330868" class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe " title="Privacy Policy ">Privacy Policy</a>
     <script type="text/javascript">
@@ -106,4 +106,4 @@
       sessionStorage.setItem('cookiesAccepted', 'false');
       document.getElementById('cookie-banner').style.display = 'none';
     }
-  </script>
+  </script> -->

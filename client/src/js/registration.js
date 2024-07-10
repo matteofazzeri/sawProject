@@ -82,23 +82,22 @@ document.addEventListener('DOMContentLoaded', function () {
       errorMsg_confirm.style.display = "none";
     }
 
-    const bodyMessage = {
-      firstname: firstname,
-      lastname: lastname,
-      email: email,
-      username: username,
-      password: password,
-      confirm: confirm
-    };
-
+    const bodyMessage = new URLSearchParams();
+    bodyMessage.append('firstname', firstname);
+    bodyMessage.append('lastname', lastname);
+    bodyMessage.append('email', email);
+    bodyMessage.append('username', username);
+    bodyMessage.append('pass', password);
+    bodyMessage.append('confirm', confirm);
 
     // If valid, allow form submission (or handle login logic here)
     if (valid) {
-
-      //alert('Login successful'); // Replace with actual login logic
       const response = await fetch(`${backendUrl.development}r`, {
-        method: "POST",
-        body: JSON.stringify(bodyMessage),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: bodyMessage.toString(),
       });
       console.log(response);
       if (!response.ok) {

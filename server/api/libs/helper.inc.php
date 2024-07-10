@@ -3,13 +3,13 @@ include __DIR__ . "/../connection/inc.php";
 
 /* input checker */
 
-function checkPwd($p, $cpass)
-{
-  $lowercase = preg_match("/.*[a-zàèéìòù]+.*/", $p);
-  $uppercase = preg_match("/.*[A-Z]+.*/", $p);
-  $numbers = preg_match("/.*[0-9]+.*/", $p);
-  $character = preg_match("/.*[!|£\$%&=?\^\+-\.,:;_|\*].*/", $p);
-
+/* function checkPwd($p, $cpass)
+{ */
+//$lowercase = preg_match("/.*[a-zàèéìòù]+.*/", $p);
+//$uppercase = preg_match("/.*[A-Z]+.*/", $p);
+//$numbers = preg_match("/.*[0-9]+.*/", $p);
+//$character = preg_match("/.*[!|£\$%&=?\^\+-\.,:;_|\*].*/", $p);
+/* 
   if (strlen($p) < 8) {
     http_response_code(400);
     echo "Password must be at least 8 characters long.";
@@ -39,7 +39,29 @@ function checkPwd($p, $cpass)
   http_response_code(400);
   echo "Invalid password format.";
   exit;
+} */
+
+function checkPwd($p, $cpass)
+{
+  // Regex pattern to match allowed characters
+  $pattern = '/^[0-9A-Za-z!@&%$*#]{8,}$/';
+
+  // Check if password matches pattern
+  if (preg_match($pattern, $p)) {
+    // Check if passwords match
+    if ($p !== $cpass) {
+      http_response_code(400);
+      echo "Passwords do not match.";
+      exit;
+    }
+    return true;
+  } else {
+    http_response_code(400);
+    echo "Password must be at least 8 characters long and can only contain the following characters: 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@&%$*#";
+    exit;
+  }
 }
+
 
 function nameCheck($data): bool
 {
@@ -101,7 +123,7 @@ function checkAll($fullname, $email, $username, $pwd, $cpwd): bool
 function isLogged(): bool
 {
   if (isset($_SESSION["uuid"])) {
-      return true;
+    return true;
   }
 
   //! connect to the database and check if the user is registered

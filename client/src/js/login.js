@@ -34,18 +34,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // if (rememberInput.checked) localStorage.setItem('email', email);
 
-    const bodyMessage = {
-      email: email,
-      password: password,
-      remember: remember,
-    };
+    const bodyMessage = new URLSearchParams();
+    bodyMessage.append('email', email);
+    bodyMessage.append('pass', password);
+    bodyMessage.append('remember', remember);
 
-    // console.log(JSON.stringify(bodyMessage)); 
+    // console.log(bodyMessage.toString());
 
     if (valid) {
       const response = await fetch(`${backendUrl.development}l`, {
-        method: "POST",
-        body: JSON.stringify(bodyMessage),
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: bodyMessage.toString(),
       });
 
       if (!response.ok) {

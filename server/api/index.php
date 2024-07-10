@@ -21,14 +21,12 @@ if ($requestURL[0] == "r") {
   require __DIR__ . "/forms/Registration.php";
 } else if ($requestURL[0] == "l") {
   require __DIR__ . "/forms/Login.php";
-} else if ($requestURL[0] == "p") {
+} else if ($requestURL[0] == "p" or preg_match("#^show_profile.php#", $requestURL)) {
   require __DIR__ . "/forms/Profile.php";
 } else if ($requestURL[0] == "s") {
   require __DIR__ . "/shop/Shop.php";
 } else if ($requestURL[0] == "h") {
   require __DIR__ . "/home/home.php";
-} else if (strpos($requestURL, "users")) {
-  // TODO: all the request for users data
 } else if ($requestURL[0] == "e") {
   require __DIR__ . "/shop/GetElem.php";
 } else if ($requestURL[0] == "c") {

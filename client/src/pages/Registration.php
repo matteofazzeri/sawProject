@@ -13,7 +13,7 @@ if (!isset($_COOKIE["email"])) : ?>
       <h1>SAW: Sign up</h1><br>
       <p>Already have an account? <a class="linkform" href="Login.php">Login now!</a></p><br>
       <!-- action="Registration.php" method="post" -->
-      <form id="registration" class="registration">
+      <form id="registration" class="registration" action="">
         <fieldset>
           <label for="firstname">First name*</label>
           <input id="firstname" type="text" name="firstname" placeholder="First name">
@@ -31,8 +31,8 @@ if (!isset($_COOKIE["email"])) : ?>
           <input id="username" type="text" name="username" placeholder="Username">
           <br><span id="err-username" class="error">Username not valid or available</span><br>
 
-          <label for="password">Password*</label>
-          <input id="password" type="password" name="password" placeholder="Password">
+          <label for="pass">Password*</label>
+          <input id="password" type="password" name="pass" placeholder="Password">
           <br><span id="err-password" class="error">Password not valid</span><br>
 
           <label for="confirm">Confirm password*</label>
@@ -41,7 +41,7 @@ if (!isset($_COOKIE["email"])) : ?>
 
           <div class="password-info">Password must contain at least 8 characters, including UPPER/lowercase, numbers and special characters.</div><br>
           <p class="required">* = Required fields</p>
-          <input type="submit" value="Sign up">
+          <input type="submit" name="submit" value="Sign up">
         </fieldset>
       </form>
     </div>
