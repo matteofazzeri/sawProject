@@ -87,7 +87,7 @@ class ProductAPI {
   // Download product JSON
   async downloadProduct() {
     const response = await fetch(
-      `${backendUrl.development}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${localStorage.getItem("uuid") || 1}&x=${this.toRender || null}`,
+      `${backendUrl.development}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${sessionStorage.getItem("email") || null}&x=${this.toRender || null}`,
       {
         method: "GET",
       }
@@ -127,7 +127,7 @@ class ProductAPI {
 
     const url = new URL(window.location.href);
     const id = url.pathname.split('/')[2];
-    const response = await fetch(`${backendUrl.development}e?eid=${id}&uuid=${localStorage.getItem("uuid") || 1}`, {
+    const response = await fetch(`${backendUrl.development}e?eid=${id}&uuid=${sessionStorage.getItem("email") || null}`, {
       method: "GET",
     });
 

@@ -12,6 +12,6 @@ echo json_encode(getElem(
     WHERE sdv.product_id LIKE :eid",
   [
     'eid' => $eid,
-    'uuid' => $_SESSION['uuid'] ?? 1
+    'uuid' => $_SESSION['uuid'] ?? null
   ]
 ));

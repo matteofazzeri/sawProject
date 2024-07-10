@@ -1,6 +1,6 @@
 <?php
 
-include("./libs/helper.inc.php");
+include __DIR__ . "/../libs/helper.inc.php";
 
 /* if (isLogged()) {
   header("Location: Home.php");

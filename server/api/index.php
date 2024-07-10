@@ -5,6 +5,7 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type");
 
+session_start();
 
 $requestURL = "http://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 
@@ -12,6 +13,8 @@ $requestURL = "http://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . explode("/", $_SERVER['REQUEST_URI'])[1] . "/server/api/";
 
 $requestURL = str_replace($base_url, "", $requestURL);
+
+
 
 // TODO: send request to form.php file 
 if ($requestURL[0] == "r") {

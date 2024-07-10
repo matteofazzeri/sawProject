@@ -17,15 +17,14 @@ if (!isset($_COOKIE["email"])) : ?>
         <fieldset>
           <label for="email">Email</label>
           <input id="email" type="text" name="email" placeholder="Email">
-          <br><span id="err-email" class="error">
-            Email not correct
-            <?php //echo $email_error; ?></span><br>
+          <br><span id="err-email" class="error">Email not correct</span><br>
+          
           <label for="password">Password</label>
           <input id="password" type="password" name="password" placeholder="Password">
-          <br><span id="err-pwd" class="error">
-            Password not correct
-            <?php //echo $password_error; ?></span><br>
+          <br><span id="err-pwd" class="error">Password not correct</span><br>
+          
           <input id="remember" type="checkbox" name="remember" value="1">Remember me<br>
+          
           <input type="submit" value="Login">
         </fieldset>
       </form>

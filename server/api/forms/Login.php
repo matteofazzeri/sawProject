@@ -1,6 +1,7 @@
 <?php
 
-//include("./libs/helper.inc.php");
+
+include __DIR__ . "/../libs/helper.inc.php";
 
 /*
 if (isLogged()) {
@@ -9,27 +10,22 @@ if (isLogged()) {
 }
   */
 
-$email = $pass = $remember = "";
+/* $email = $pass = $remember = "";
 $email_error = $password_error = "";
-session_start();
+session_start(); */
 
 //Controlla se il form è stato correttamente inviato
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $email = $_POST["email"];
-  $pass = $_POST["pass"];
-  $remember = $_POST["remember"];
-  $email_error = $password_error = "";
+  // Read raw POST data
+  $postData = file_get_contents("php://input");
+  // Decode JSON data
+  $bodyMessage = json_decode($postData, true);
 
-  if (empty($email)) {
-    $email_error = "Email is required";
-  }
-  if (empty($pass)) {
-    $password_error = "Password is required";
-  }
+  $email = $bodyMessage["email"];
+  $pass = $bodyMessage["password"];
+  $remember = $bodyMessage["remember"];
 
-  include __DIR__ . "/../connection/inc.php";
-
-  //Controlla che l'utente sia registrato
+  /* //Controlla che l'utente sia registrato
   if (empty($email_error) && empty($password_error)) {
     $select = "SELECT * FROM users WHERE email = '$email'";
     if (mysqli_num_rows(mysqli_query($con, $select)) == 0) {
@@ -58,5 +54,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $con->close();
       }
     }
+  } */
+
+  $user = getElem("SELECT * FROM users WHERE email = :email", [
+    'email' => $email,
+  ]);
+
+  if (empty($user)) {
+    echo json_encode(["message" => "Looks like you're not registered yet."]);
+    http_response_code(401);
+    exit;
+  }
+
+  if (password_verify($pass, $user[0]['password_hash'])) {
+    //Il login ha successo
+    session_start();
+    $_SESSION["uuid"] = id($email);
+    if ($remember) {
+      setcookie("email", $email, time() + (86400 * 30), "/");
+    }
+    echo json_encode(["message" => "Login successful"]);
+    http_response_code(200);
+    exit;
+  } else {
+    //Il login fallisce, quindi mostro un messaggio di errore
+    echo json_encode(["message" => "Invalid email or password"]);
+    http_response_code(401);
+    exit;
   }
 }

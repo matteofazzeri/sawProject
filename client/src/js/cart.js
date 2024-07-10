@@ -6,7 +6,7 @@ class Cart {
   async addProductToCart(product, quantity) {
     const body_message = {
       elem_id: product,
-      uuid: localStorage.getItem("uuid") || 1,
+      uuid: sessionStorage.getItem("email") || null,
       n_elem: quantity,
     };
 
@@ -77,7 +77,7 @@ class Cart {
 
   async downloadCart() {
 
-    const response = await fetch(`${backendUrl.development}c?uuid=${localStorage.getItem("uuid") || 1}`, {
+    const response = await fetch(`${backendUrl.development}c?uuid=${sessionStorage.getItem("email") || null}`, {
       method: "GET",
     });
 
@@ -95,7 +95,7 @@ class Cart {
 
     const body_message = {
       prod_id: card.id,
-      uuid: localStorage.getItem("uuid") || 1,
+      uuid: sessionStorage.getItem("email") || null,
     };
 
     const response = await fetch(`${backendUrl.development}c`, {
@@ -113,9 +113,15 @@ class Cart {
 
   async renderCart(id_div) {
 
+    // check if the user is logged in
+
+    if(sessionStorage.getItem("email") === null) {
+      window.location.href = "login";
+    }
+
     loaders.show("loader-" + id_div, "search");
 
-    /* if (localStorage.getItem("uuid") === null) {
+    /* if (sessionStorage.getItem("email") === null) {
       loaders.hide("loader-" + id_div);
       document.getElementById(id_div).innerHTML = "<h1>You must be logged in to view your cart</h1><p>Redirecting you to login page...</p>";
       document.getElementById(id_div).style.display = "flex";
@@ -237,7 +243,7 @@ class Checkout extends Cart {
 
   async renderCheckout() {
 
-    if (localStorage.getItem("uuid") === null) {
+    if (sessionStorage.getItem("email") === null) {
       //window.location.href = "login";
       // return;
     }
@@ -261,7 +267,7 @@ class Checkout extends Cart {
 
 
     const body_message = {
-      uuid: localStorage.getItem("uuid") || 1,
+      uuid: sessionStorage.getItem("email") || null,
     };
 
     const response = await fetch(`${backendUrl.development}c/checkout`, {
@@ -274,9 +280,9 @@ class Checkout extends Cart {
 
       if (response.status === 409) {
         loaders.show("loader-checkout", "bubble", "Checkout Failed! Redirecting to the cart...");
-        setTimeout(function () {
+        /* setTimeout(function () {
           window.location.href = "cart";
-        }, 3000);
+        }, 3000); */
       }
       // window.location.href = "cart";
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -284,9 +290,9 @@ class Checkout extends Cart {
       loaders.show("loader-checkout", "bubble", "Checkout completed! Redirecting to home page...");
     }
 
-    setTimeout(function () {
+    /* setTimeout(function () {
       window.location.href = "";
-    }, 3000);
+    }, 3000); */
 
   }
 }

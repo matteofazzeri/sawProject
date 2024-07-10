@@ -1,5 +1,5 @@
 <?php
-include './connection/inc.php';
+include __DIR__ . "/../connection/inc.php";
 
 /* input checker */
 
@@ -100,8 +100,7 @@ function checkAll($fullname, $email, $username, $pwd, $cpwd): bool
 
 function isLogged(): bool
 {
-  if (isset($_SESSION["logged"])) {
-    if ($_SESSION['logged'])
+  if (isset($_SESSION["uuid"])) {
       return true;
   }
 

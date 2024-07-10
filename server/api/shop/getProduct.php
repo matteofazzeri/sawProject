@@ -3,7 +3,7 @@
 $page = $_GET['page'] ?? 1;
 $items_per_page = $_GET['nElem'] ?? 16;
 $searchedElem = $_GET['k'] ?? '';
-$uuid = isset($_SESSION['uuid']) && $_SESSION['uuid'] == $_GET['uuid'] ? $_GET['uuid'] : 1;
+$uuid = isset($_SESSION['uuid']) && $_SESSION['uuid'] == id($_GET['uuid']) ? $_SESSION['uuid'] : 1;
 
 
 // check if the user is logged in and get the user id
@@ -21,7 +21,7 @@ $data = getElem(
     WHERE sdv.product_name LIKE :searchElem",
   [
     'searchElem' => "%$searchedElem%",
-    'uuid' => $uuid
+    'uuid' => $uuid,
   ]
 );
 
