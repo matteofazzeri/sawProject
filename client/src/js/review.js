@@ -46,7 +46,7 @@ class Review {
     };
 
     // make the fetch request
-    const response = await fetch(`${backendUrl.development}c/checkout`, {
+    const response = await fetch(`${backendUrl.development}p/review`, {
       method: "POST",
       body: JSON.stringify(body_message),
     });

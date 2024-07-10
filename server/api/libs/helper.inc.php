@@ -10,7 +10,11 @@ function checkPwd($p, $cpass)
   $numbers = preg_match("/.*[0-9]+.*/", $p);
   $character = preg_match("/.*[!|£\$%&=?\^\+-\.,:;_|\*].*/", $p);
 
-  if (strlen($p) < 8) return false;
+  if (strlen($p) < 8) {
+    http_response_code(400);
+    echo "Password must be at least 8 characters long.";
+    exit;
+  }
   if ($lowercase || $uppercase || $numbers || $character) {
     if (
       ($lowercase && $uppercase) || ($lowercase && $numbers) || ($lowercase && $character) ||
@@ -23,32 +27,51 @@ function checkPwd($p, $cpass)
         if ($lowercase && $uppercase && $numbers && $character) {
           // se pass e cpass non sono uguali, impossible registrarsi nel sito
           if ($p != $cpass) {
-            return false;
+            http_response_code(400);
+            echo "Passwords do not match.";
+            exit;
           }
           return true;
         }
       }
     }
   }
-  return false;
+  http_response_code(400);
+  echo "Invalid password format.";
+  exit;
 }
 
 function nameCheck($data): bool
 {
-  if (preg_match("/^.\d.$/", $data)) {
-    echo "why tf u have a number in your name man!";
+  if (preg_match("/^(([a-zA-Z]+[àèéìòù]*\s+)+([a-zA-Z]+[àèéìòù]*\s*)|\b\d{4,}\b)$/", $data)) {
+    return true;
+  } else {
+    http_response_code(400);
+    echo "Invalid name format.";
+    exit;
   }
-  return preg_match("/([a-zA-Z]+[àèéìòù]*\s+)+([a-zA-Z]+[àèéìòù]*\s*)/", $data);
 }
 
 function checkEmail($data): bool
 {
-  return preg_match("/^[a-zA-Z\d\.]+@[a-zA-Z\d]+\.[a-z]{2,3}$/", $data);
+  if (preg_match("/^[a-zA-Z\d](?:[a-zA-Z\d]|(?:[a-zA-Z\d]\.[a-zA-Z\d]))*[a-zA-Z\d]@[a-zA-Z\d]+(?:\.[a-zA-Z\d]+)*\.[a-zA-Z]{2,}$/", $data)) {
+    return true;
+  } else {
+    http_response_code(400);
+    echo "Invalid email format.";
+    exit;
+  }
 }
 
 function checkUsername($data): bool
 {
-  return preg_match("/^[Ss][0-9]{7}$/", $data);
+  if (preg_match("/^[a-zA-Z0-9]*$/", $data) || empty($data) || $data == "") {
+    return true;
+  } else {
+    http_response_code(400);
+    echo "Invalid username format.";
+    exit;
+  }
 }
 
 function userExists($email): bool
@@ -61,13 +84,17 @@ function userExists($email): bool
     ]
   );
 
-  if (!empty($res))  return true;
+  if (!empty($res)) {
+    http_response_code(400);
+    echo "User already exists.";
+    exit;
+  }
   return false;
 }
 
-function checkAll($firstname, $lastname, $email, $username, $pwd, $cpwd): bool
+function checkAll($fullname, $email, $username, $pwd, $cpwd): bool
 {
-  return namecheck($firstname) and namecheck($lastname) and checkEmail($email) and checkUsername($username)
+  return namecheck($fullname) and checkEmail($email) and checkUsername($username)
     and checkPwd($pwd, $cpwd) and !userExists($email || $username);
 }
 

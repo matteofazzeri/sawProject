@@ -183,6 +183,7 @@ CREATE TABLE IF NOT EXISTS
     user_id INT,
     product_id INT,
     rating INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
+    title VARCHAR(255) NOT NULL,
     comment TEXT,
     review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users (id),
