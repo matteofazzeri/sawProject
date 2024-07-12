@@ -3,11 +3,14 @@
 // Get the full URL
 $fullUrl = "http://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 
-
 // Define constants
 define("ROOT", str_replace("\\", "/", __DIR__));
 define("BASE_URL", "http://" . $_SERVER['HTTP_HOST'] . "/" . explode("/", $_SERVER['REQUEST_URI'])[1]);
 define("ROUTING_URL", strtolower(str_replace(BASE_URL, "", $fullUrl)));
+
+include __DIR__ . "/libs/functions.php";
+
+session_start();
 
 
 // Function to safely require pages
@@ -25,6 +28,37 @@ function requirePage($pagePath)
 
 // Routing the URL
 switch (true) {
+
+    /*
+  ! start switch cases for routing the URL of the automatic test
+  */
+  case preg_match("#^/login.php.*$#", ROUTING_URL):
+    // reRoute(BASE_URL . '/server/api/login.php');
+    include __DIR__ . "/../../server/api/forms/Login.php";
+    break;
+
+  case preg_match("#^/registration.php.*$#", ROUTING_URL):
+    // reRoute(BASE_URL . '/server/api/registration.php');
+    include __DIR__ . "/../../server/api/forms/registration.php";
+    break;
+
+  case preg_match("#^/show_profile.php.*$#", ROUTING_URL):
+    // reRoute(BASE_URL . '/server/api/show_profile.php');
+    include __DIR__ . "/../../server/api/forms/Profile.php";
+    break;
+
+  case preg_match("#^/logout.php.*$#", ROUTING_URL):
+    // reRoute(BASE_URL . '/server/api/show_profile.php');
+    include __DIR__ . "/../../server/api/forms/logout.php";
+
+    
+    break;
+
+
+    /* 
+    ?end of switch cases for routing the URL of the automatic test
+    */
+
   case preg_match("#^/admin.*$#", ROUTING_URL):
     requirePage("/pages/PrivateArea.php");
     break;
@@ -78,7 +112,7 @@ switch (true) {
       $productName = strstr($productName, '?', true) ?: $productName;
       $uuid = $_SESSION['uuid'] ?? 1;
 
-      $apiUrl = "http://" . $_SERVER['HTTP_HOST'] . "/" . explode("/", $_SERVER['REQUEST_URI'])[1] ."/server/api/e?eid=" . $entityId . "&uuid=" . $uuid;
+      $apiUrl = "http://" . $_SERVER['HTTP_HOST'] . "/" . explode("/", $_SERVER['REQUEST_URI'])[1] . "/server/api/e?eid=" . $entityId . "&uuid=" . $uuid;
       $response = file_get_contents($apiUrl); // probably need to use cURL for the server side (localhost works fine with file_get_contents())
 
       if ($response !== false) {

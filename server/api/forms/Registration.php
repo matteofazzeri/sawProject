@@ -40,10 +40,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   //Appena registrato sei loggato
-  $uuid = insertValue("INSERT INTO users (username, email, password_hash, full_name ) VALUES (:username, :email, :password, :name)", [
-    'username' => test_input($_POST['username']),
+  /* $uuid = insertValue("INSERT INTO users (username, email, password_hash, full_name ) VALUES (:username, :email, :password, :name)", [
+    'username' => test_input($_POST['username'] ?? $_POST['email']),
     'email' => test_input($_POST['email']),
-    'password' => password_hash($_POST['password'], PASSWORD_BCRYPT),
+    'password' => password_hash($_POST['pass'], PASSWORD_BCRYPT),
     'name' => test_input($_POST['firstname'] . " " . $_POST['lastname'])
   ], true);
 
@@ -51,9 +51,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     http_response_code(500); // Set the response code to 500 Internal Server Error
     echo json_encode(['error' => 'Failed to register user']);
   } else {
+    $_SESSION['uuid'] = $uuid;
     http_response_code(200); // Set the response code to 200 OK
-    echo json_encode(['uuid' => $uuid]);
-  }
+    echo json_encode(['uuid' => $uuid, 'message' => 'Registration successful']);
+  } */
 
   exit;
 }
