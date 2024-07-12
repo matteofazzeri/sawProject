@@ -98,7 +98,7 @@ class ProductAPI {
     } else {
       if (response.status === 204 && this.currentPage !== 1) {
         return -1;
-        } else if (response.status === 204 && this.currentPage === 1) {
+      } else if (response.status === 204 && this.currentPage === 1) {
         return [];
       }
       else
@@ -162,7 +162,8 @@ class searchProduct extends ProductAPI {
   search = () => {
     const search_input = encodeURIComponent(document.querySelector("input").value);
 
-    window.location.href = `http://localhost/sawProject/search?k=${search_input}`;
+    search_input === "" ?
+      null : window.location.href = `http://localhost/sawProject/search?k=${search_input}`;
   }
 }
 

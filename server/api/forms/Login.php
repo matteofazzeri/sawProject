@@ -24,9 +24,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (password_verify($pass, $user[0]['password_hash'])) {
     //Il login ha successo
     if(!isset($_SESSION["uuid"])) $_SESSION["uuid"] = id($email);
+
+
+    //Genero un token di sessione
+    generateSessionToken();
+
+    //Salvo il token di sessione nel database
+
+    $result = insertValue("INSERT INTO sessions (session_token, user_id, keep_logged, expiration_date) VALUES (:token, :user_id, :keep_logged, :expiration_date);", [
+      'token' => $_SESSION["session_token"],
+      'user_id' => $_SESSION["uuid"],
+      'keep_logged' => $remember ? 1 : 0,
+      'expiration_date' => $remember ? date('Y-m-d H:i:s', time() + 86400 * 30) : date('Y-m-d H:i:s', time() + 86400)
+    ]);
+
+
+
     if ($remember) {
-      setcookie("email", $email, time() + (86400 * 30), "/");
+      setcookie("rmbme", $user[0]['session_token'], time() + (86400 * 30), "/");
     }
+
+
+
     echo json_encode(["message" => "Login successful"]);
     http_response_code(200);
     exit;

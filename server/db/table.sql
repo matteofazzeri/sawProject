@@ -211,6 +211,7 @@ CREATE TABLE IF NOT EXISTS
     user_id INT,
     session_token VARCHAR(255) PRIMARY KEY NOT NULL,
     expiration_date TIMESTAMP NOT NULL,
+    remember_me BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (user_id) REFERENCES users (id),
     UNIQUE(user_id, session_token)
   ); 

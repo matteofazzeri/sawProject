@@ -44,10 +44,8 @@ switch (true) {
     include __DIR__ . "/../../server/api/forms/Profile.php";
     break;
 
-  case preg_match("#^/logout.php.*$#", ROUTING_URL):
+  case preg_match("#^/logout.php.*$#", ROUTING_URL) or preg_match("#^/logout.*$#", ROUTING_URL):
     include __DIR__ . "/../../server/api/forms/logout.php";
-
-    
     break;
 
 
@@ -58,7 +56,7 @@ switch (true) {
   case preg_match("#^/admin.*$#", ROUTING_URL):
     requirePage("/pages/PrivateArea.php");
     break;
-  case preg_match("#^/$#", ROUTING_URL):
+  case preg_match("#^/$#", ROUTING_URL) or preg_match("#^/home(\?.*)?$#", ROUTING_URL):
     requirePage("/pages/Home.php");
     break;
   case preg_match("#^/search(\?.*)?$#", ROUTING_URL):

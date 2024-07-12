@@ -127,10 +127,10 @@ function isLogged(): bool
   }
 
   //! connect to the database and check if the user is registered
-  $result = getElem(
+  /* $result = getElem(
     "SELECT keep_logged, expiration_date, user_id FROM sessions WHERE session_token = :token_cookie;",
     ['token_cookie' => $_COOKIE['rmbme'] ?? 'null']
-  );
+  ); */
 
   if (!empty($result)) {
     /* check if the keep_logged flag is 1 (true) */
@@ -154,10 +154,11 @@ function isAdmin(): bool
   }
 
   //! connect to the database and check if the user is registered
-  $result = getElem(
+  //? we don't have an admin table in the database, don't need that know
+  /* $result = getElem(
     "SELECT is_admin FROM admin WHERE users_id = :id;",
     ['id' => $_SESSION['id'] ?? 'null']
-  );
+  ); */
 
   // check if the user is logged
 
@@ -165,7 +166,7 @@ function isAdmin(): bool
     $_SESSION['admin'] = true;
     return isAdmin();
   }
-  return true;
+  return false;
 }
 
 function id($data): string
@@ -186,4 +187,8 @@ function dbInfo($id, $toFind): string
 
   if (!empty($res))  return $res[0][$toFind];
   return 'Unknown';
+}
+
+function generateSessionToken($length = 32) {
+  return bin2hex(random_bytes($length / 2));
 }

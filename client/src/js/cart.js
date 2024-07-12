@@ -280,9 +280,9 @@ class Checkout extends Cart {
 
       if (response.status === 409) {
         loaders.show("loader-checkout", "bubble", "Checkout Failed! Redirecting to the cart...");
-        /* setTimeout(function () {
+        setTimeout(function () {
           window.location.href = "cart";
-        }, 3000); */
+        }, 3000);
       }
       // window.location.href = "cart";
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -290,9 +290,9 @@ class Checkout extends Cart {
       loaders.show("loader-checkout", "bubble", "Checkout completed! Redirecting to home page...");
     }
 
-    /* setTimeout(function () {
+    setTimeout(function () {
       window.location.href = "";
-    }, 3000); */
+    }, 3000);
 
   }
 }

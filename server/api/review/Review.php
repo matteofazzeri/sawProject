@@ -1,5 +1,6 @@
 <?php
-include __DIR__ . "/../connection/inc.php";
+include __DIR__ . "/../libs/helper.inc.php";
+
 
 
 $requestURL = explode('/', $_SERVER['REQUEST_URI']);

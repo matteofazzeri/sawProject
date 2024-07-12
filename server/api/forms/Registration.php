@@ -26,11 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     die;
   }
 
-  if (insertValue("INSERT INTO users (username, email, password_hash, full_name ) VALUES (:username, :email, :password, :name)", [
+  if (insertValue("INSERT INTO users (username, email, password_hash, first_name, last_name ) VALUES (:username, :email, :password, :firstname, :lastname)", [
     'username' => test_input($_POST['username'] ?? $_POST['email']),
     'email' => test_input($_POST['email']),
     'password' => password_hash($_POST['pass'], PASSWORD_BCRYPT),
-    'name' => test_input($_POST['firstname'] . " " . $_POST['lastname'])
+    'firstname' => test_input($_POST['lastname']),
+    'lastname' => test_input($_POST['lastname'])
   ])) {
     http_response_code(200); // Set the response code to 200 OK
     echo json_encode(['message' => 'Registration successful']);

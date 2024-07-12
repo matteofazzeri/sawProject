@@ -11,7 +11,7 @@ if (!isset($_COOKIE["email"])) : ?>
   <main>
     <div class="form">
       <h1>SAW: Sign up</h1><br>
-      <p>Already have an account? <a class="linkform" href="Login.php">Login now!</a></p><br>
+      <p>Already have an account? <a class="linkform" href="login">Login now!</a></p><br>
       <!-- action="Registration.php" method="post" -->
       <form id="registration" class="registration" action="">
         <fieldset>
@@ -47,7 +47,7 @@ if (!isset($_COOKIE["email"])) : ?>
       </form>
     </div>
   <?php else :
-  header("Location: Home.php");
+  //header("Location: Home.php");
 
 endif;
   ?>
