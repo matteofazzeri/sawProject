@@ -33,22 +33,18 @@ switch (true) {
   ! start switch cases for routing the URL of the automatic test
   */
   case preg_match("#^/login.php.*$#", ROUTING_URL):
-    // reRoute(BASE_URL . '/server/api/login.php');
     include __DIR__ . "/../../server/api/forms/Login.php";
     break;
 
   case preg_match("#^/registration.php.*$#", ROUTING_URL):
-    // reRoute(BASE_URL . '/server/api/registration.php');
     include __DIR__ . "/../../server/api/forms/registration.php";
     break;
 
   case preg_match("#^/show_profile.php.*$#", ROUTING_URL):
-    // reRoute(BASE_URL . '/server/api/show_profile.php');
     include __DIR__ . "/../../server/api/forms/Profile.php";
     break;
 
   case preg_match("#^/logout.php.*$#", ROUTING_URL):
-    // reRoute(BASE_URL . '/server/api/show_profile.php');
     include __DIR__ . "/../../server/api/forms/logout.php";
 
     
