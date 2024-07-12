@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
         throw new Error(`HTTP error! status: ${response.status}`);
       } else {
         console.log("Login successful"); 
+        window.location.href = "";
         sessionStorage.setItem('email', email);
       }
     }
