@@ -40,12 +40,16 @@ class Review {
     // Add the review to the reviews array
     const bodyMessage = new URLSearchParams();
     bodyMessage.append('title', title);
-    bodyMessage.append('text', text);
-    bodyMessage.append('stars', stars);
-    bodyMessage.append('productId', 1);
+    bodyMessage.append('review', text);
+    bodyMessage.append('rating', stars);
+
+    // get element id from _GET
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('eid');
+    bodyMessage.append('eid', productId);
 
     // make the fetch request
-    const response = await fetch(`${backendUrl.development}p/review`, {
+    const response = await fetch(`${backendUrl.development}e/review`, {
       method: "POST",
       headers: {
       "Content-Type": "application/x-www-form-urlencoded"

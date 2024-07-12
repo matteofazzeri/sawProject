@@ -1,11 +1,78 @@
 <?php
 
-// Read raw POST data
-$postData = file_get_contents("php://input");
+if (!isLogged()) {
+  echo json_encode(array("error" => "You must be logged in to add a review"));
+  exit;
+}
 
-// Decode JSON data
-$data = json_decode($postData, true);
+if (!isset($_POST['eid']) || !isset($_POST['title']) || !isset($_POST['rating'])) {
+  echo json_encode(array("error" => "Missing parameters" . json_encode($_POST)));
+  http_response_code(400);
+  exit;
+}
 
-if (!isset($data['title']) || !isset($data['stars'])) {
-  
+$eid = $_POST['eid'];
+$title = $_POST['title'];
+$rating = $_POST['rating'];
+$description = $_POST['review'] ?? null;
+
+if (!is_numeric($eid) || !is_numeric($rating)) {
+  echo json_encode(array("error" => "Invalid parameters"));
+  http_response_code(400);
+  exit;
+}
+
+if ($rating < 1 || $rating > 5) {
+  echo json_encode(array("error" => "Rating must be between 1 and 5"));
+  http_response_code(400);
+  exit;
+}
+
+$uuid = $_SESSION['uuid'];
+
+// check if user purchased the element 
+
+$item = getElem("SELECT id FROM order_items AS oi WHERE oi.product_id = :eid AND oi.order_id IN 
+                (SELECT id FROM `orders` AS o WHERE o.user_id = :uuid);", [
+  "eid" => $eid,
+  "uuid" => $uuid
+]);
+
+if (!$item) {
+  echo json_encode(array("error" => "An error occurred while checking if the user purchased the item"));
+  http_response_code(500);
+  exit;
+} else if (count($item) == 0) {
+  echo json_encode(array("error" => "You must purchase the item to review it"));
+  http_response_code(403);
+  exit;
+}
+
+// check if user already reviewed the element
+
+if (count(getElem("SELECT id FROM reviews WHERE product_id = :eid AND user_id = :uuid", [
+  "eid" => $eid,
+  "uuid" => $uuid
+])) > 0) {
+  echo json_encode(array("error" => "You already reviewed this item"));
+  http_response_code(403);
+  exit;
+}
+
+// insert review
+
+if (insertValue("INSERT INTO reviews (product_id, user_id, title, rating, comment) VALUES (:eid, :uuid, :title, :rating, :description)", [
+  "eid" => $eid,
+  "uuid" => $uuid,
+  "title" => $title,
+  "rating" => $rating,
+  "description" => $description
+])) {
+  echo json_encode(array("success" => "Review added successfully"));
+  http_response_code(200);
+  exit;
+} else {
+  echo json_encode(array("error" => "An error occurred while adding the review"));
+  http_response_code(500);
+  exit;
 }

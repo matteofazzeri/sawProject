@@ -126,8 +126,8 @@ class ProductAPI {
   async fillElemPage() {
 
     const url = new URL(window.location.href);
-    const id = url.pathname.split('/')[2];
-    const response = await fetch(`${backendUrl.development}e?eid=${id}&uuid=${sessionStorage.getItem("email") || null}`, {
+    const eid = url.pathname.split('/')[2];
+    const response = await fetch(`${backendUrl.development}e?eid=${eid}`, {
       method: "GET",
     });
 

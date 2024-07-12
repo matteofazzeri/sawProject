@@ -11,8 +11,6 @@ if (!isLogged()) {
   http_response_code(401);
 }
 
-
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   require __DIR__ . "/addToCart.php";
 } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {

@@ -28,7 +28,11 @@ if ($requestURL[0] == "r") {
 } else if ($requestURL[0] == "h") {
   require __DIR__ . "/home/home.php";
 } else if ($requestURL[0] == "e") {
-  require __DIR__ . "/shop/GetElem.php";
+  if (strpos($requestURL, "review")) {
+    require __DIR__ . "/review/Review.php";
+  } else {
+    require __DIR__ . "/shop/GetElem.php";
+  }
 } else if ($requestURL[0] == "c") {
   if (strpos($requestURL, "checkout")) {
     require __DIR__ . "/cart/checkout/Checkout.php";
@@ -41,7 +45,6 @@ if ($requestURL[0] == "r") {
   } else {
     require __DIR__ . "/user/User.php";
   }
-
 } else {
   echo "wtf are u doing here?!";
   echo $requestURL;

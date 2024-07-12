@@ -74,6 +74,8 @@
         document.addEventListener("DOMContentLoaded", function() {
           (async () => {
             const user_status = await get_user_status();
+
+            console.log(user_status);
             
             if (user_status['isLogged']) {
               document.getElementById('user-links').innerHTML = `
@@ -83,7 +85,7 @@
             } else {
               document.getElementById('user-links').innerHTML = `
                 <a href="login">Login</a>
-                <a href="register">Register</a>
+                <a href="registration">Register</a>
               `;
             }
           })();
