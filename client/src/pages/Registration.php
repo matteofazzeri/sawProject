@@ -39,8 +39,9 @@ if (!isset($_COOKIE["email"])) : ?>
           <input id="confirm" type="password" name="confirm" placeholder="Confirm password">
           <br><span id="err-confirm" class="error">Confirm password not valid</span><br>
 
-          <div class="password-info">Password must contain at least 8 characters, including UPPER/lowercase, numbers and special characters.</div><br>
+          <div class="password-info">Password must be at least 8 characters long and can only contain the following characters: 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@&%$*#</div><br>
           <p class="required">* = Required fields</p>
+          <div id="errors" class="errors"></div>
           <input type="submit" name="submit" value="Sign up">
         </fieldset>
       </form>

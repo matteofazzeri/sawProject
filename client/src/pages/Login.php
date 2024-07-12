@@ -24,7 +24,7 @@ if (!isset($_COOKIE["email"])) : ?>
           <br><span id="err-pwd" class="error">Password not correct</span><br>
           
           <input id="remember" type="checkbox" name="remember" value="1">Remember me<br>
-          
+          <div id="errors" class="errors"></div>
           <input type="submit" value="Login">
         </fieldset>
       </form>
@@ -36,11 +36,6 @@ if (!isset($_COOKIE["email"])) : ?>
 endif;
   ?>
   </main>
-
-
-  </body>
-
-  </html>
 
   <?php
   display('Footer');

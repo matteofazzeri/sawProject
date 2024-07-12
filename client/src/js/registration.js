@@ -101,9 +101,12 @@ document.addEventListener('DOMContentLoaded', function () {
       });
       console.log(response);
       if (!response.ok) {
+        
+        const error = document.createElement('div');
+        const errorDiv = document.getElementById('errors');
+        error.textContent = response.statusText;
+        errorDiv.appendChild(error);
         throw new Error(`HTTP error! status: ${response.status}`);
-
-        // ! AGGIUNGERE UN DIV PER GLI ERRORI RELATIVI ALLA FETCH => response.statustext 
 
       } else
         window.location.href = "";

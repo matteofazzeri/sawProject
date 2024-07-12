@@ -39,8 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo json_encode(['error' => 'Failed to register user']);
   }
 
-  /*
-  ! IN CASO VOLESSIMO FARE CHE UNA VOLTA REGISTRATO SEI ANCHE LOGGATO:
+  //Appena registrato sei loggato
   $uuid = insertValue("INSERT INTO users (username, email, password_hash, full_name ) VALUES (:username, :email, :password, :name)", [
     'username' => test_input($_POST['username']),
     'email' => test_input($_POST['email']),
@@ -55,7 +54,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     http_response_code(200); // Set the response code to 200 OK
     echo json_encode(['uuid' => $uuid]);
   }
-  */
 
   exit;
 }

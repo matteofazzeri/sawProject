@@ -51,6 +51,10 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 
       if (!response.ok) {
+        const error = document.createElement('div');
+        const errorDiv = document.getElementById('errors');
+        error.textContent = response.statusText;
+        errorDiv.appendChild(error);
         throw new Error(`HTTP error! status: ${response.status}`);
       } else {
         console.log("Login successful"); 
