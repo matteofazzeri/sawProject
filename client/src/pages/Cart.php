@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../libs/functions.php';
+
 
 /* if (!isLogged()) {
   header('Location: login.php');

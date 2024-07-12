@@ -38,17 +38,19 @@ class Review {
     console.log("Stars:", stars);
 
     // Add the review to the reviews array
-    const body_message = {
-      title: title,
-      text: text,
-      stars: stars,
-      productId: 1
-    };
+    const bodyMessage = new URLSearchParams();
+    bodyMessage.append('title', title);
+    bodyMessage.append('text', text);
+    bodyMessage.append('stars', stars);
+    bodyMessage.append('productId', 1);
 
     // make the fetch request
     const response = await fetch(`${backendUrl.development}p/review`, {
       method: "POST",
-      body: JSON.stringify(body_message),
+      headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: bodyMessage.toString(),
     });
 
     if (!response.ok) {

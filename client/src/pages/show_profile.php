@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../libs/functions.php';
+
 
 display('Head', false, [
   'title' => 'SAW: Profile',

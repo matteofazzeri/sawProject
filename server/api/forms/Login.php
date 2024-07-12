@@ -6,7 +6,7 @@ include __DIR__ . "/../libs/helper.inc.php";
 
 //Controlla se il form è stato correttamente inviato
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
+  
   $email = $_POST["email"];
   $pass = $_POST["pass"];
   $remember = $_POST["remember"] ?? false;
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   if (password_verify($pass, $user[0]['password_hash'])) {
     //Il login ha successo
-    $_SESSION["uuid"] = id($email);
+    if(!isset($_SESSION["uuid"])) $_SESSION["uuid"] = id($email);
     if ($remember) {
       setcookie("email", $email, time() + (86400 * 30), "/");
     }
