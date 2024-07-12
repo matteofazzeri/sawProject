@@ -57,7 +57,7 @@ function checkPwd($p, $cpass)
     return true;
   } else {
     http_response_code(400);
-    echo "Password must be at least 8 characters long and can only contain the following characters: 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@&%$*#";
+    echo json_encode(['error' => '"Password must only contain the following characters: 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@&%$*#"']);
     exit;
   }
 }
@@ -76,7 +76,7 @@ function nameCheck($data): bool
 
 function checkEmail($data): bool
 {
-  if (preg_match("/^[a-zA-Z\d](?:[a-zA-Z\d]|(?:[a-zA-Z\d]\.[a-zA-Z\d]))*[a-zA-Z\d]@[a-zA-Z\d]+(?:\.[a-zA-Z\d]+)*\.[a-zA-Z]{2,}$/", $data)) {
+  if (preg_match("/^[a-zA-Z\d\.]+@[a-zA-Z\d]+\.[a-z]{1,3}$/", $data)) {
     return true;
   } else {
     http_response_code(400);
