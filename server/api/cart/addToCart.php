@@ -3,7 +3,7 @@
 if (!empty($_POST)) {
   // Access the data
   $eid = htmlspecialchars(strip_tags($_POST['elem_id'])) ?? null;
-  $uuid = id(htmlspecialchars(strip_tags($_POST['uuid']))) == $_SESSION['uuid'] ? $_SESSION['uuid'] : null;
+  $uuid = id(htmlspecialchars(strip_tags($_POST['uuid']))) == $_SESSION['uuid'] && isLogged() ? $_SESSION['uuid'] : null;
   $n_elem = $_POST['n_elem'] ?? 0;
 } else {
   echo "Error decoding JSON data";

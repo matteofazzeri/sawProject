@@ -22,7 +22,7 @@ if (!is_numeric($eid) || !is_numeric($rating)) {
   exit;
 }
 
-if ($rating < 1 || $rating > 5) {
+if ($rating < 1 || $rating > 10) {
   echo json_encode(array("error" => "Rating must be between 1 and 5"));
   http_response_code(400);
   exit;

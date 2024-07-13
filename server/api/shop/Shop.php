@@ -10,9 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   require __DIR__ . "/getProduct.php";
 } else if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
-  require __DIR__ . "/put.php";
+  http_response_code(405);
 } else if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-  require __DIR__ . "/delete.php";
+  http_response_code(405);
 } else {
   echo "Invalid request";
 }

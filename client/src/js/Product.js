@@ -50,7 +50,7 @@ class ProductAPI {
               </div>
               <div class="details">
                   <h1 class="product-title"><a href="${product.product_id}/${product.product_name.replace(/ /g, "-")}?eid=${product.product_id}">${product.product_name}</a></h1>
-                  <div class="product-rating">Rating: ${product.product_rating === null ? "no rating" : Math.floor((product.product_rating/2) * 10) / 10}</div>
+                  <div class="product-rating">Rating: ${product.product_rating === null ? "no rating" : Math.floor((product.product_rating / 2) * 10) / 10}</div>
                   <span class="edit-quantity-elem" >
                     <button onclick="c.decrement_value(this)">
                       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
@@ -141,9 +141,28 @@ class ProductAPI {
       document.getElementById("elem-title").innerHTML = data['product_name'];
       document.getElementById("elem-description").innerHTML = data['product_description'];
       document.getElementById("add-" + data['product_id']).innerHTML = "Quantity: " + data['quantity'];
+      document.getElementById("elem-rating").innerHTML = "" + data['product_rating'] === null ? "no rating" : Math.floor((data['product_rating'] / 2) * 10) / 10;
 
 
-      // document.getElementById("elem-rating").innerHTML = data['product_rating'];
+      const productRating = data['product_rating']/2; 
+      const ratingContainer = document.getElementById('rating-stars');
+      const stars = ratingContainer.querySelectorAll('span');
+      const fullStars = Math.floor(productRating);
+      const halfStars = productRating % 1 !== 0 ? 1 : 0;
+
+      // Add 'rev-star-on' class to full stars
+      for (let i = 0; i < fullStars * 2; i++) {
+        stars[i].classList.add('rev-star-on');
+      }
+
+      // Add 'rev-star-on' class to half star if applicable
+      if (halfStars) {
+        stars[fullStars * 2].classList.add('rev-star-on');
+      }
+
+
+
+      // console.log(data['product_rating'] === null ? "no rating" : Math.floor((data['product_rating'] / 2) * 10) / 10);
 
       // render images of the product in the carousel
     }

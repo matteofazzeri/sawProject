@@ -14,8 +14,21 @@
     <div class="elem-info">
       <h1 id="elem-title"></h1>
       <div class="elem-mark">
-        <div id="elem-stars"></div>
-        <a href="#review" id="n-votes">100 Voti</a>
+        <div id="elem-rating"></div>
+        <div id="rating-stars" class="rating-star rate">
+
+            <span class="half" for="rating1" title="1/2 star"></span>
+            <span for="rating2" title="1 star"></span>
+            <span class="half" for="rating3" title="1 1/2 stars"></span>
+            <span for="rating4" title="2 stars"></span>
+            <span class="half" for="rating5" title="2 1/2 stars"></span>
+            <span for="rating6" title="3 stars"></span>
+            <span class="half" for="rating7" title="3 1/2 stars"></span>
+            <span for="rating8" title="4 stars"></span>
+            <span class="half" for="rating9" title="4 1/2 stars"></span>
+            <span for="rating10" title="5 stars" class=""></span>
+
+        </div>
       </div>
       <h4 id="elem-description"></h4>
     </div>
@@ -108,7 +121,7 @@
 
     <div class="review-list">
       <h2>Recensioni</h2>
-      <div id="review"></div>
+      <div id="reviews"></div>
     </div>
 
   </section>

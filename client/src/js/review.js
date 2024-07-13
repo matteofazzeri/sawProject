@@ -1,5 +1,7 @@
 class Review {
-  constructor() { }
+  constructor() {
+    this.eid = new URLSearchParams(window.location.search).get('eid');
+  }
 
   async addReview(e) {
     e.preventDefault(); // Prevent the default form submission
@@ -45,10 +47,7 @@ class Review {
     bodyMessage.append('review', text);
     bodyMessage.append('rating', stars);
 
-    // get element id from _GET
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get('eid');
-    bodyMessage.append('eid', productId);
+    bodyMessage.append('eid', this.eid);
 
     // make the fetch request
     try {
@@ -93,7 +92,64 @@ class Review {
   }
 
   downloadReviews() {
-    // Implementation for downloading reviews
+    const bodyMessage = new URLSearchParams();
+    bodyMessage.append('eid', this.eid);
+
+    fetch(`${backendUrl.development}e/review?${bodyMessage.toString()}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }
+    )
+      .then(response => response.json())
+      .then(data => {
+        this.reviews = data;
+
+        //console.log(data);
+
+        // Display the reviews
+
+        var reviewsHTML = data.map(review => {
+          let stars = "";
+
+          for (let i = 1; i < 11; i++) {
+            if (i <= review.rating) {
+              if (i % 2 === 0)
+                stars += `<span class="rev-star-on" for="rating2" title="${i / 2} star"></span>`
+              else
+                stars += `<span class="half rev-star-on" for="rating1" title="${i !== 1 ? (i-1)/2 : ""} 1/2 star"></span>`
+            } else {
+              if (i % 2 === 0)
+                stars += `<span for="rating2" title="${i / 2} star"></span>`
+              else
+                stars += `<span class="half" for="rating1" title="${i !== 1 ? (i-1)/2 : ""} 1/2 star"></span>`
+            }
+          }
+
+
+          return `
+            <div id="${review.id}" class="review">
+              <div class="review-header">
+                <p>${review.username}</p>
+                <p>${Math.floor((review.rating / 2) * 10) / 10}</p>
+                <div class="stars rating-star rate">${stars}</div>
+                <h3>${review.title}</h3>
+                  
+              </div>
+              <p>${review.comment}</p>
+            </div>
+          `;
+        }).join('');
+
+        document.getElementById("reviews").innerHTML = reviewsHTML;
+
+
+
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   }
 
   getReviewsByProductId(productId) {
@@ -106,6 +162,7 @@ const r = new Review();
 document.addEventListener('DOMContentLoaded', () => {
 
   const starInputs = document.querySelectorAll('input[name="rating"]');
+  r.downloadReviews();
 
   starInputs.forEach(input => {
 

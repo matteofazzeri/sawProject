@@ -2,10 +2,6 @@
 
 include __DIR__ . "/../../libs/helper.inc.php";
 
-/* if (!isLogged()) {
-  http_response_code(401);
-} */
-
 
 if (!isset($_POST['uuid'])) {
   echo json_encode(['message' => 'Invalid user data'], JSON_PRETTY_PRINT);
@@ -13,21 +9,7 @@ if (!isset($_POST['uuid'])) {
   exit;
 }
 
-$uuid = id(htmlspecialchars(strip_tags($_POST['uuid']))) == $_SESSION['uuid'] ? $_SESSION['uuid'] : null;
-
-/* if (!isLogged()) {
-  echo json_encode(['message' => 'User not logged in'], JSON_PRETTY_PRINT);
-  http_response_code(401);
-  exit;
-} */
-
-// check if the uuid corresponds to the user with the session id
-
-/* if ($_SESSION['uuid'] !== $uuid) {
-  echo json_encode(['message' => 'Invalid user data'], JSON_PRETTY_PRINT);
-  http_response_code(400);
-  exit;
-} */
+$uuid = id(htmlspecialchars(strip_tags($_POST['uuid']))) == $_SESSION['uuid'] && isLogged() ? $_SESSION['uuid'] : null;
 
 // get all the items from the cart of the user
 

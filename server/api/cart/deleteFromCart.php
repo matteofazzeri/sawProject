@@ -9,7 +9,7 @@ if (!isset($data['uuid']) || !isset($data['prod_id'])) {
   echo json_encode(['message' => 'Invalid data'], JSON_PRETTY_PRINT);
   exit;
 } else {
-  $uuid = id(htmlspecialchars(strip_tags($data['uuid']))) == $_SESSION['uuid'] ? $_SESSION['uuid'] : null;
+  $uuid = id(htmlspecialchars(strip_tags($data['uuid']))) == $_SESSION['uuid'] && isLogged() ? $_SESSION['uuid'] : null;
   $prod_id = htmlspecialchars(strip_tags($data['prod_id'])) ?? null;
 }
 
