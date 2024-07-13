@@ -336,7 +336,6 @@ LEFT JOIN tags_mapping tm ON p.id = tm.product_id
 LEFT JOIN tags t ON tm.tag_id = t.id 
 RIGHT JOIN spacesuits ss ON p.id = ss.product_id
 GROUP BY p.id, s.size, pc.name, t.name_name; */
-
 CREATE VIEW spaceships_detail_view AS
 SELECT
     p.id AS product_id,
@@ -355,6 +354,7 @@ SELECT
     s.model AS spaceship_model,
     AVG(r.rating) AS product_rating,
     pt.tag_names AS tag_names,
+    latest_review.comment AS latest_comment, -- Add latest comment
     p.created_at AS product_created_at,
     p.updated_at AS product_updated_at
 FROM
@@ -383,8 +383,17 @@ LEFT JOIN (
     LEFT JOIN tags t ON tm.tag_id = t.id
     GROUP BY product_id
 ) pt ON p.id = pt.product_id
+LEFT JOIN (
+    SELECT r.product_id, r.comment
+    FROM reviews r
+    INNER JOIN (
+        SELECT product_id, MAX(review_date) AS latest_review_date
+        FROM reviews
+        GROUP BY product_id
+    ) latest ON r.product_id = latest.product_id AND r.review_date = latest.latest_review_date
+) latest_review ON p.id = latest_review.product_id -- Join latest review
 RIGHT JOIN spaceships s ON p.id = s.product_id
-GROUP BY p.id, p.name, p.description, p.price, p.quantity, p.availability, p.item_sold, s.fuel_type, s.capacity, s.speed, s.model, p.created_at, p.updated_at, pp.images;
+GROUP BY p.id, p.name, p.description, p.price, p.quantity, p.availability, p.item_sold, s.fuel_type, s.capacity, s.speed, s.model, p.created_at, p.updated_at, pp.images, latest_review.comment;
 
 
 

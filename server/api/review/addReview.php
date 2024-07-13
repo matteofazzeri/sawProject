@@ -11,10 +11,10 @@ if (!isset($_POST['eid']) || !isset($_POST['title']) || !isset($_POST['rating'])
   exit;
 }
 
-$eid = $_POST['eid'];
-$title = $_POST['title'];
-$rating = $_POST['rating'];
-$description = $_POST['review'] ?? null;
+$eid = htmlspecialchars(strip_tags($_POST['eid']));
+$title = htmlspecialchars(strip_tags($_POST['title']));
+$rating = htmlspecialchars(strip_tags($_POST['rating']));
+$description = htmlspecialchars(strip_tags($_POST['review'] ?? null));
 
 if (!is_numeric($eid) || !is_numeric($rating)) {
   echo json_encode(array("error" => "Invalid parameters"));
@@ -39,7 +39,7 @@ $item = getElem("SELECT id FROM order_items AS oi WHERE oi.product_id = :eid AND
 ]);
 
 if (!$item) {
-  echo json_encode(array("error" => "An error occurred while checking if the user purchased the item"));
+  echo json_encode(array("error" => "You must have purchased the item to review it."));
   http_response_code(500);
   exit;
 } else if (count($item) == 0) {

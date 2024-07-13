@@ -9,7 +9,7 @@
 
   <div class="total-price">
     <p id="cart-list-total"></p>
-    <button id="btn-checkout" onclick="c.redirectToCheckOut(this)">Checkout</button>
+    <button id="btn-checkout" onclick="c.redirectToCheckOut(this)" class="btn">Checkout</button>
   </div>
 
   <!-- <div id="cart-checkout"></div> -->

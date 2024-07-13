@@ -50,7 +50,7 @@ class ProductAPI {
               </div>
               <div class="details">
                   <h1 class="product-title"><a href="${product.product_id}/${product.product_name.replace(/ /g, "-")}?eid=${product.product_id}">${product.product_name}</a></h1>
-                  <div class="product-rating">Rating: ${product.product_rating}</div>
+                  <div class="product-rating">Rating: ${product.product_rating === null ? "no rating" : Math.floor((product.product_rating/2) * 10) / 10}</div>
                   <span class="edit-quantity-elem" >
                     <button onclick="c.decrement_value(this)">
                       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
@@ -70,8 +70,8 @@ class ProductAPI {
             } 
                   </span>
                   <p class="error" id="${product.product_id}-error"></p>
-                  <div class="product-tags">Tags: ${product.tags && product.tags.length > 0 ? product.tags.join(", ") : "No tags available"}</div>
-                  <p class="latest-comment">Latest Comment: Aggiungere ultimo commentoooooooo oooootjtjakoooooo oooooo ooooooooooloooooo oooooooooo ooooooooo oooooooo ooo oooooo oooooo oooooo o!</p>
+                  <div class="product-tags">Tags: ${product.tag_names}</div>
+                  <p class="latest-comment">Latest Comment: ${product.latest_comment !== null ? product.latest_comment : "No comment available for this product"}</p>
               </div>
             </div>
         `;

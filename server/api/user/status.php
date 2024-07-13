@@ -2,7 +2,6 @@
 
 include __DIR__ . "/../libs/helper.inc.php";
 
-
 $response = [
   'isLogged' => false,
   'isAdmin' => false

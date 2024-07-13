@@ -81,30 +81,27 @@
 
         <!-- Star rating inputs -->
 
-        <div>
-          <input class="star star-5" id="star-5-2" type="radio" name="star" value="5" />
-          <label class="star star-5" for="star-5-2"></label>
-
-          <input class="star star-4" id="star-4-2" type="radio" name="star" value="4" />
-          <label class="star star-4" for="star-4-2"></label>
-
-          <input class="star star-3" id="star-3-2" type="radio" name="star" value="3" />
-          <label class="star star-3" for="star-3-2"></label>
-
-          <input class="star star-2" id="star-2-2" type="radio" name="star" value="2" />
-          <label class="star star-2" for="star-2-2"></label>
-
-          <input class="star star-1" id="star-1-2" type="radio" name="star" value="1" />
-          <label class="star star-1" for="star-1-2"></label>
-
-        </div>
+        <fieldset class="rate">
+          <input type="radio" id="rating10" name="rating" value="10" class="star" /><label for="rating10" title="5 stars"></label>
+          <input type="radio" id="rating9" name="rating" value="9" class="star" /><label class="half" for="rating9" title="4 1/2 stars"></label>
+          <input type="radio" id="rating8" name="rating" value="8" class="star" /><label for="rating8" title="4 stars"></label>
+          <input type="radio" id="rating7" name="rating" value="7" class="star" /><label class="half" for="rating7" title="3 1/2 stars"></label>
+          <input type="radio" id="rating6" name="rating" value="6" class="star" /><label for="rating6" title="3 stars"></label>
+          <input type="radio" id="rating5" name="rating" value="5" class="star" /><label class="half" for="rating5" title="2 1/2 stars"></label>
+          <input type="radio" id="rating4" name="rating" value="4" class="star" /><label for="rating4" title="2 stars"></label>
+          <input type="radio" id="rating3" name="rating" value="3" class="star" /><label class="half" for="rating3" title="1 1/2 stars"></label>
+          <input type="radio" id="rating2" name="rating" value="2" class="star" /><label for="rating2" title="1 star"></label>
+          <input type="radio" id="rating1" name="rating" value="1" class="star" /><label class="half" for="rating1" title="1/2 star"></label>
+        </fieldset>
         <span id="star-err" class="invalid"></span>
 
         <div class="rev-box">
           <textarea id="review-text" class="review" cols="30" rows="5" name="review" placeholder="Brief Review"></textarea>
         </div>
 
-        <button type="submit" class="review-btn loader" id="post-rev-btn">Submit</button>
+        <span id="err-review" class="invalid"></span>
+
+        <button type="submit" class="btn loader" id="post-rev-btn">Submit</button>
       </form>
     </div>
 

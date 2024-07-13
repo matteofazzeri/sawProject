@@ -27,7 +27,7 @@
   align-items: center;
 }
 
-form > div:nth-child(2) {
+form>div:nth-child(2) {
   width: 100%;
   display: flex;
   flex-direction: row-reverse;
@@ -44,53 +44,76 @@ input.rev-title {
   padding: .5vh 1vh;
   border: solid 1px #ccc;
   border-radius: 5px;
+
   &:focus {
     outline: none;
     border-color: #a1a1a1;
   }
 }
 
-input.star {
+/* Ratings widget */
+.rate {
+  display: inline-block;
+  border: 0;
+}
+
+/* Hide radio */
+.rate>input {
   display: none;
 }
 
-label.star {
+/* Order correctly by floating highest to the right */
+.rate>label {
   float: right;
-  padding: 10px;
-  font-size: 36px;
-  color: #444;
-  transition: all .2s;
 }
 
-input.star:checked ~ label.star:before,
-input.star:hover ~ label.star:before {
-  content: '\2605';
+/* The star of the show */
+.rate>label:before {
+  display: inline-block;
+  font-size: 2rem;
+  padding: .3rem .2rem;
+  margin: 0;
+  cursor: pointer;
+  font-family: FontAwesome;
+  content: "\f005 ";
+  /* full star */
+}
+
+/* Half star trick */
+.rate .half:before {
+  content: "\f089 ";
+  /* half star no outline */
+  position: absolute;
+  padding-right: 0;
+}
+
+/* Click + hover color */
+input:checked~label,
+/* color current and previous stars on checked */
+label:hover,
+label:hover~label {
   color: #FD4;
-  transition: all .25s;
 }
 
-input.star-5:checked ~ label.star:before,
-input.star-5:hover ~ label.star:before {
-  content: "\2605";
-  color: #FE7;
-  text-shadow: 0 0 20px #952;
-}
+/* color previous stars on hover */
 
-input.star-1:checked ~ label.star:before {
+/* Hover highlights */
+input:checked+label:hover,
+input:checked~label:hover,
+/* highlight current and previous stars */
+input:checked~label:hover~label,
+/* highlight previous selected stars for new rating */
+label:hover~input:checked~label
+
+/* highlight previous selected stars */
+  {
   color: #F62;
 }
 
-label.star:hover {
-  transform: rotate(-15deg) scale(1.3);
-}
-
-label.star:before {
-  content: "\2606";
-  font-family: FontAwesome;
-}
 
 .rev-box {
-  display: none; /* Initially hide the review box */
+  display: none;
+  /* Initially hide the review box */
   overflow: hidden;
   width: 100%;
   transition: all .25s;
@@ -114,14 +137,15 @@ textarea.review {
   }
 }
 
-input.star:checked ~ .rev-box {
-  display: block; /* Show the review box when a star is checked */
+input.star:checked~.rev-box {
+  display: block;
+  /* Show the review box when a star is checked */
   height: auto;
   margin-top: 10px;
 }
 
 
-.review-btn {
+/* .review-btn {
   background: #c9eb0b;
   max-width: 100px;
   max-height: 40px;
@@ -152,4 +176,4 @@ input.star:checked ~ .rev-box {
   &:focus {
     outline: none;
   }
-}
+} */

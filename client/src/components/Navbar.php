@@ -74,8 +74,6 @@
         document.addEventListener("DOMContentLoaded", function() {
           (async () => {
             const user_status = await get_user_status();
-
-            console.log(user_status);
             
             if (user_status['isLogged']) {
               document.getElementById('user-links').innerHTML = `

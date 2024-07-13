@@ -2,7 +2,6 @@
 
 // Read raw POST data
 $postData = file_get_contents("php://input");
-
 // Decode JSON data
 $data = json_decode($postData, true);
 
@@ -10,8 +9,8 @@ if (!isset($data['uuid']) || !isset($data['prod_id'])) {
   echo json_encode(['message' => 'Invalid data'], JSON_PRETTY_PRINT);
   exit;
 } else {
-  $uuid = id(htmlspecialchars(strip_tags($data['uuid'])));
-  $prod_id = htmlspecialchars(strip_tags($data['prod_id']));
+  $uuid = id(htmlspecialchars(strip_tags($data['uuid']))) == $_SESSION['uuid'] ? $_SESSION['uuid'] : null;
+  $prod_id = htmlspecialchars(strip_tags($data['prod_id'])) ?? null;
 }
 
 if (isset($data['deleteAll']) && $data['deleteAll'] === true) {
@@ -23,10 +22,10 @@ if (isset($data['deleteAll']) && $data['deleteAll'] === true) {
   http_response_code(204);
   exit;
 } else {
-  if (insertValue("DELETE FROM shopping_cart WHERE user_id = :uuid AND product_id = :prod_id", [
-    'uuid' => $uuid ?? null,
-    'prod_id' => $prod_id ?? null,
-  ]) === false) {
+  if (!insertValue("DELETE FROM shopping_cart WHERE user_id = :uuid AND product_id = :prod_id", [
+    'uuid' => $uuid,
+    'prod_id' => $prod_id,
+  ])) {
     http_response_code(500);
     exit;
   }

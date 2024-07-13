@@ -2,7 +2,7 @@
 
 include __DIR__ . "/../connection/inc.php";
 
-$eid =  $_GET['eid'];
+$eid = htmlspecialchars(strip_tags($_GET['eid']));
 
 echo json_encode(getElem(
   "SELECT sdv.*, COALESCE(sc.quantity, 1) AS quantity

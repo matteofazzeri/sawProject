@@ -1,16 +1,10 @@
 <?php
 
-// Read raw POST data
-$postData = file_get_contents("php://input");
-
-// Decode JSON data
-$data = json_decode($postData, true);
-
-if ($data !== null) {
+if (!empty($_POST)) {
   // Access the data
-  $eid = htmlspecialchars(strip_tags($data['elem_id'])) ?? null;
-  $uuid = id(htmlspecialchars(strip_tags($data['uuid']))) ?? null;
-  $n_elem = $data['n_elem'] ?? 0;
+  $eid = htmlspecialchars(strip_tags($_POST['elem_id'])) ?? null;
+  $uuid = id(htmlspecialchars(strip_tags($_POST['uuid']))) == $_SESSION['uuid'] ? $_SESSION['uuid'] : null;
+  $n_elem = $_POST['n_elem'] ?? 0;
 } else {
   echo "Error decoding JSON data";
 }
@@ -18,13 +12,13 @@ if ($data !== null) {
 // Check if data is missing
 
 if ($uuid === null) {
-  echo "Error: user not logged in";
+  echo json_encode(["Error" => "must be logged in"]);
   http_response_code(401);
   exit;
 }
 
 if ($eid === null || $n_elem === 0) {
-  echo "Error: missing data";
+  echo json_encode(["Error" => "missing data"]);
   http_response_code(400);
   exit;
 }
@@ -40,26 +34,14 @@ if ($alr_in === false) {
   exit;
 }
 
-if (empty($alr_in)) {
-  if (!insertValue("INSERT INTO shopping_cart (user_id, product_id, quantity) VALUES (:uuid, :eid, :quantity)", [
-    'uuid' => $uuid,
-    'eid' => $eid,
-    'quantity' => $n_elem,
-  ])) {
-    echo json_encode(["Error" => "database error"]);
-    http_response_code(500);
-    exit;
-  }
-  http_response_code(201);
-} else {
-  if (!insertValue("UPDATE shopping_cart SET quantity = :new_quantity WHERE user_id = :uuid AND product_id = :eid", [
-    'uuid' => $uuid,
-    'eid' => $eid,
-    'new_quantity' => $n_elem,
-  ])) {
-    echo json_encode(["Error" => "database error"]);
-    http_response_code(500);
-    exit;
-  }
-  http_response_code(204);
+if (!insertValue("INSERT INTO shopping_cart (user_id, product_id, quantity) VALUES (:uuid, :eid, :quantity)", [
+  'uuid' => $uuid,
+  'eid' => $eid,
+  'quantity' => $n_elem,
+])) {
+  echo json_encode(["Error" => "database error"]);
+  http_response_code(500);
+  exit;
 }
+
+$alr_in != 0 ? http_response_code(204) : http_response_code(201);

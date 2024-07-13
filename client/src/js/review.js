@@ -1,10 +1,8 @@
 class Review {
-  constructor() {}
+  constructor() { }
 
   async addReview(e) {
     e.preventDefault(); // Prevent the default form submission
-
-    console.log("first");
 
     loaders.show("post-rev-btn", "bubble", "");
 
@@ -19,23 +17,27 @@ class Review {
 
     // Get the value of the selected star rating
     let stars = null;
-    const starInputs = form.querySelectorAll('input[name="star"]');
+    const starInputs = form.querySelectorAll('input[name="rating"]');
     starInputs.forEach(input => {
       if (input.checked) {
         stars = DOMPurify.sanitize(input.value);
       }
     });
 
-    if(stars === null) {
+    if (stars === null) {
       document.getElementById("star-err").innerHTML = "To make the Review you have to select a rating";
       document.getElementById("post-rev-btn").innerHTML = "Submit";
+      document.getElementById("post-rev-btn").disabled = false;
+
       return;
+    } else {
+      document.getElementById("star-err").innerHTML = "";
     }
 
     // Log the values (you can replace this with your own logic)
-    console.log("Title:", title);
+    /* console.log("Title:", title);
     console.log("Review:", text);
-    console.log("Stars:", stars);
+    console.log("Stars:", stars); */
 
     // Add the review to the reviews array
     const bodyMessage = new URLSearchParams();
@@ -49,16 +51,39 @@ class Review {
     bodyMessage.append('eid', productId);
 
     // make the fetch request
-    const response = await fetch(`${backendUrl.development}e/review`, {
-      method: "POST",
-      headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: bodyMessage.toString(),
-    });
+    try {
+      const response = await fetch(`${backendUrl.development}e/review`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: bodyMessage.toString(),
+      });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const contentType = response.headers.get("content-type");
+      let responseBody;
+
+      if (contentType && contentType.includes("application/json")) {
+        responseBody = await response.json(); // Read the response body once
+      } else {
+        responseBody = await response.text(); // Fallback to text if not JSON
+      }
+
+      if (!response.ok) {
+        //console.error('Error:', responseBody.error || responseBody); // Use the parsed response body for error
+        // Optionally throw an error to handle it in a higher-level catch block
+        // throw new Error(`HTTP error! status: ${response.status} - ${responseBody.error || responseBody}`);
+
+        document.getElementById("post-rev-btn").innerHTML = "Submit";
+        document.getElementById("post-rev-btn").disabled = false;
+        document.getElementById("err-review").innerHTML = responseBody.error || responseBody;
+      } else {
+        //console.log('Success:', responseBody); // Use the parsed response body for success
+        document.getElementById("post-rev-btn").innerHTML = "Submit";
+        document.getElementById("post-rev-btn").disabled = false;
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
     }
 
     // Clear the form
@@ -80,7 +105,7 @@ const r = new Review();
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  const starInputs = document.querySelectorAll('input[name="star"]');
+  const starInputs = document.querySelectorAll('input[name="rating"]');
 
   starInputs.forEach(input => {
 

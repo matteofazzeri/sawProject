@@ -6,19 +6,14 @@ include __DIR__ . "/../../libs/helper.inc.php";
   http_response_code(401);
 } */
 
-// Read raw POST data
-$postData = file_get_contents("php://input");
 
-// Decode JSON data
-$data = json_decode($postData, true);
-
-if (!isset($data['uuid'])) {
+if (!isset($_POST['uuid'])) {
   echo json_encode(['message' => 'Invalid user data'], JSON_PRETTY_PRINT);
   http_response_code(400);
   exit;
 }
 
-$uuid = id(htmlspecialchars(strip_tags($data['uuid']))) == $_SESSION['uuid'] ? $_SESSION['uuid'] : null;
+$uuid = id(htmlspecialchars(strip_tags($_POST['uuid']))) == $_SESSION['uuid'] ? $_SESSION['uuid'] : null;
 
 /* if (!isLogged()) {
   echo json_encode(['message' => 'User not logged in'], JSON_PRETTY_PRINT);

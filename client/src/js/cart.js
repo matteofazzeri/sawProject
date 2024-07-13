@@ -4,16 +4,17 @@ class Cart {
   }
 
   async addProductToCart(product, quantity) {
-    const body_message = {
-      elem_id: product,
-      uuid: sessionStorage.getItem("email") || null,
-      n_elem: quantity,
-    };
+    const bodyMessage = new URLSearchParams();
+    bodyMessage.append('elem_id', product);
+    bodyMessage.append('uuid', sessionStorage.getItem("email") || null);
+    bodyMessage.append('n_elem', quantity);
 
     const response = await fetch(`${backendUrl.development}c`, {
       method: "POST",
-
-      body: JSON.stringify(body_message),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: bodyMessage.toString(),
     });
 
     if (!response.ok) {
@@ -37,7 +38,6 @@ class Cart {
     const clean_quantity = quantity.textContent.replace("Quantity: ", "");
 
     await this.addProductToCart(card.id, clean_quantity);
-
 
     const okBTN = document.getElementById(card.id + "saveNQ");
     okBTN !== null ? okBTN.style.display = "none" : null;
@@ -77,7 +77,10 @@ class Cart {
 
   async downloadCart() {
 
-    const response = await fetch(`${backendUrl.development}c?uuid=${sessionStorage.getItem("email") || null}`, {
+    const bodyMessage = new URLSearchParams();
+    bodyMessage.append('uuid', sessionStorage.getItem("email") || null);
+
+    const response = await fetch(`${backendUrl.development}c?${bodyMessage.toString()}`, {
       method: "GET",
     });
 
@@ -115,7 +118,7 @@ class Cart {
 
     // check if the user is logged in
 
-    if(sessionStorage.getItem("email") === null) {
+    if (sessionStorage.getItem("email") === null) {
       window.location.href = "login";
     }
 
@@ -238,20 +241,20 @@ class Cart {
 }
 
 class Checkout extends Cart {
-
-
-
   async renderCheckout() {
-
     if (sessionStorage.getItem("email") === null) {
-      //window.location.href = "login";
-      // return;
+      window.location.href = "login";
+      return;
     }
 
-    if (await this.renderCart("checkout") === 404) {
+    document.getElementById("checkout").innerHTML = '<span id="loader-checkout" class="loader"></span>';
+
+    const res = await this.renderCart("checkout");
+
+    if (res === 404) {
       window.location.href = "cart";
-    } else if (await this.renderCart("checkout") === 401) {
-      // window.location.href = "login";
+    } else if (res === 401) {
+      window.location.href = "login";
     }
 
     Array.from(document.getElementsByClassName("cart-elem-option")).forEach(function (item) {
@@ -260,19 +263,19 @@ class Checkout extends Cart {
   }
 
   async completeCheckout() {
-
     document.getElementById("checkout").innerHTML = '<span id="loader-checkout" class="loader"></span>';
 
     loaders.show("loader-checkout", "bubble", "Completing checkout...");
 
-
-    const body_message = {
-      uuid: sessionStorage.getItem("email") || null,
-    };
+    const bodyMessage = new URLSearchParams();
+    bodyMessage.append('uuid', sessionStorage.getItem("email") || null);
 
     const response = await fetch(`${backendUrl.development}c/checkout`, {
       method: "POST",
-      body: JSON.stringify(body_message),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: bodyMessage.toString(),
     });
 
     if (!response.ok) {
