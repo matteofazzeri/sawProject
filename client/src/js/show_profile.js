@@ -1,27 +1,72 @@
-async function showProfile() {
+class Profile {
+  async showProfile() {
+    try {
+      const response = await fetch(`${backendUrl.development}p`, {
+        method: 'GET',
+      });
+      const data = await response.json();
+      const profileData = data[0];
 
-  await fetch(`${backendUrl.development}p`, {
-    method: 'GET',
-  })
-    .then(response => response.json())
-    .then(data => {
-      // Handle data
-      data = data[0];
-      console.log('User profile:', data);
-
-      // split full name into first and last name
-
-      // Use firstName and lastName as needed
+      console.log(profileData);
 
       document.getElementById('show-profile').innerHTML = `
-        <p><strong>Full Name:</strong> ${data.full_name}</p>
-
-        <p><strong>Email:</strong> ${data.email}</p>
-        <p><strong>username:</strong> ${data.username}</p>
+        <input type="text" class="profile-input" value="${profileData.first_name}" readonly disabled>
+        <input type="text" class="profile-input" value="${profileData.last_name}" readonly disabled>
+        <input type="text" class="profile-input" value="${profileData.email}" readonly disabled>
+        <input type="text" class="profile-input" value="${profileData.username}" readonly disabled>
+        <button onclick="profile.editProfile()">Edit Profile</button>
       `;
-    })
-    .catch(error => {
-      // Handle error
+    } catch (error) {
       console.error('Error fetching user profile:', error);
-    });
+    }
+  }
+
+  editProfile() {
+    const inputs = document.querySelectorAll('.profile-input');
+    const profileData = {
+      first_name: inputs[0].value,
+      last_name: inputs[1].value,
+      email: inputs[2].value,
+      username: inputs[3].value,
+    };
+
+    document.getElementById('show-profile').innerHTML = `
+      <input type="text" class="profile-input" value="${profileData.first_name}">
+      <input type="text" class="profile-input" value="${profileData.last_name}">
+      <input type="email" class="profile-input" value="${profileData.email}" readonly disabled>
+      <input type="text" class="profile-input" value="${profileData.username}">
+      <button onclick="profile.updateProfile(event)">Update Profile</button>
+    `;
+  }
+
+  async updateProfile(event) {
+    //event.preventDefault(); // Ensure the event object is passed correctly
+
+    const inputs = document.querySelectorAll('.profile-input');
+    const profileData = {
+      firstname: DOMPurify.sanitize(inputs[0].value),
+      lastname: DOMPurify.sanitize(inputs[1].value),
+      email: DOMPurify.sanitize(inputs[2].value),
+      username: DOMPurify.sanitize(inputs[3].value),
+    };
+
+    try {
+      const response = await fetch(`${backendUrl.development}p`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(profileData),
+      });
+      const data = await response.json();
+      console.log(data);
+
+      // Optionally, refresh the profile view after updating
+      this.showProfile();
+    } catch (error) {
+      console.error('Error updating user profile:', error);
+    }
+  }
 }
+
+const profile = new Profile();

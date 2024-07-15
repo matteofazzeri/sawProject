@@ -44,7 +44,7 @@ include __DIR__ . "/../connection/inc.php";
 function checkPwd($p, $cpass)
 {
   // Regex pattern to match allowed characters
-  $pattern = '/^[0-9A-Za-z!@&%$*#]{8,}$/';
+  $pattern = '/^[0-9A-Za-z!@&%$*#]{1,12}$/';
 
   // Check if password matches pattern
   if (preg_match($pattern, $p)) {

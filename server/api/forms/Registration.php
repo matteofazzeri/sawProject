@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     'username' => test_input($_POST['username'] ?? $_POST['email']),
     'email' => test_input($_POST['email']),
     'password' => password_hash($_POST['pass'], PASSWORD_BCRYPT),
-    'firstname' => test_input($_POST['lastname']),
+    'firstname' => test_input($_POST['firstname']),
     'lastname' => test_input($_POST['lastname'])
   ])) {
     http_response_code(200); // Set the response code to 200 OK

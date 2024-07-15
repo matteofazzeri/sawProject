@@ -21,8 +21,8 @@ if ($requestURL[0] == "r") {
   require __DIR__ . "/forms/Registration.php";
 } else if ($requestURL[0] == "l") {
   require __DIR__ . "/forms/Login.php";
-} else if ($requestURL[0] == "p" or $requestURL == "show_profile.php") {
-  require __DIR__ . "/forms/Profile.php";
+} else if ($requestURL[0] == "p" or $requestURL == "show_profile.php" or $requestURL == "update_profile.php") {
+  require __DIR__ . "/forms/update_profile.php";
 } else if ($requestURL[0] == "s") {
   require __DIR__ . "/shop/Shop.php";
 } else if ($requestURL[0] == "h") {

@@ -41,7 +41,11 @@ switch (true) {
     break;
 
   case preg_match("#^/show_profile.php.*$#", ROUTING_URL):
-    include __DIR__ . "/../../server/api/forms/Profile.php";
+    include __DIR__ . "/../../server/api/forms/update_profile.php";
+    break;
+
+  case preg_match("#^/update_profile.php.*$#", ROUTING_URL):
+    include __DIR__ . "/../../server/api/forms/update_profile.php";
     break;
 
   case preg_match("#^/logout.php.*$#", ROUTING_URL) or preg_match("#^/logout.*$#", ROUTING_URL):

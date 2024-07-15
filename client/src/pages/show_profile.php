@@ -1,7 +1,4 @@
 <?php
-
-
-
 display('Head', false, [
   'title' => 'SAW: Profile',
   'css' => ['generic', 'navbar'],
@@ -9,18 +6,19 @@ display('Head', false, [
 ]);
 
 display('Navbar');
-
 ?>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    showProfile();
+    profile.showProfile();
   });
 </script>
 
 <main>
 
-  <div id="show-profile"></div>
+  <form id="show-profile">
+
+  </form>
 
 </main>
 

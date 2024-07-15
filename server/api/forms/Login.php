@@ -6,7 +6,7 @@ include __DIR__ . "/../libs/helper.inc.php";
 
 //Controlla se il form è stato correttamente inviato
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  
+
   $email = $_POST["email"];
   $pass = $_POST["pass"];
   $remember = $_POST["remember"] ?? false;
@@ -23,18 +23,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   if (password_verify($pass, $user[0]['password_hash'])) {
     //Il login ha successo
-    if(!isset($_SESSION["uuid"])) $_SESSION["uuid"] = id($email);
+    if (!isset($_SESSION["uuid"])) $_SESSION["uuid"] = id($email);
 
 
     //Genero un token di sessione
-    generateSessionToken();
+    $_SESSION["session_token"] = generateSessionToken();
 
     //Salvo il token di sessione nel database
 
-    $result = insertValue("INSERT INTO sessions (session_token, user_id, keep_logged, expiration_date) VALUES (:token, :user_id, :keep_logged, :expiration_date);", [
+    $result = insertValue("INSERT INTO sessions (session_token, user_id, expiration_date) VALUES (:token, :user_id, :expiration_date);", [
       'token' => $_SESSION["session_token"],
       'user_id' => $_SESSION["uuid"],
-      'keep_logged' => $remember ? 1 : 0,
       'expiration_date' => $remember ? date('Y-m-d H:i:s', time() + 86400 * 30) : date('Y-m-d H:i:s', time() + 86400)
     ]);
 
