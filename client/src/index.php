@@ -12,7 +12,6 @@ include __DIR__ . "/libs/functions.php";
 
 session_start();
 
-
 // Function to safely require pages
 function requirePage($pagePath)
 {

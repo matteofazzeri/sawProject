@@ -14,8 +14,6 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/" . explode("/", $_SERVER['REQ
 
 $requestURL = str_replace($base_url, "", $requestURL);
 
-
-
 // TODO: send request to form.php file 
 if ($requestURL[0] == "r") {
   require __DIR__ . "/forms/Registration.php";

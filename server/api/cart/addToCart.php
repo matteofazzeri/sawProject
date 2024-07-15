@@ -34,14 +34,26 @@ if ($alr_in === false) {
   exit;
 }
 
-if (!insertValue("INSERT INTO shopping_cart (user_id, product_id, quantity) VALUES (:uuid, :eid, :quantity)", [
-  'uuid' => $uuid,
-  'eid' => $eid,
-  'quantity' => $n_elem,
-])) {
-  echo json_encode(["Error" => "database error"]);
-  http_response_code(500);
-  exit;
+if (empty($alr_in)) {
+  if (!insertValue("INSERT INTO shopping_cart (user_id, product_id, quantity) VALUES (:uuid, :eid, :quantity)", [
+    'uuid' => $uuid,
+    'eid' => $eid,
+    'quantity' => $n_elem,
+  ])) {
+    echo json_encode(["Error" => "database error"]);
+    http_response_code(500);
+    exit;
+  }
+} else {
+  if (!insertValue("UPDATE shopping_cart SET quantity = :quantity WHERE user_id = :uuid AND product_id = :eid", [
+    'uuid' => $uuid,
+    'eid' => $eid,
+    'quantity' => $n_elem,
+  ])) {
+    echo json_encode(["Error" => "database error"]);
+    http_response_code(500);
+    exit;
+  }
 }
 
 $alr_in != 0 ? http_response_code(204) : http_response_code(201);

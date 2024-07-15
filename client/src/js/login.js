@@ -32,8 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const remember = rememberInput.checked;
 
-    // if (rememberInput.checked) localStorage.setItem('email', email);
-
     const bodyMessage = new URLSearchParams();
     bodyMessage.append('email', email);
     bodyMessage.append('pass', password);
@@ -43,11 +41,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (valid) {
       const response = await fetch(`${backendUrl.development}l`, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: bodyMessage.toString(),
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: bodyMessage.toString(),
       });
 
       if (!response.ok) {
@@ -57,9 +55,10 @@ document.addEventListener('DOMContentLoaded', function () {
         errorDiv.appendChild(error);
         throw new Error(`HTTP error! status: ${response.status}`);
       } else {
-        console.log("Login successful"); 
-        window.location.href = "";
+        //console.log("Login successful"); 
+        if (rememberInput.checked) localStorage.setItem('email', email);
         sessionStorage.setItem('email', email);
+        window.location.href = "";
       }
     }
   });

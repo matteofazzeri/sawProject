@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo json_encode(['error' => 'Failed to register user']);
   }
 
-  //Appena registrato sei loggato
+  //Appena registrato sei loggato - non serve fare il login dopo la registrazione. possibile alternativa
   /* $uuid = insertValue("INSERT INTO users (username, email, password_hash, full_name ) VALUES (:username, :email, :password, :name)", [
     'username' => test_input($_POST['username'] ?? $_POST['email']),
     'email' => test_input($_POST['email']),

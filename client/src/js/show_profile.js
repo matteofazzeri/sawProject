@@ -10,10 +10,18 @@ class Profile {
       console.log(profileData);
 
       document.getElementById('show-profile').innerHTML = `
-        <input type="text" class="profile-input" value="${profileData.first_name}" readonly disabled>
-        <input type="text" class="profile-input" value="${profileData.last_name}" readonly disabled>
-        <input type="text" class="profile-input" value="${profileData.email}" readonly disabled>
-        <input type="text" class="profile-input" value="${profileData.username}" readonly disabled>
+        <label for="first-name">First Name:</label>
+        <input type="text" id="first-name" class="profile-input" value="${profileData.first_name}" readonly disabled>
+        
+        <label for="last-name">Last Name:</label>
+        <input type="text" id="last-name" class="profile-input" value="${profileData.last_name}" readonly disabled>
+        
+        <label for="email">Email:</label>
+        <input type="text" id="email" class="profile-input" value="${profileData.email}" readonly disabled>
+        
+        <label for="username">Username:</label>
+        <input type="text" id="username" class="profile-input" value="${profileData.username}" readonly disabled>
+        
         <button onclick="profile.editProfile()">Edit Profile</button>
       `;
     } catch (error) {
@@ -31,21 +39,29 @@ class Profile {
     };
 
     document.getElementById('show-profile').innerHTML = `
-      <input type="text" class="profile-input" value="${profileData.first_name}">
-      <input type="text" class="profile-input" value="${profileData.last_name}">
-      <input type="email" class="profile-input" value="${profileData.email}" readonly disabled>
-      <input type="text" class="profile-input" value="${profileData.username}">
+      <label for="first-name">First Name:</label>
+      <input type="text" id="first-name" class="profile-input" value="${profileData.first_name}">
+      
+      <label for="last-name">Last Name:</label>
+      <input type="text" id="last-name" class="profile-input" value="${profileData.last_name}">
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" class="profile-input" value="${profileData.email}">
+      
+      <label for="username">Username:</label>
+      <input type="text" id="username" class="profile-input" value="${profileData.username}">
+      
       <button onclick="profile.updateProfile(event)">Update Profile</button>
     `;
   }
 
   async updateProfile(event) {
-    //event.preventDefault(); // Ensure the event object is passed correctly
+    event.preventDefault(); // Ensure the event object is passed correctly
 
     const inputs = document.querySelectorAll('.profile-input');
     const profileData = {
-      firstname: DOMPurify.sanitize(inputs[0].value),
-      lastname: DOMPurify.sanitize(inputs[1].value),
+      first_name: DOMPurify.sanitize(inputs[0].value),
+      last_name: DOMPurify.sanitize(inputs[1].value),
       email: DOMPurify.sanitize(inputs[2].value),
       username: DOMPurify.sanitize(inputs[3].value),
     };

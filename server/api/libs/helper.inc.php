@@ -87,7 +87,7 @@ function checkEmail($data): bool
 
 function checkUsername($data): bool
 {
-  if (preg_match("/^[a-zA-Z0-9]*$/", $data) || empty($data) || $data == "") {
+  if (preg_match("/^[a-zA-Z0-9_]*$/", $data) || empty($data) || $data == "") {
     return true;
   } else {
     http_response_code(400);
