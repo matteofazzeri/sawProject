@@ -5,6 +5,12 @@ $requestURL = explode('/', $_SERVER['REQUEST_URI']);
 
 $URL_lenght = $requestURL[count($requestURL) - 1];
 
+if (!isLogged()) {
+  echo json_encode(['message' => 'Must be logged in'], JSON_PRETTY_PRINT);
+  http_response_code(401);
+  exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   require __DIR__ . "/addReview.php";
 } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {

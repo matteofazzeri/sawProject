@@ -44,7 +44,7 @@ include __DIR__ . "/../connection/inc.php";
 function checkPwd($p, $cpass)
 {
   // Regex pattern to match allowed characters
-  $pattern = '/^[0-9A-Za-z!@&%$*#]{1,12}$/';
+  $pattern = '/^[0-9A-Za-z!@&%$*#]{1,25}$/';
 
   // Check if password matches pattern
   if (preg_match($pattern, $p)) {
@@ -99,10 +99,9 @@ function checkUsername($data): bool
 function userExists($email): bool
 {
   $res = getElem(
-    "SELECT * FROM users WHERE email = :email OR username = :username;",
+    "SELECT * FROM users WHERE email = :email ;",
     [
       'email' => $email,
-      'username' => $email
     ]
   );
 
@@ -114,32 +113,34 @@ function userExists($email): bool
   return false;
 }
 
-function checkAll($fullname, $email, $username, $pwd, $cpwd): bool
+function checkAll($fullname, $email, $pwd, $cpwd): bool
 {
-  return namecheck($fullname) and checkEmail($email) and checkUsername($username)
-    and checkPwd($pwd, $cpwd) and !userExists($email || $username);
+  return namecheck($fullname) and checkEmail($email) and checkPwd($pwd, $cpwd) and !userExists($email);
 }
 
 function isLogged(): bool
 {
+
   if (isset($_SESSION["uuid"])) {
     return true;
   }
+  if (isset($_COOKIE['rmbme'])) {
+    //! connect to the database and check if the user is registered
+    $result = getElem(
+      "SELECT remember_me, expiration_date, user_id FROM sessions WHERE session_token = :token_cookie;",
+      ['token_cookie' => $_COOKIE['rmbme'] ?? null]
+    );
 
-  //! connect to the database and check if the user is registered
-  /* $result = getElem(
-    "SELECT keep_logged, expiration_date, user_id FROM sessions WHERE session_token = :token_cookie;",
-    ['token_cookie' => $_COOKIE['rmbme'] ?? 'null']
-  ); */
-
-  if (!empty($result)) {
-    /* check if the keep_logged flag is 1 (true) */
-    if ($result[0]['keep_logged'] === 1) {
-      /* check if is expired */
-      if ($result[0]['expire_date'] > date('Y-m-d H:i:s', time())) {
-        $_SESSION['logged'] = true;
-        $_SESSION['uuid'] = $result[0]['users_id'];
-        return isLogged();
+    if (!empty($result)) {
+      /* check if the keep_logged flag is 1 (true) */
+      if ($result[0]['remember_me'] === 1) {
+        /* check if is expired */
+        if ($result[0]['expiration_date'] > date('Y-m-d H:i:s', time())) {
+          // Regenerate session ID to prevent session fixation attacks
+          session_regenerate_id(true);
+          $_SESSION['uuid'] = $result[0]['user_id'];
+          return isLogged();
+        }
       }
     }
   }
@@ -171,8 +172,8 @@ function isAdmin(): bool
 
 function id($data): string
 {
-  $query = "SELECT id FROM users WHERE email = :email OR username = :username;";
-  $data = ['email' => $data, 'username' => $data];
+  $query = "SELECT id FROM users WHERE email = :email";
+  $data = ['email' => $data];
   $res = getElem($query, $data);
 
   if (!empty($res))  return $res[0]['id'];
@@ -189,6 +190,7 @@ function dbInfo($id, $toFind): string
   return 'Unknown';
 }
 
-function generateSessionToken($length = 32) {
+function generateSessionToken($length = 32)
+{
   return bin2hex(random_bytes($length / 2));
 }

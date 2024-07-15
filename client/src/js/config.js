@@ -8,6 +8,16 @@ async function get_user_status() {
     method: 'GET',
   });
   const data = await response.json();
+
   return data['user_status'];
+}
+
+function logout() {
+  // delete session and local storage
+  sessionStorage.clear();
+  localStorage.clear();
+
+  // redirect to login page
+  window.location.href = 'logout';
 }
 

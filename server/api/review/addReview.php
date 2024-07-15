@@ -1,10 +1,5 @@
 <?php
 
-if (!isLogged()) {
-  echo json_encode(array("error" => "You must be logged in to add a review"));
-  exit;
-}
-
 if (!isset($_POST['eid']) || !isset($_POST['title']) || !isset($_POST['rating'])) {
   echo json_encode(array("error" => "Missing parameters" . json_encode($_POST)));
   http_response_code(400);

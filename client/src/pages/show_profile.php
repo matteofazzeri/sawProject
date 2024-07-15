@@ -11,14 +11,15 @@ display('Navbar');
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     profile.showProfile();
+    profileDetails.showDetails();
   });
 </script>
 
 <main>
 
-  <form id="show-profile">
+  <form id="show-profile"></form>
 
-  </form>
+  <form id="show-details"></form>
 
 </main>
 

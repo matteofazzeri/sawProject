@@ -78,7 +78,7 @@
             if (user_status['isLogged']) {
               document.getElementById('user-links').innerHTML = `
                 <a href="profile">Profile</a>
-                <a href="logout">Logout</a>
+                <button onclick="logout()">Logout</button>
               `;
             } else {
               document.getElementById('user-links').innerHTML = `

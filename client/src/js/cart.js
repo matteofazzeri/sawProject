@@ -20,14 +20,26 @@ class Cart {
     if (!response.ok) {
 
       if (response.status === 401) {
-        // window.location.href = "login";
+        Swal.fire({
+          title: 'Auto close alert!',
+          text: 'Must be logged in to add products to the cart!',
+          icon: 'warning',
+          timer: 3000,
+          showConfirmButton: false
+        });
       } else if (response.status === 409) {
         document.getElementById(product + "-error").innerHTML = "Errore: Quantità non disponibile";
       } else {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
-      throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+      Swal.fire({
+        title: 'Product added to cart!',
+        text: '',
+        icon: 'success',
+        timer: 1000,
+        showConfirmButton: false
+      });
     }
   }
 
@@ -85,7 +97,12 @@ class Cart {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+
+      if (response.status === 401) {
+        window.location.href = "login";
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
     }
 
     return await response.json();
@@ -116,25 +133,7 @@ class Cart {
 
   async renderCart(id_div) {
 
-    // check if the user is logged in
-
-    if (sessionStorage.getItem("email") === null) {
-      window.location.href = "login";
-    }
-
     loaders.show("loader-" + id_div, "search");
-
-    /* if (sessionStorage.getItem("email") === null) {
-      loaders.hide("loader-" + id_div);
-      document.getElementById(id_div).innerHTML = "<h1>You must be logged in to view your cart</h1><p>Redirecting you to login page...</p>";
-      document.getElementById(id_div).style.display = "flex";
-
-      setTimeout(function () {
-        // window.location.href = "login";
-      }, 3000);
-
-      return 401;
-    } */
 
     const timeout = new Promise((resolve, reject) => {
       setTimeout(reject, 1000, 'Request timed out');
@@ -282,7 +281,14 @@ class Checkout extends Cart {
       /* document.getElementById("checkout").innerHTML = response.status + " - " +response.statusText; */
 
       if (response.status === 409) {
-        loaders.show("loader-checkout", "bubble", "Checkout Failed! Redirecting to the cart...");
+        loaders.hide("loader-checkout");
+        Swal.fire({
+          title: 'Checkout failed!',
+          text: 'You will be redirected to the cart page in 2 seconds',
+          icon: 'error',
+          timer: 2000,
+          showConfirmButton: false
+        });
         setTimeout(function () {
           window.location.href = "cart";
         }, 3000);
@@ -290,7 +296,14 @@ class Checkout extends Cart {
       // window.location.href = "cart";
       throw new Error(`HTTP error! status: ${response.status}`);
     } else {
-      loaders.show("loader-checkout", "bubble", "Checkout completed! Redirecting to home page...");
+      loaders.hide("loader-checkout");
+      Swal.fire({
+        title: 'Checkout complete!',
+        text: 'You will be redirected to the homepage in 2 seconds',
+        icon: 'success',
+        timer: 2000,
+        showConfirmButton: false
+      });
     }
 
     setTimeout(function () {

@@ -32,10 +32,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const remember = rememberInput.checked;
 
+    console.log(remember);
+
     const bodyMessage = new URLSearchParams();
     bodyMessage.append('email', email);
     bodyMessage.append('pass', password);
-    bodyMessage.append('remember', remember);
+    bodyMessage.append('remember', remember ? 1 : 0);
 
     // console.log(bodyMessage.toString());
 
@@ -55,8 +57,6 @@ document.addEventListener('DOMContentLoaded', function () {
         errorDiv.appendChild(error);
         throw new Error(`HTTP error! status: ${response.status}`);
       } else {
-        //console.log("Login successful"); 
-        if (rememberInput.checked) localStorage.setItem('email', email);
         sessionStorage.setItem('email', email);
         window.location.href = "";
       }

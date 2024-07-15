@@ -2,10 +2,11 @@
 
 include __DIR__ . "/../libs/helper.inc.php";
 
-/* if (isLogged()) {
-  header("Location: Home.php");
-  exit();
-} */
+if (isLogged()) {
+  echo json_encode(['message' => 'Already logged in'], JSON_PRETTY_PRINT);
+  http_response_code(400);
+  exit;
+}
 
 //Controlla se il form è stato correttamente inviato
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -17,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit;
   }
 
-  if (!checkAll($_POST['firstname'] . " " . $_POST['lastname'], $_POST['email'], $_POST['username'] ?? "", $_POST['pass'], $_POST['confirm'])) {
+  if (!checkAll($_POST['firstname'] . " " . $_POST['lastname'], $_POST['email'], $_POST['pass'], $_POST['confirm'])) {
     echo "Error -> unable to register" . "<br/>";
 
     http_response_code(400); // Set the response code to 400 Bad Request
@@ -26,8 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     die;
   }
 
-  if (insertValue("INSERT INTO users (username, email, password_hash, first_name, last_name ) VALUES (:username, :email, :password, :firstname, :lastname)", [
-    'username' => test_input($_POST['username'] ?? $_POST['email']),
+  if (insertValue("INSERT INTO users (email, password_hash, first_name, last_name ) VALUES (:email, :password, :firstname, :lastname)", [
     'email' => test_input($_POST['email']),
     'password' => password_hash($_POST['pass'], PASSWORD_BCRYPT),
     'firstname' => test_input($_POST['firstname']),

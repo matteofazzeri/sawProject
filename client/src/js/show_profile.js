@@ -1,5 +1,11 @@
 class Profile {
   async showProfile() {
+
+    if (await get_user_status()['isLogged']) {
+      console.log("dio can");
+    }
+
+
     try {
       const response = await fetch(`${backendUrl.development}p`, {
         method: 'GET',
@@ -7,7 +13,10 @@ class Profile {
       const data = await response.json();
       const profileData = data[0];
 
-      console.log(profileData);
+      if (localStorage.getItem('email') !== profileData.email) {
+        localStorage.setItem('email', profileData.email);
+        sessionStorage.setItem('email', profileData.email);
+      }
 
       document.getElementById('show-profile').innerHTML = `
         <label for="first-name">First Name:</label>
@@ -18,9 +27,6 @@ class Profile {
         
         <label for="email">Email:</label>
         <input type="text" id="email" class="profile-input" value="${profileData.email}" readonly disabled>
-        
-        <label for="username">Username:</label>
-        <input type="text" id="username" class="profile-input" value="${profileData.username}" readonly disabled>
         
         <button onclick="profile.editProfile()">Edit Profile</button>
       `;
@@ -35,7 +41,6 @@ class Profile {
       first_name: inputs[0].value,
       last_name: inputs[1].value,
       email: inputs[2].value,
-      username: inputs[3].value,
     };
 
     document.getElementById('show-profile').innerHTML = `
@@ -48,9 +53,6 @@ class Profile {
       <label for="email">Email:</label>
       <input type="email" id="email" class="profile-input" value="${profileData.email}">
       
-      <label for="username">Username:</label>
-      <input type="text" id="username" class="profile-input" value="${profileData.username}">
-      
       <button onclick="profile.updateProfile(event)">Update Profile</button>
     `;
   }
@@ -60,10 +62,9 @@ class Profile {
 
     const inputs = document.querySelectorAll('.profile-input');
     const profileData = {
-      first_name: DOMPurify.sanitize(inputs[0].value),
-      last_name: DOMPurify.sanitize(inputs[1].value),
+      firstname: DOMPurify.sanitize(inputs[0].value),
+      lastname: DOMPurify.sanitize(inputs[1].value),
       email: DOMPurify.sanitize(inputs[2].value),
-      username: DOMPurify.sanitize(inputs[3].value),
     };
 
     try {
@@ -74,8 +75,10 @@ class Profile {
         },
         body: JSON.stringify(profileData),
       });
-      const data = await response.json();
-      console.log(data);
+
+      if (!response.ok) {
+        throw new Error('Error updating user profile');
+      }
 
       // Optionally, refresh the profile view after updating
       this.showProfile();
@@ -85,4 +88,95 @@ class Profile {
   }
 }
 
+class detailsProfile extends Profile {
+  async showDetails() {
+    try {
+      const response = await fetch(`${backendUrl.development}p/details`, {
+        method: 'GET',
+      });
+      const data = await response.json();
+
+      console.log(data);
+
+      const profileData = data[0] || {};
+
+      document.getElementById('show-details').innerHTML = `
+        <label for="username">Public Name:</label>
+        <input type="text" id="username" class="detail-input" value="${profileData.username || ""}" readonly disabled>
+        
+        <label for="phone-number">Phone number:</label>
+        <input type="text" id="phone-number" class="detail-input" value="${profileData.phone_number || ""}" readonly disabled>
+        
+        <label for="birthdate">birthdate:</label>
+        <input type="text" id="birthdate" class="detail-input" value="${profileData.birthdate || ""}" readonly disabled>
+        
+        <label for="bio">A little bit about you:</label>
+        <textarea type="text" id="bio" class="detail-input" readonly disabled >${profileData.bio || ""}</textarea>
+        
+        <button onclick="profileDetails.editDetails()">Edit details</button>
+      `;
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+    }
+  }
+
+  editDetails() {
+    const inputs = document.querySelectorAll('.detail-input');
+    const profileData = {
+      username: inputs[0].value,
+      phone_number: inputs[1].value,
+      birthdate: inputs[2].value,
+      bio: inputs[3].value,
+    };
+
+    document.getElementById('show-details').innerHTML = `
+      <label for="username">Public Name:</label>
+      <input type="text" id="username" class="detail-input" value="${profileData.username}">
+      
+      <label for="phone-number">Phone number:</label>
+      <input type="number" id="phone-number" class="detail-input" value="${profileData.phone_number}">
+      
+      <label for="birthdate">birthdate:</label>
+      <input type="date" id="birthdate" class="detail-input" value="${profileData.birthdate}">
+      
+      <label for="bio">A little bit about you:</label>
+      <textarea type="text" id="bio" class="detail-input" >${profileData.bio}</textarea>
+      
+      <button onclick="profileDetails.updateDetails(event)">Update detail</button>
+    `;
+  }
+
+  async updateDetails(event) {
+    event.preventDefault(); // Ensure the event object is passed correctly
+
+    const inputs = document.querySelectorAll('.detail-input');
+    const profileData = {
+      username: DOMPurify.sanitize(inputs[0].value),
+      phone_number: DOMPurify.sanitize(inputs[1].value),
+      birthdate: DOMPurify.sanitize(inputs[2].value),
+      bio: DOMPurify.sanitize(inputs[3].value),
+    };
+
+    try {
+      const response = await fetch(`${backendUrl.development}p/details`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(profileData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error updating user profile');
+      }
+
+      // Optionally, refresh the profile view after updating
+      this.showDetails();
+    } catch (error) {
+      console.error('Error updating user profile:', error);
+    }
+  }
+}
+
 const profile = new Profile();
+const profileDetails = new detailsProfile();

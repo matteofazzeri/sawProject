@@ -2,8 +2,10 @@
 
 include __DIR__ . "/../libs/helper.inc.php";
 
-if (!isLogged()) {
+if(!isLogged()) {
+  echo json_encode(['message' => 'Must be logged in'], JSON_PRETTY_PRINT);
   http_response_code(401);
+  exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

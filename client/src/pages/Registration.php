@@ -27,10 +27,6 @@ if (!isset($_COOKIE["email"])) : ?>
           <input id="email" type="email" name="email" placeholder="Email">
           <br><span id="err-email" class="error">Username not valid or available</span><br>
 
-          <label for="username">Username</label>
-          <input id="username" type="text" name="username" placeholder="Username">
-          <br><span id="err-username" class="error">Username not valid or available</span><br>
-
           <label for="pass">Password*</label>
           <input id="password" type="password" name="pass" placeholder="Password">
           <br><span id="err-password" class="error">Password not valid</span><br>

@@ -149,13 +149,23 @@ TODO:
 CREATE TABLE IF NOT EXISTS
   users (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(50) UNIQUE,
     email VARCHAR(255) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
   );
+
+CREATE TABLE IF NOT EXISTS user_details (
+  user_id INT PRIMARY KEY,
+  phone_number VARCHAR(20),
+  profile_picture_url VARCHAR(255),
+  birthdate DATE,
+  bio TEXT,
+  username VARCHAR(50) UNIQUE,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
 
 CREATE TABLE IF NOT EXISTS
   orders (
