@@ -35,7 +35,7 @@
 
     <div class="box-outer">
       <span id="elem-price"></span>
-      <p>Consegna senza costi aggiuntivi
+      <p>Delivery without fees
         <?php
         $currentTimestamp = time();
         $targetTimestamp = mktime(21, 0, 0);
@@ -44,25 +44,25 @@
         $remainingMinutes = floor(($remainingSeconds % 3600) / 60);
 
         if ($remainingHours > 0) {
-          echo "<b>domani</b>. Ordina entro ";
-          echo $remainingHours . " ore e " . $remainingMinutes . " min.";
+          echo "<b>tomorrow</b>. Order before ";
+          echo $remainingHours . " hours and " . $remainingMinutes . " min.";
         } else {
-          echo "<b>dopo domani</b>. Ordina entro ";
-          echo -$remainingHours + 21 . " ore e " . -$remainingMinutes . " min.";
+          echo "<b>the day afetr tomorrow</b>. order before ";
+          echo -$remainingHours + 21 . " hours and " . -$remainingMinutes . " min.";
         }
         ?>
 
-        <a href="">Maggiori informazioni</a>
+        <a href="">More informations</a>
       </p>
-      <div>Invia a Address</div>
-      <h3>Disponibilità Immediata</h3>
+      <div>Send to Address</div>
+      <h3>Immediate availability</h3>
       <div class="select-quantity">
         <button id="" onclick="c.decrement_value(this)">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
             <path d="M200-440v-80h560v80H200Z" />
           </svg>
         </button>
-        <p id=<?php echo "add-" . $eid ?>>Quantity: 1</p>
+        <p id=<?php echo "add-" . $eid ?> class="q-btn">Quantity: 1</p>
         <button onclick="c.increment_value(this)">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
             <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
@@ -120,7 +120,7 @@
 
 
     <div class="review-list">
-      <h2>Recensioni</h2>
+      <h2>Reviews</h2>
       <div id="reviews"></div>
     </div>
 

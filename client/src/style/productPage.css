@@ -2,6 +2,13 @@
   width: 100%;
   min-height: 90vh;
   background-color: #222E50;
+<<<<<<< HEAD
+=======
+}
+
+a:visited {
+  color: #a9bae9;
+>>>>>>> 810d88665a58d8cd47d82a23b266d128ce7f86f0
 }
 
 .elem {
@@ -22,6 +29,7 @@
 .elem-info {
   width: 45%;
   background-color: ivory;
+  padding: 10px;
 }
 
 .elem-info #elem-title {
@@ -34,6 +42,13 @@
   border: solid 1px;
   border-radius: 7px;
   color: white;
+<<<<<<< HEAD
+=======
+}
+
+.q-btn {
+  color: black;
+>>>>>>> 810d88665a58d8cd47d82a23b266d128ce7f86f0
 }
 
 .select-quantity {
@@ -94,4 +109,12 @@
 
 .review-list{
   color: white;
+<<<<<<< HEAD
+=======
+  padding: 10px;
+}
+
+.review-form{
+  background-color: ivory;
+>>>>>>> 810d88665a58d8cd47d82a23b266d128ce7f86f0
 }

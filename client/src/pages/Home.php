@@ -7,7 +7,7 @@ display(
   [
     'title' => 'Home',
     'css' => ['generic', 'navbar', 'homepage', 'productCard', 'footer'],
-    'js' => ['Product', 'config', 'Loaders']
+    'js' => ['Product', 'config', 'Loaders', 'cart']
   ]
 );
 
