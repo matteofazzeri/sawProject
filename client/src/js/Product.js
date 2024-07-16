@@ -66,7 +66,7 @@ class ProductAPI {
                     <button id="${product.product_id}saveNQ" class="saveNQ" onclick="c.addToCart(this)" >OK</button>
 
                     ${product.product_quantity <= 0 ? "<p style='color: red'> no product</p>" : product.product_quantity < 10 ?
-              `<p style='color: orange'>Prodotti rimasti: ${product.product_quantity}</p>` : ""
+              `<p style='color: orange'>Remaining products: ${product.product_quantity}</p>` : ""
             } 
                   </span>
                   <p class="error" id="${product.product_id}-error"></p>
@@ -127,12 +127,7 @@ class ProductAPI {
 
     const url = new URL(window.location.href);
     const eid = url.pathname.split('/')[2];
-<<<<<<< HEAD
     const response = await fetch(`${backendUrl.production}e?eid=${eid}`, {
-=======
-    const elem_name = url.pathname.split('/')[3].replace(/-/g, " ");
-    const response = await fetch(`${backendUrl.development}e?eid=${eid}&en=${elem_name}`, {
->>>>>>> f7e1d2adb26d8d40a5e3e39f9d4a550deda02536
       method: "GET",
     });
 
@@ -142,7 +137,7 @@ class ProductAPI {
     } else {
       const data = (await response.json())[0];
       document.title = data['product_name'];
-      document.getElementById("elem-price").innerHTML = data['product_price'] + "$";
+      document.getElementById("elem-price").innerHTML = data['product_price'] + "€";
       document.getElementById("elem-title").innerHTML = data['product_name'];
       document.getElementById("elem-description").innerHTML = data['product_description'];
       document.getElementById("add-" + data['product_id']).innerHTML = "Quantity: " + data['quantity'];

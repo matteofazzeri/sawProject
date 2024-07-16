@@ -30,12 +30,7 @@ if (!isset($_COOKIE["email"])) : ?>
       </form>
     </div>
 
-<<<<<<< HEAD
-  <?php else :
-  //header("");
-=======
   <?php 
->>>>>>> f7e1d2adb26d8d40a5e3e39f9d4a550deda02536
 
 endif;
   ?>

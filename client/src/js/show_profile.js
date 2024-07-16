@@ -1,8 +1,8 @@
 class Profile {
   async showProfile() {
 
-    if (await get_user_status()['isLogged']) {
-      console.log("dio can");
+    if (!await get_user_status()['isLogged']) {
+      window.location.href = 'login';
     }
 
 

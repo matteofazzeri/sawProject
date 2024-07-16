@@ -1,5 +1,11 @@
 <?php
 
+if (!isLogged()) {
+  echo json_encode(['message' => 'Must be logged in'], JSON_PRETTY_PRINT);
+  http_response_code(401);
+  exit;
+}
+
 if (!isset($_POST['eid']) || !isset($_POST['title']) || !isset($_POST['rating'])) {
   echo json_encode(array("error" => "Missing parameters" . json_encode($_POST)));
   http_response_code(400);

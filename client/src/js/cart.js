@@ -28,7 +28,7 @@ class Cart {
           showConfirmButton: false
         });
       } else if (response.status === 409) {
-        document.getElementById(product + "-error").innerHTML = "Errore: Quantità non disponibile";
+        document.getElementById(product + "-error").innerHTML = "Error: Quantity not available";
       } else {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -199,13 +199,13 @@ class Cart {
                   <button id="${product.product_id}saveNQ" class="saveNQ" onclick="c.addToCart(this)" >OK</button>
 
                   ${product.product_quantity <= 0 ? "<p style='color: red'> no product</p>" : product.product_quantity < 10 ?
-              `<p style='color: orange'>Prodotti rimasti: ${product.product_quantity}</p>` : `<p style='color: green'>Disponibilità immediata</p>`
+              `<p style='color: orange'>Remaining products: ${product.product_quantity}</p>` : `<p style='color: green'>Immediate availability</p>`
             }
 
                   <div class="cart-elem-option">
-                    <button onclick="c.removeProductFromCart(this)">Rimuovi</button>
-                    <button>Salva per dopo</button>
-                    <button>Condividi</button>
+                    <button onclick="c.removeProductFromCart(this)">Remove</button>
+                    <button>Save for later</button>
+                    <button>Share</button>
                   </div>
                 </span>
                 <p class="error" id="${product.product_id}-error"></p>
@@ -221,7 +221,7 @@ class Cart {
       loaders.hide("loader-" + id_div);
       document.getElementById(id_div).innerHTML = productHTML;
       document.getElementById(id_div).style.display = "flex";
-      document.getElementById(id_div + "-total").innerHTML = `Totale (${numItems} articoli): <b>${total.toFixed(2)}€</b> `;
+      document.getElementById(id_div + "-total").innerHTML = `Total  (${numItems} items): <b>${total.toFixed(2)}€</b> `;
 
       if (toDisable) {
         document.getElementById("btn-checkout").disable = true;

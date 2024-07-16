@@ -35,7 +35,7 @@
 
     <div class="box-outer">
       <span id="elem-price"></span>
-      <p>Consegna senza costi aggiuntivi
+      <p>Delivery at no additional cost
         <?php
         $currentTimestamp = time();
         $targetTimestamp = mktime(21, 0, 0);
@@ -44,17 +44,17 @@
         $remainingMinutes = floor(($remainingSeconds % 3600) / 60);
 
         if ($remainingHours > 0) {
-          echo "<b>domani</b>. Ordina entro ";
+          echo "<b>tomorrow</b>. Ordina entro ";
           echo $remainingHours . " ore e " . $remainingMinutes . " min.";
         } else {
-          echo "<b>dopo domani</b>. Ordina entro ";
-          echo -$remainingHours + 21 . " ore e " . -$remainingMinutes . " min.";
+          echo "<b>the day after tomorrow</b>. Order within ";
+          echo -$remainingHours + 21 . " hours and " . -$remainingMinutes . " minutes.";
         }
         ?>
 
-        <a href="">Maggiori informazioni</a>
+        <a href="https://www.youtube.com/watch?v=LKKwwUjm4ic">More information</a>
       </p>
-      <div>Invia a Address</div>
+      <div>Send to Address</div>
       <h3>Disponibilità Immediata</h3>
       <div class="select-quantity">
         <button id="" onclick="c.decrement_value(this)">
