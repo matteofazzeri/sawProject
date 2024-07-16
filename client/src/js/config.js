@@ -4,7 +4,7 @@ const backendUrl = {
 };
 
 async function get_user_status() {
-  const response = await fetch(`${backendUrl.development}/user/status`, {
+  const response = await fetch(`${backendUrl.development}user/status`, {
     method: 'GET',
   });
   const data = await response.json();

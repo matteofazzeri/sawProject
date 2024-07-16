@@ -40,13 +40,9 @@ if ($requestURL[0] == "r") {
   } else {
     require __DIR__ . "/cart/Cart.php";
   }
-} else if (strpos($requestURL, "user")) {
-  if (strpos($requestURL, "status")) {
-    require __DIR__ . "/user/Status.php";
-  } else {
-    require __DIR__ . "/user/User.php";
-  }
+} else if (preg_match("#^user/status(\?.*)?$#", $requestURL)) {
+  require __DIR__ . "/user/status.php";
 } else {
-  echo "wtf are u doing here?!";
+  echo "wtf are u doing here?! <br>";
   echo $requestURL;
 }
