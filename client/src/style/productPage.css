@@ -1,7 +1,7 @@
 .element-page {
   width: 100%;
   min-height: 90vh;
-  background-color: #12130F;
+  background-color: #222E50;
 }
 
 .elem {
@@ -33,6 +33,7 @@
   padding: 10px;
   border: solid 1px;
   border-radius: 7px;
+  color: white;
 }
 
 .select-quantity {
@@ -89,4 +90,8 @@
 
 .add-to-cart:active {
   background-color: #1B598B;
+}
+
+.review-list{
+  color: white;
 }
