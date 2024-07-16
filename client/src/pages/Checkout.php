@@ -8,7 +8,7 @@ if (!isLogged()) {
 
 display('Head', false, [
     'title' => 'Checkout',
-    'css' => ['generic', 'navbar', 'cart'],
+    'css' => ['generic', 'navbar', 'cart', 'footer'],
     'js' => ['config', 'Loaders', 'cart', 'Product']
 ]);
 

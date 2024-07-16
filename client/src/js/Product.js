@@ -127,7 +127,12 @@ class ProductAPI {
 
     const url = new URL(window.location.href);
     const eid = url.pathname.split('/')[2];
+<<<<<<< HEAD
     const response = await fetch(`${backendUrl.production}e?eid=${eid}`, {
+=======
+    const elem_name = url.pathname.split('/')[3].replace(/-/g, " ");
+    const response = await fetch(`${backendUrl.development}e?eid=${eid}&en=${elem_name}`, {
+>>>>>>> f7e1d2adb26d8d40a5e3e39f9d4a550deda02536
       method: "GET",
     });
 

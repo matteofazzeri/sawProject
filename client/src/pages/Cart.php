@@ -8,7 +8,7 @@
 
 display('Head', false, [
   'title' => 'Shopping Cart',
-  'css' => ['generic', 'navbar', 'cart'],
+  'css' => ['generic', 'navbar', 'cart', 'footer'],
   'js' => ['config', 'Loaders', 'cart', 'Product']
 ]);
 

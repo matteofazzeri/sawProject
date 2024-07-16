@@ -128,8 +128,13 @@ switch (true) {
           isset($productData[0]['product_name']) &&
           str_replace("-", " ", strtolower($productData[0]['product_name'])) === str_replace("-", " ", strtolower($productName))
         ) { */
+<<<<<<< HEAD
       requirePage("/pages/ElementPage.php");
       /* } else {
+=======
+          requirePage("/pages/ElementPage.php");
+       /*  } else {
+>>>>>>> f7e1d2adb26d8d40a5e3e39f9d4a550deda02536
           header("Location: " . BASE_URL . "/notfound");
         }
       } else {

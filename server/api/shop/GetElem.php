@@ -12,7 +12,7 @@ $elem = getElem(
     WHERE sdv.product_id = :eid ",
   [
     'eid' => $eid,
-    'uuid' => $_SESSION['uuid'] ?? null
+    'uuid' => $_SESSION['uuid'] ?? null,
   ]
 );
 

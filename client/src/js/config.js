@@ -4,7 +4,11 @@ const backendUrl = {
 };
 
 async function get_user_status() {
+<<<<<<< HEAD
   const response = await fetch(`${backendUrl.production}user/status`, {
+=======
+  const response = await fetch(`${backendUrl.development}user/status`, {
+>>>>>>> f7e1d2adb26d8d40a5e3e39f9d4a550deda02536
     method: 'GET',
   });
   const data = await response.json();
@@ -22,6 +26,7 @@ function logout() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+<<<<<<< HEAD
   const profileIcon = document.getElementById('profile');
   const popupProfile = document.getElementById('popup-profile');
 
@@ -40,3 +45,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+=======
+  const profileBtn = document.getElementById('profile');
+  const popupProfile = document.getElementById('popup-profile');
+
+  profileBtn.addEventListener('click', function (event) {
+    event.stopPropagation(); // Prevent the click event from bubbling up to the document
+    profileBtn.classList.toggle('active');
+  });
+
+  document.addEventListener('click', function (event) {
+    if (!profileBtn.contains(event.target)) {
+      profileBtn.classList.remove('active');
+    }
+  });
+});
+
+>>>>>>> f7e1d2adb26d8d40a5e3e39f9d4a550deda02536

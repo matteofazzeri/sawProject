@@ -2,7 +2,7 @@
 
 display('Head', false, [
   'title' => 'SAW: Login',
-  'css' => ['generic', 'navbar', 'about'],
+  'css' => ['generic', 'navbar', 'about', 'footer'],
   'js' => ['config', 'Loaders', 'cart']
 ]);
 display('Navbar');
