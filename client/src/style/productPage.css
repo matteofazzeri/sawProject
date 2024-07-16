@@ -1,7 +1,11 @@
 .element-page {
   width: 100%;
   min-height: 90vh;
-  background-color: #12130F;
+  background-color: #222E50;
+}
+
+a:visited {
+  color: #a9bae9;
 }
 
 .elem {
@@ -22,6 +26,7 @@
 .elem-info {
   width: 45%;
   background-color: ivory;
+  padding: 10px;
 }
 
 .elem-info #elem-title {
@@ -33,6 +38,11 @@
   padding: 10px;
   border: solid 1px;
   border-radius: 7px;
+  color: white;
+}
+
+.q-btn {
+  color: black;
 }
 
 .select-quantity {
@@ -89,4 +99,13 @@
 
 .add-to-cart:active {
   background-color: #1B598B;
+}
+
+.review-list{
+  color: white;
+  padding: 10px;
+}
+
+.review-form{
+  background-color: ivory;
 }

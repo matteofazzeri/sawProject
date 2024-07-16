@@ -86,12 +86,25 @@ class ProductAPI {
 
   // Download product JSON
   async downloadProduct() {
-    const response = await fetch(
-      `${backendUrl.production}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${sessionStorage.getItem("email") || null}&x=${this.toRender || null}`,
-      {
-        method: "GET",
-      }
-    );
+
+    let response = null;
+
+    if (this.toRender === "") {
+
+       response = await fetch(
+        `${backendUrl.development}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${sessionStorage.getItem("email") || null}&x=${this.toRender || null}`,
+        {
+          method: "GET",
+        }
+      );
+    } else {
+      response = await fetch(
+        `${backendUrl.development}h?k=${this.searchElem}&uuid=${sessionStorage.getItem("email") || null}&x=${this.toRender || null}`,
+        {
+          method: "GET",
+        }
+      );
+    }
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -144,7 +157,7 @@ class ProductAPI {
       document.getElementById("elem-rating").innerHTML = "" + data['product_rating'] === null ? "no rating" : Math.floor((data['product_rating'] / 2) * 10) / 10;
 
 
-      const productRating = data['product_rating']/2; 
+      const productRating = data['product_rating'] / 2;
       const ratingContainer = document.getElementById('rating-stars');
       const stars = ratingContainer.querySelectorAll('span');
       const fullStars = Math.floor(productRating);
