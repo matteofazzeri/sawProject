@@ -139,6 +139,7 @@ function isLogged(): bool
           // Regenerate session ID to prevent session fixation attacks
           session_regenerate_id(true);
           $_SESSION['uuid'] = $result[0]['user_id'];
+          $_SESSION['session_token'] = $_COOKIE['rmbme'];
           return isLogged();
         }
       }

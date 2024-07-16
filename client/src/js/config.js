@@ -21,3 +21,19 @@ function logout() {
   window.location.href = 'logout';
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+  const profileBtn = document.getElementById('profile');
+  const popupProfile = document.getElementById('popup-profile');
+
+  profileBtn.addEventListener('click', function (event) {
+    event.stopPropagation(); // Prevent the click event from bubbling up to the document
+    profileBtn.classList.toggle('active');
+  });
+
+  document.addEventListener('click', function (event) {
+    if (!profileBtn.contains(event.target)) {
+      profileBtn.classList.remove('active');
+    }
+  });
+});
+

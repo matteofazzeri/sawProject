@@ -103,7 +103,7 @@ switch (true) {
     break;
   default:
     if (count(explode('/', ROUTING_URL)) > 2) {
-      $parts = explode('/', ROUTING_URL);
+      /* $parts = explode('/', ROUTING_URL);
       $entityId = $parts[1];
       $productName = $parts[2];
       $productName = strstr($productName, '?', true) ?: $productName;
@@ -117,15 +117,15 @@ switch (true) {
         if (
           isset($productData[0]['product_name']) &&
           str_replace("-", " ", strtolower($productData[0]['product_name'])) === str_replace("-", " ", strtolower($productName))
-        ) {
+        ) { */
           requirePage("/pages/ElementPage.php");
-        } else {
+       /*  } else {
           header("Location: " . BASE_URL . "/notfound");
         }
       } else {
         header("HTTP/1.0 404 Not Found");
         requirePage("/pages/Error404.php");
-      }
+      } */
     } else {
       header("Location: " . BASE_URL . "/notfound");
     }
