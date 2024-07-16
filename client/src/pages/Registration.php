@@ -3,7 +3,7 @@
 
 display('Head', false, [
   'title' => 'SAW: Registration',
-  'css' => ['generic', 'navbar', 'forms'],
+  'css' => ['generic', 'navbar', 'forms', 'footer'],
   'js' => ['config', 'Loaders', 'Product', 'registration']
 ]);
 display('Navbar');

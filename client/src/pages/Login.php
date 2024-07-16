@@ -3,7 +3,7 @@
 
 display('Head', false, [
   'title' => 'SAW: Login',
-  'css' => ['generic', 'navbar', 'forms'],
+  'css' => ['generic', 'navbar', 'forms', 'footer'],
   'js' => ['config', 'Loaders', 'cart', 'Product', 'login']
 ]);
 display('Navbar');
@@ -30,8 +30,7 @@ if (!isset($_COOKIE["email"])) : ?>
       </form>
     </div>
 
-  <?php else :
-  header("");
+  <?php 
 
 endif;
   ?>

@@ -6,7 +6,7 @@ display(
   false,
   [
     'title' => 'Home',
-    'css' => ['generic', 'navbar', 'homepage', 'productCard'],
+    'css' => ['generic', 'navbar', 'homepage', 'productCard', 'footer'],
     'js' => ['Product', 'config', 'Loaders']
   ]
 );

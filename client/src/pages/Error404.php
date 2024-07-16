@@ -3,7 +3,7 @@
 
 display('Head', false, [
   'title' => 'Item Searched',
-  'css' => ['generic', 'navbar', 'cart'],
+  'css' => ['generic', 'navbar', 'cart', 'footer'],
   'js' => ['config', 'Loaders', 'cart', 'Product']
 ]);
 
