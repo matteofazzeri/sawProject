@@ -27,7 +27,7 @@
     </div>
   </div>
 <div class="footer-bottom">
-    &copy; 2024 StartSaw. All rights reserved.
+    &copy; 2024 StartSaw. All lefts reserved.
 </div>
 </footer>
 
