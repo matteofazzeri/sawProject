@@ -1,11 +1,11 @@
 RewriteEngine On
-RewriteBase /
+RewriteBase /~S5163676/
 
 # Exclude requests for CSS files, JavaScript files, images, and other static assets
 RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif)$ [NC]
 RewriteRule ^ - [L]
 
-RewriteRule ^(.*)$ /sawproject/client/src/index.php [L]
+RewriteRule ^(.*)$ client/src/index.php [L]
 
 RewriteCond %{REQUEST_URI} !/server/api/*
-RewriteRule ^(.*)$ /sawproject/server/api/index.php [L]
+RewriteRule ^(.*)$ server/api/index.php [L]

@@ -1,10 +1,10 @@
 <?php
 $serverName = "localhost";
-$dbName = "sawProject";
+$dbName = "S5163676";
 
 $db = "mysql:host=$serverName;dbname=$dbName";
-$userName = "root";
-$password = "";
+$userName = "S5163676";
+$password = "G4l4ct1c.3mp1r3.F0r-S4w";
 
 try {
     $pdo = new PDO($db, $userName, $password);

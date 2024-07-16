@@ -17,6 +17,8 @@ $requestURL = str_replace($base_url, "", $requestURL);
 // TODO: send request to form.php file 
 if ($requestURL[0] == "r") {
   require __DIR__ . "/forms/Registration.php";
+} else if ($requestURL == "logout.php" or $requestURL == "logout") {
+  require __DIR__ . "/forms/logout.php";
 } else if ($requestURL[0] == "l") {
   require __DIR__ . "/forms/Login.php";
 } else if ($requestURL[0] == "p" or $requestURL == "show_profile.php" or $requestURL == "update_profile.php") {
@@ -40,13 +42,9 @@ if ($requestURL[0] == "r") {
   } else {
     require __DIR__ . "/cart/Cart.php";
   }
-} else if (strpos($requestURL, "user")) {
-  if (strpos($requestURL, "status")) {
-    require __DIR__ . "/user/Status.php";
-  } else {
-    require __DIR__ . "/user/User.php";
-  }
+} else if (preg_match("#^user/status(\?.*)?$#", $requestURL)) {
+  require __DIR__ . "/user/status.php";
 } else {
-  echo "wtf are u doing here?!";
+  echo "wtf are u doing here?! <br>";
   echo $requestURL;
 }

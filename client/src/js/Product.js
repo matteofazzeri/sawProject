@@ -87,7 +87,7 @@ class ProductAPI {
   // Download product JSON
   async downloadProduct() {
     const response = await fetch(
-      `${backendUrl.development}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${sessionStorage.getItem("email") || null}&x=${this.toRender || null}`,
+      `${backendUrl.production}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${sessionStorage.getItem("email") || null}&x=${this.toRender || null}`,
       {
         method: "GET",
       }
@@ -127,13 +127,13 @@ class ProductAPI {
 
     const url = new URL(window.location.href);
     const eid = url.pathname.split('/')[2];
-    const response = await fetch(`${backendUrl.development}e?eid=${eid}`, {
+    const response = await fetch(`${backendUrl.production}e?eid=${eid}`, {
       method: "GET",
     });
 
-
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      //throw new Error(`HTTP error! status: ${response.status}`);
+      window.location.href = "notfound";
     } else {
       const data = (await response.json())[0];
       document.title = data['product_name'];
@@ -182,7 +182,7 @@ class searchProduct extends ProductAPI {
     const search_input = encodeURIComponent(document.querySelector("input").value);
 
     search_input === "" ?
-      null : window.location.href = `http://localhost/sawProject/search?k=${search_input}`;
+      null : window.location.href = `search?k=${search_input}`;
   }
 }
 

@@ -7,7 +7,7 @@ class Profile {
 
 
     try {
-      const response = await fetch(`${backendUrl.development}p`, {
+      const response = await fetch(`${backendUrl.production}p`, {
         method: 'GET',
       });
       const data = await response.json();
@@ -68,7 +68,7 @@ class Profile {
     };
 
     try {
-      const response = await fetch(`${backendUrl.development}p`, {
+      const response = await fetch(`${backendUrl.production}p`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ class Profile {
 class detailsProfile extends Profile {
   async showDetails() {
     try {
-      const response = await fetch(`${backendUrl.development}p/details`, {
+      const response = await fetch(`${backendUrl.production}p/details`, {
         method: 'GET',
       });
       const data = await response.json();
@@ -158,7 +158,7 @@ class detailsProfile extends Profile {
     };
 
     try {
-      const response = await fetch(`${backendUrl.development}p/details`, {
+      const response = await fetch(`${backendUrl.production}p/details`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

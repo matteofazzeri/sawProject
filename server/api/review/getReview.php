@@ -9,21 +9,21 @@ if ($eid === null) {
 }
 
 $review = getElem(
-  "SELECT u.username, r.title, r.rating, r.comment, r.id FROM reviews AS r JOIN users AS u ON r.user_id = u.id WHERE r.product_id = :eid;",
+  "SELECT ud.username, r.title, r.rating, r.comment, r.id FROM reviews AS r JOIN users AS u ON r.user_id = u.id JOIN user_details AS ud ON u.id = ud.user_id WHERE r.product_id = :eid;",
   [
     'eid' => $eid,
   ]
 );
 
-if(!$review) {
-  echo json_encode(['message' => 'Error getting reviews'], JSON_PRETTY_PRINT);
-  http_response_code(500);
-  exit;
-}
-
 if (count($review) === 0) {
   echo json_encode(['message' => 'No reviews for this product'], JSON_PRETTY_PRINT);
   http_response_code(204);
+  exit;
+}
+
+if (!$review) {
+  echo json_encode(['message' => 'Error getting reviews'], JSON_PRETTY_PRINT);
+  http_response_code(500);
   exit;
 }
 

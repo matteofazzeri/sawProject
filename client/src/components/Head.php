@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <base href="/sawproject/">
+  <base href="/~S5163676/">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
   <link rel="icon" type="image/x-icon" href="././client/public/img/logo.jpeg">
   

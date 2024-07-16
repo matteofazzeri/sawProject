@@ -31,7 +31,7 @@ if (!isset($_COOKIE["email"])) : ?>
     </div>
 
   <?php else :
-  header("");
+  //header("");
 
 endif;
   ?>

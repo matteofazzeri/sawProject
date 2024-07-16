@@ -1,6 +1,5 @@
 <?php
 
-
 include __DIR__ . "/../libs/helper.inc.php";
 
 if (!isLogged()) {
@@ -9,13 +8,15 @@ if (!isLogged()) {
   exit;
 }
 
-insertValue("DELETE FROM sessions WHERE session_token = :token", [
-  'token' => $_SESSION["session_token"]
-]);
+if (isset($_SESSION['session_token'])) {
+  insertValue("DELETE FROM sessions WHERE session_token = :token", [
+    'token' => $_SESSION["session_token"]
+  ]);
 
-// Cancella il cookie di sessione
-if (isset($_COOKIE['rmbme'])) {
-  setcookie("rmbme", "", time() - 3600, "/");
+  // Cancella il cookie di sessione
+  if (isset($_COOKIE['rmbme'])) {
+    setcookie("rmbme", "", time() - 3600, "/");
+  }
 }
 
 session_unset();

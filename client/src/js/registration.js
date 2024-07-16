@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // If valid, allow form submission (or handle login logic here)
     if (valid) {
-      const response = await fetch(`${backendUrl.development}r`, {
+      const response = await fetch(`${backendUrl.production}r`, {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"

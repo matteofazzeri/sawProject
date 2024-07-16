@@ -36,7 +36,7 @@ switch (true) {
     break;
 
   case preg_match("#^/registration.php.*$#", ROUTING_URL):
-    include __DIR__ . "/../../server/api/forms/registration.php";
+    include __DIR__ . "/../../server/api/forms/Registration.php";
     break;
 
   case preg_match("#^/show_profile.php.*$#", ROUTING_URL):
@@ -103,7 +103,7 @@ switch (true) {
     break;
   default:
     if (count(explode('/', ROUTING_URL)) > 2) {
-      $parts = explode('/', ROUTING_URL);
+      /* $parts = explode('/', ROUTING_URL);
       $entityId = $parts[1];
       $productName = $parts[2];
       $productName = strstr($productName, '?', true) ?: $productName;
@@ -112,20 +112,30 @@ switch (true) {
       $apiUrl = "http://" . $_SERVER['HTTP_HOST'] . "/" . explode("/", $_SERVER['REQUEST_URI'])[1] . "/server/api/e?eid=" . $entityId . "&uuid=" . $uuid;
       $response = file_get_contents($apiUrl); // probably need to use cURL for the server side (localhost works fine with file_get_contents())
 
+      $ch = curl_init();
+
+      // Set the URL and other appropriate options
+      curl_setopt($ch, CURLOPT_URL, $apiUrl);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return the response as a string
+      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects if any
+
+      // Execute the request
+      $response = curl_exec($ch);
+
       if ($response !== false) {
         $productData = json_decode($response, true);
         if (
           isset($productData[0]['product_name']) &&
           str_replace("-", " ", strtolower($productData[0]['product_name'])) === str_replace("-", " ", strtolower($productName))
-        ) {
-          requirePage("/pages/ElementPage.php");
-        } else {
+        ) { */
+      requirePage("/pages/ElementPage.php");
+      /* } else {
           header("Location: " . BASE_URL . "/notfound");
         }
       } else {
         header("HTTP/1.0 404 Not Found");
         requirePage("/pages/Error404.php");
-      }
+      } */
     } else {
       header("Location: " . BASE_URL . "/notfound");
     }

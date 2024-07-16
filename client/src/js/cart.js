@@ -9,7 +9,7 @@ class Cart {
     bodyMessage.append('uuid', sessionStorage.getItem("email") || null);
     bodyMessage.append('n_elem', quantity);
 
-    const response = await fetch(`${backendUrl.development}c`, {
+    const response = await fetch(`${backendUrl.production}c`, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -92,7 +92,7 @@ class Cart {
     const bodyMessage = new URLSearchParams();
     bodyMessage.append('uuid', sessionStorage.getItem("email") || null);
 
-    const response = await fetch(`${backendUrl.development}c?${bodyMessage.toString()}`, {
+    const response = await fetch(`${backendUrl.production}c?${bodyMessage.toString()}`, {
       method: "GET",
     });
 
@@ -118,7 +118,7 @@ class Cart {
       uuid: sessionStorage.getItem("email") || null,
     };
 
-    const response = await fetch(`${backendUrl.development}c`, {
+    const response = await fetch(`${backendUrl.production}c`, {
       method: "DELETE",
 
       body: JSON.stringify(body_message),
@@ -269,7 +269,7 @@ class Checkout extends Cart {
     const bodyMessage = new URLSearchParams();
     bodyMessage.append('uuid', sessionStorage.getItem("email") || null);
 
-    const response = await fetch(`${backendUrl.development}c/checkout`, {
+    const response = await fetch(`${backendUrl.production}c/checkout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"

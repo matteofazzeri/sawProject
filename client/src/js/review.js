@@ -51,7 +51,7 @@ class Review {
 
     // make the fetch request
     try {
-      const response = await fetch(`${backendUrl.development}e/review`, {
+      const response = await fetch(`${backendUrl.production}e/review`, {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
@@ -95,14 +95,23 @@ class Review {
     const bodyMessage = new URLSearchParams();
     bodyMessage.append('eid', this.eid);
 
-    fetch(`${backendUrl.development}e/review?${bodyMessage.toString()}`, {
+    fetch(`${backendUrl.production}e/review?${bodyMessage.toString()}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
       }
     }
     )
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        } else {
+          if (response.status === 204) {
+            return [];
+          }
+          return response.json();
+        }
+      })
       .then(data => {
         this.reviews = data;
 
@@ -118,12 +127,12 @@ class Review {
               if (i % 2 === 0)
                 stars += `<span class="rev-star-on" for="rating2" title="${i / 2} star"></span>`
               else
-                stars += `<span class="half rev-star-on" for="rating1" title="${i !== 1 ? (i-1)/2 : ""} 1/2 star"></span>`
+                stars += `<span class="half rev-star-on" for="rating1" title="${i !== 1 ? (i - 1) / 2 : ""} 1/2 star"></span>`
             } else {
               if (i % 2 === 0)
                 stars += `<span for="rating2" title="${i / 2} star"></span>`
               else
-                stars += `<span class="half" for="rating1" title="${i !== 1 ? (i-1)/2 : ""} 1/2 star"></span>`
+                stars += `<span class="half" for="rating1" title="${i !== 1 ? (i - 1) / 2 : ""} 1/2 star"></span>`
             }
           }
 
