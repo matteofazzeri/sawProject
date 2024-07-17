@@ -1,15 +1,23 @@
 class Profile {
   async showProfile() {
 
-    if (!await get_user_status()['isLogged']) {
+    if (await get_user_status()['isLogged'] === false) {
       window.location.href = 'login';
     }
-
 
     try {
       const response = await fetch(`${backendUrl.production}p`, {
         method: 'GET',
       });
+
+      if (!response.ok) {
+        //throw new Error('Error fetching user profile');
+
+        if (response.status === 401) {
+          window.location.href = 'login';
+        }
+      }
+
       const data = await response.json();
       const profileData = data[0];
 
@@ -28,7 +36,7 @@ class Profile {
         <label for="email">Email:</label>
         <input type="text" id="email" class="profile-input" value="${profileData.email}" readonly disabled>
         
-        <button onclick="profile.editProfile()">Edit Profile</button>
+        <button onclick="profile.editProfile()" class="btn">Edit Profile</button>
       `;
     } catch (error) {
       console.error('Error fetching user profile:', error);
@@ -53,7 +61,7 @@ class Profile {
       <label for="email">Email:</label>
       <input type="email" id="email" class="profile-input" value="${profileData.email}">
       
-      <button onclick="profile.updateProfile(event)">Update Profile</button>
+      <button onclick="profile.updateProfile(event)" class="btn">Update Profile</button>
     `;
   }
 
@@ -90,10 +98,23 @@ class Profile {
 
 class detailsProfile extends Profile {
   async showDetails() {
+    if (await get_user_status()['isLogged'] === false) {
+      window.location.href = 'login';
+    }
+
     try {
       const response = await fetch(`${backendUrl.production}p/details`, {
         method: 'GET',
       });
+
+      if (!response.ok) {
+        //throw new Error('Error fetching user profile');
+
+        if (response.status === 401) {
+          window.location.href = 'login';
+        }
+      }
+
       const data = await response.json();
 
       console.log(data);
@@ -113,7 +134,7 @@ class detailsProfile extends Profile {
         <label for="bio">A little bit about you:</label>
         <textarea type="text" id="bio" class="detail-input" readonly disabled >${profileData.bio || ""}</textarea>
         
-        <button onclick="profileDetails.editDetails()">Edit details</button>
+        <button onclick="profileDetails.editDetails()" class="btn">Edit Details</button>
       `;
     } catch (error) {
       console.error('Error fetching user profile:', error);
@@ -142,7 +163,7 @@ class detailsProfile extends Profile {
       <label for="bio">A little bit about you:</label>
       <textarea type="text" id="bio" class="detail-input" >${profileData.bio}</textarea>
       
-      <button onclick="profileDetails.updateDetails(event)">Update detail</button>
+      <button onclick="profileDetails.updateDetails(event)" class="btn">Update Details</button>
     `;
   }
 

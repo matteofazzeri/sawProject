@@ -12,6 +12,24 @@ if (!isset($_POST['eid']) || !isset($_POST['title']) || !isset($_POST['rating'])
   exit;
 }
 
+$username = getElem("SELECT username FROM user_details WHERE user_id = :uuid", [
+  "uuid" => $_SESSION['uuid']
+]);
+
+if (count($username) == 0) {
+  echo json_encode(array("error" => "U need to have a public name <a href='profile'>here</a>"));
+  http_response_code(404);
+  exit;
+}
+
+if (!$username) {
+  echo json_encode(array("error" => "An error occurred while getting user details"));
+  http_response_code(500);
+  exit;
+}
+
+
+
 $eid = htmlspecialchars(strip_tags($_POST['eid']));
 $title = htmlspecialchars(strip_tags($_POST['title']));
 $rating = htmlspecialchars(strip_tags($_POST['rating']));

@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
       'username' => $data['username'] ?? null,
       'phone' => $data['phone_number'] ?? null,
       'bio' => $data['bio'] ?? null,
-      'bd' => $data['birthdate'] ?? null,
+      'bd' => !empty($data['birthdate']) ? date('Y-m-d', strtotime($data['birthdate'])) : null,
       'id' => $_SESSION['uuid']
     ]);
   }

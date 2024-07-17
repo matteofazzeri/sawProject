@@ -184,36 +184,15 @@ input.star:checked~.rev-box {
   margin-top: 10px;
 }
 
+.review {
+  margin-top: 10px;
+  padding: 3px;
+  border-bottom: solid 1px rgb(105, 105, 240);
+}
 
-/* .review-btn {
-  background: #c9eb0b;
-  max-width: 100px;
-  max-height: 40px;
+.review-header {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
   align-items: center;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 600;
-  color: #333;
-  cursor: pointer;
-  transition: all .25s;
-  margin-top: 20px;
-
-  &:disabled {
-    background-color: #ccc;
-    color: #fff;
-    cursor: not-allowed;
-  }
-
-  &:hover {
-    background: #333;
-    color: #fff;
-  }
-
-  &:focus {
-    outline: none;
-  }
-} */
+}

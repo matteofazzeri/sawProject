@@ -1,8 +1,8 @@
 <?php
 display('Head', false, [
   'title' => 'SAW: Profile',
-  'css' => ['generic', 'navbar', 'footer'],
-  'js' => ['config', 'Loaders', 'show_profile', 'product']
+  'css' => ['generic', 'navbar', 'footer', 'forms'],
+  'js' => ['config', 'Loaders', 'show_profile', 'Product']
 ]);
 
 display('Navbar');

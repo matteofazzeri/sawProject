@@ -136,16 +136,15 @@ class Review {
             }
           }
 
-
           return `
             <div id="${review.id}" class="review">
               <div class="review-header">
                 <p>${review.username}</p>
                 <p>${Math.floor((review.rating / 2) * 10) / 10}</p>
                 <div class="stars rating-star rate">${stars}</div>
-                <h3>${review.title}</h3>
-                  
               </div>
+                <h3>${review.title}</h3>
+
               <p>${review.comment}</p>
             </div>
           `;

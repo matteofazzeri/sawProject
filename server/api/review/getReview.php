@@ -15,7 +15,7 @@ $review = getElem(
   ]
 );
 
-if (count($review) === 0) {
+if (count($review) == 0) {
   echo json_encode(['message' => 'No reviews for this product'], JSON_PRETTY_PRINT);
   http_response_code(204);
   exit;

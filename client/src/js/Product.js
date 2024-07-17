@@ -43,6 +43,7 @@ class ProductAPI {
     } else {
       var productHTML = data
         .map(function (product) {
+
           return `
             <div class="product-card elem" id="${product.product_id}">
               <div class="image">
@@ -92,14 +93,14 @@ class ProductAPI {
     if (this.toRender === "") {
 
        response = await fetch(
-        `${backendUrl.development}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${sessionStorage.getItem("email") || null}&x=${this.toRender || null}`,
+        `${backendUrl.production}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${sessionStorage.getItem("email") || null}&x=${this.toRender || null}`,
         {
           method: "GET",
         }
       );
     } else {
       response = await fetch(
-        `${backendUrl.development}h?k=${this.searchElem}&uuid=${sessionStorage.getItem("email") || null}&x=${this.toRender || null}`,
+        `${backendUrl.production}h?x=${this.toRender || null}`,
         {
           method: "GET",
         }
