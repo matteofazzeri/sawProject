@@ -18,20 +18,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     if (empty($data)) {
       http_response_code(204); // No content
-      echo json_encode(
-        ['message' => 'No items found'],
-        JSON_PRETTY_PRINT,
-      );
+      echo json_encode(['message' => 'No items found']);
       exit;
     } else if ($data === false) {
       http_response_code(500); // Internal server error
-      echo json_encode(
-        ['message' => 'An error occurred'],
-        JSON_PRETTY_PRINT,
-      );
+      echo json_encode(['message' => 'An error occurred']);
       exit;
     }
     echo json_encode($data, JSON_PRETTY_PRINT);
+    http_response_code(200);
+    exit;
   } else {
     http_response_code(400); // Bad request (invalid request)
     echo "Invalid request";

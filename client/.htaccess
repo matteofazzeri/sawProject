@@ -7,4 +7,4 @@ RewriteRule ^ - [L]
 
 # Redirect all other requests to index.php inside client/src folder
 RewriteCond %{REQUEST_URI} !/client/src/index\.php
-RewriteRule ^(.*)$ /client/src/index.php [L]
+RewriteRule ^(.*)$ /sawproject/client/src/index.php [L]

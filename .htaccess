@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /~S5163676/
+RewriteBase /sawproject/
 
 # Exclude requests for CSS files, JavaScript files, images, and other static assets
 RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif)$ [NC]

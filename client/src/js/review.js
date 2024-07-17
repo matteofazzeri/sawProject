@@ -51,7 +51,7 @@ class Review {
 
     // make the fetch request
     try {
-      const response = await fetch(`${backendUrl.production}e/review`, {
+      const response = await fetch(`${backendUrl.development}e/review`, {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
@@ -95,7 +95,7 @@ class Review {
     const bodyMessage = new URLSearchParams();
     bodyMessage.append('eid', this.eid);
 
-    fetch(`${backendUrl.production}e/review?${bodyMessage.toString()}`, {
+    fetch(`${backendUrl.development}e/review?${bodyMessage.toString()}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"

@@ -6,7 +6,7 @@ class Profile {
     }
 
     try {
-      const response = await fetch(`${backendUrl.production}p`, {
+      const response = await fetch(`${backendUrl.development}p`, {
         method: 'GET',
       });
 
@@ -76,7 +76,7 @@ class Profile {
     };
 
     try {
-      const response = await fetch(`${backendUrl.production}p`, {
+      const response = await fetch(`${backendUrl.development}p`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ class detailsProfile extends Profile {
     }
 
     try {
-      const response = await fetch(`${backendUrl.production}p/details`, {
+      const response = await fetch(`${backendUrl.development}p/details`, {
         method: 'GET',
       });
 
@@ -179,7 +179,7 @@ class detailsProfile extends Profile {
     };
 
     try {
-      const response = await fetch(`${backendUrl.production}p/details`, {
+      const response = await fetch(`${backendUrl.development}p/details`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

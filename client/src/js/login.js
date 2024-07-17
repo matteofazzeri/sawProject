@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // console.log(bodyMessage.toString());
 
     if (valid) {
-      const response = await fetch(`${backendUrl.production}l`, {
+      const response = await fetch(`${backendUrl.development}l`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'

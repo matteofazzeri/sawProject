@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS
 CREATE TABLE IF NOT EXISTS
   photos (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    product_id INT,
-    image BLOB,
+    product_id INT NOT NULL,
+    image VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (product_id) REFERENCES products (id) ON DELETE CASCADE ON UPDATE CASCADE
   );
@@ -934,6 +934,10 @@ VALUES (@new_product_id, 'Warp Drive', 600, 6500, 'Model EE-9000', 'Extra Large'
 
 
 
+/*esempio inserimento foto. caricarle in client/public/img*/
+
+INSERT INTO `photos`( `product_id`, `image`) VALUES (1, 'falcon.jpeg');
+INSERT INTO `photos`( `product_id`, `image`) VALUES (28, 'falcon.jpeg');
 
 
 

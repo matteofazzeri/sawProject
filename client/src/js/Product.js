@@ -44,10 +44,12 @@ class ProductAPI {
       var productHTML = data
         .map(function (product) {
 
+          console.log(product.product_images);
+
           return `
             <div class="product-card elem" id="${product.product_id}">
               <div class="image">
-                <img src="${product.product_image}" alt="${product.product_name}" class="product-image">
+                <img src="././client/public/img/${product.product_images}" alt="${product.product_name}" class="product-image">
               </div>
               <div class="details">
                   <h1 class="product-title"><a href="${product.product_id}/${product.product_name.replace(/ /g, "-")}?eid=${product.product_id}">${product.product_name}</a></h1>
@@ -93,14 +95,14 @@ class ProductAPI {
     if (this.toRender === "") {
 
        response = await fetch(
-        `${backendUrl.production}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${sessionStorage.getItem("email") || null}&x=${this.toRender || null}`,
+        `${backendUrl.development}s?k=${this.searchElem}&page=${this.currentPage}&nElem=${this.numItems}&uuid=${sessionStorage.getItem("email") || null}&x=${this.toRender || null}`,
         {
           method: "GET",
         }
       );
     } else {
       response = await fetch(
-        `${backendUrl.production}h?x=${this.toRender || null}`,
+        `${backendUrl.development}h?x=${this.toRender || null}`,
         {
           method: "GET",
         }
@@ -141,7 +143,8 @@ class ProductAPI {
 
     const url = new URL(window.location.href);
     const eid = url.pathname.split('/')[2];
-    const response = await fetch(`${backendUrl.production}e?eid=${eid}`, {
+    const name = url.pathname.split('/')[3].replace(/-/g, " ");
+    const response = await fetch(`${backendUrl.development}e?eid=${eid}&en=${name}`, {
       method: "GET",
     });
 
