@@ -145,12 +145,15 @@ class ProductAPI {
       method: "GET",
     });
 
-
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      if (response.status === 404) {
+        console.log("first");
+        window.location.href = "notfound";
+      }
     } else {
       const data = (await response.json())[0];
       document.title = data['product_name'];
+      document.getElementById("elem-image").alt = data['product_name'];
       document.getElementById("elem-price").innerHTML = data['product_price'] + "$";
       document.getElementById("elem-title").innerHTML = data['product_name'];
       document.getElementById("elem-description").innerHTML = data['product_description'];

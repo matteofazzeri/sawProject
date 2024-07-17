@@ -208,3 +208,22 @@
   align-items: center;
   gap: 1rem;
 }
+
+@media screen and (max-width: 800px) {
+  .global-navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+  }
+
+  
+
+  .global-navbar a img {
+    width: 250px;
+    height: 32px;
+  }
+
+  .profile-btn .popup-menu {
+    right: 0;
+  }
+}

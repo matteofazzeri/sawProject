@@ -3,6 +3,24 @@
 include __DIR__ . "/../connection/inc.php";
 
 $eid = htmlspecialchars(strip_tags($_GET['eid']));
+$name = htmlspecialchars(strip_tags($_GET['en']));
+
+
+
+$res = getElem(
+  "SELECT name FROM products WHERE id LIKE :eid",
+  ['eid' => $eid]
+);
+
+if (empty($res) or !$res) {
+  echo json_encode(['error' => 'Element not found']);
+  http_response_code(404);
+  exit;
+} else if (str_replace('-', ' ', $res[0]['name']) != $name) {
+  echo json_encode(['error' => 'Elem name not match the one on db']);
+  http_response_code(404);
+  exit;
+}
 
 echo json_encode(getElem(
   "SELECT sdv.*, COALESCE(sc.quantity, 1) AS quantity

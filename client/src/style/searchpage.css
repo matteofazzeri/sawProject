@@ -6,22 +6,42 @@
 }
 
 .elem-section {
+  position: relative;
   width: 80%;
-  height: 90vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  background-color: #222E50;
+  padding: 3vw 1.5vw 5vh 1.5vw;
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    height: 100%;
+  }
+
+
 }
 
 .show-row-4 {
   width: 100%;
-  height: 90vh;
+  height: 100%;
   display: flex;
   flex-wrap: wrap;
-  background-color: #222E50;
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 .product-card {
   min-width: 24%;
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
 }
 
 .products-filter {
@@ -34,6 +54,11 @@
   align-items: center;
   margin-bottom: 1rem;
   background-color: #7EB2DD;
+
+  @media screen and (max-width: 500px) {
+    display: none;
+
+  }
 }
 
 .edit-quantity-elem {
@@ -59,22 +84,11 @@
   background-color: #fcd200;
 }
 
-@media screen and (max-width: 768px) {
-  .show-4-grid {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .products-filter {
-    width: 0;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
 
 .pagination {
+  position: absolute;
+  bottom: .5vw;
+  left: 0;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -82,8 +96,6 @@
   flex-direction: row;
   background-color: #222E50;
 }
-
-
 
 #page-number {
   width: 50px;

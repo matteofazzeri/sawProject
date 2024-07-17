@@ -13,18 +13,17 @@ a:visited {
   height: 90vh;
   background-color: #222E50;
   display: flex;
-  flex-direction: row;
   gap: 5px;
 }
 
 #elem-images {
-  width: 30%;
+  min-width: 30%;
   height: 100%;
   background-color: #7EB2DD;
 }
 
 .elem-info {
-  width: 45%;
+  max-width: 45%;
   background-color: ivory;
   padding: 10px;
 }
@@ -34,7 +33,7 @@ a:visited {
 }
 
 .box-outer {
-  width: 15%;
+  max-width: 15%;
   padding: 10px;
   border: solid 1px;
   border-radius: 7px;
@@ -108,4 +107,24 @@ a:visited {
 
 .review-form{
   background-color: ivory;
+}
+
+@media screen and (max-width: 500px) {
+  .elem {
+    flex-direction: column;
+  }
+
+  #elem-images {
+    min-width: 100%;
+    height: 50vh;
+  }
+
+  .elem-info {
+    max-width: 100%;
+  }
+
+  .box-outer {
+    max-width: 100%;
+  }
+  
 }

@@ -2,7 +2,7 @@
 
 
 display('Head', false, [
-  'title' => 'Item Searched',
+  'title' => '404',
   'css' => ['generic', 'navbar', 'cart', 'footer'],
   'js' => ['config', 'Loaders', 'cart', 'Product']
 ]);

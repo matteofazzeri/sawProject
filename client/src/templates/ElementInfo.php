@@ -8,8 +8,11 @@
     }
   </script>
   <section class="elem" id=<?php echo $eid ?>>
-    <!-- Immagini del prodotto | titolo, descrizione, presso, recensione | area per comprare/aggiungere al carello -->
-    <div id="elem-images"></div>
+    <!-- Immagini del prodotto | titolo, descrizione, prezzo, recensione | area per comprare/aggiungere al carello -->
+    <div id="elem-images">
+      <img src="" alt="" id="elem-image">
+      <div class="elem-gallery"></div>
+    </div>
 
     <div class="elem-info">
       <h1 id="elem-title"></h1>
@@ -17,16 +20,16 @@
         <div id="elem-rating"></div>
         <div id="rating-stars" class="rating-star rate">
 
-            <span class="half" for="rating1" title="1/2 star"></span>
-            <span for="rating2" title="1 star"></span>
-            <span class="half" for="rating3" title="1 1/2 stars"></span>
-            <span for="rating4" title="2 stars"></span>
-            <span class="half" for="rating5" title="2 1/2 stars"></span>
-            <span for="rating6" title="3 stars"></span>
-            <span class="half" for="rating7" title="3 1/2 stars"></span>
-            <span for="rating8" title="4 stars"></span>
-            <span class="half" for="rating9" title="4 1/2 stars"></span>
-            <span for="rating10" title="5 stars" class=""></span>
+          <span class="half" for="rating1" title="1/2 star"></span>
+          <span for="rating2" title="1 star"></span>
+          <span class="half" for="rating3" title="1 1/2 stars"></span>
+          <span for="rating4" title="2 stars"></span>
+          <span class="half" for="rating5" title="2 1/2 stars"></span>
+          <span for="rating6" title="3 stars"></span>
+          <span class="half" for="rating7" title="3 1/2 stars"></span>
+          <span for="rating8" title="4 stars"></span>
+          <span class="half" for="rating9" title="4 1/2 stars"></span>
+          <span for="rating10" title="5 stars" class=""></span>
 
         </div>
       </div>
